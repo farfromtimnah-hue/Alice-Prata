@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Will Kit — Alice Prata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;--r:14px;--r-lg:20px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Lora',Georgia,serif;line-height:1.2;}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(250,243,229,0.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--sand);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.topbar-brand{display:flex;align-items:center;gap:10px;}
+.topbar-brand img{height:32px;}
+.topbar-brand .title{font-family:'Lora',serif;font-weight:700;font-size:0.92rem;color:var(--terra-deep);}
+.topbar-brand .subtitle{font-size:0.72rem;color:var(--ink-soft);}
+.topbar-right{display:flex;align-items:center;gap:8px;}
+.lang-toggle{display:flex;gap:3px;background:var(--sand);border-radius:999px;padding:3px;}
+.lang-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;padding:5px 14px;border-radius:999px;border:none;cursor:pointer;background:transparent;color:var(--ink-soft);transition:all 0.15s;}
+.lang-btn.active{background:var(--terra-deep);color:var(--white);}
+.hero{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:36px 32px;border-radius:0 0 24px 24px;box-shadow:0 6px 24px rgba(140,62,42,0.2);}
+.hero-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.hero img{height:68px;background:var(--white);border-radius:14px;padding:8px 12px;flex-shrink:0;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:var(--white);margin-bottom:6px;}
+.hero p{color:rgba(250,243,229,0.85);font-size:0.88rem;max-width:540px;}
+.disclaimer-wrap{max-width:960px;margin:18px auto;padding:0 20px;}
+.disclaimer{background:#FFF8E8;border:1px solid var(--ochre);border-left:4px solid var(--ochre);border-radius:var(--r);padding:12px 18px;font-size:0.86rem;color:var(--ink-mid);}
+.disclaimer strong{color:var(--terra-deep);}
+.page{max-width:960px;margin:0 auto;padding:0 20px 80px;display:grid;grid-template-columns:1fr;gap:14px;}
+@media(min-width:860px){.page{grid-template-columns:1fr 250px;align-items:start;}}
+.form-col{display:flex;flex-direction:column;gap:14px;}
+.section{background:var(--white);border-radius:var(--r-lg);padding:24px 26px;box-shadow:0 2px 14px rgba(140,62,42,0.07);}
+.section-header{display:flex;align-items:center;gap:13px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--sand-light);}
+.section-num{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:var(--terra-deep);color:var(--white);font-family:'Lora',serif;font-weight:700;font-size:0.9rem;display:flex;align-items:center;justify-content:center;}
+.section-header h2{font-size:1.05rem;font-weight:700;color:var(--terra-deep);margin:0;}
+.section-desc{font-size:0.8rem;color:var(--ink-soft);font-style:italic;margin:-8px 0 13px 43px;}
+.field-grid{display:grid;gap:11px;}
+.field-grid-2{grid-template-columns:1fr 1fr;}
+@media(max-width:560px){.field-grid-2{grid-template-columns:1fr;}}
+label.field{display:block;}
+.lbl{display:block;font-size:0.8rem;font-weight:700;color:var(--ink-mid);margin-bottom:4px;}
+.lbl .sub{font-weight:500;color:var(--ink-soft);font-size:0.74rem;display:block;margin-top:1px;}
+input.fi,select.fi,textarea.fi{width:100%;padding:10px 12px;border:1.5px solid var(--sand);border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.9rem;color:var(--ink);background:var(--sand-cream);transition:border-color 0.15s;outline:none;resize:vertical;}
+input.fi:focus,select.fi:focus,textarea.fi:focus{border-color:var(--terra);background:var(--white);}
+input.fi::placeholder,textarea.fi::placeholder{color:var(--ink-soft);opacity:0.4;}
+.gifts-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.gift-row{display:grid;grid-template-columns:110px 1fr 1fr 32px;gap:8px;align-items:center;}
+@media(max-width:560px){.gift-row{grid-template-columns:1fr 1fr;}}
+.gift-del{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;background:rgba(181,85,63,0.1);color:var(--terra-deep);font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gift-del:hover{background:var(--terra-deep);color:var(--white);}
+.add-row-btn{width:100%;padding:9px;border-radius:10px;border:2px dashed var(--sand);background:transparent;color:var(--terra);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.86rem;cursor:pointer;transition:all 0.15s;}
+.add-row-btn:hover{border-color:var(--terra);background:rgba(181,85,63,0.05);}
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.radio-opt{display:flex;align-items:center;gap:7px;cursor:pointer;background:var(--sand-cream);border:1.5px solid var(--sand);border-radius:999px;padding:7px 13px;font-size:0.86rem;transition:all 0.15s;}
+.radio-opt input{width:13px;height:13px;accent-color:var(--terra-deep);}
+.radio-opt:has(input:checked){background:rgba(181,85,63,0.1);border-color:var(--terra);color:var(--terra-deep);font-weight:700;}
+.sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:68px;}
+.actions-card{background:var(--white);border-radius:var(--r-lg);padding:22px 18px;box-shadow:0 2px 14px rgba(140,62,42,0.07);}
+.actions-card h3{font-size:0.95rem;font-weight:700;color:var(--terra-deep);margin-bottom:14px;font-family:'Nunito',sans-serif;}
+.action-btn{width:100%;padding:11px 14px;border-radius:var(--r);border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.88rem;display:flex;align-items:center;gap:9px;margin-bottom:7px;transition:all 0.15s;}
+.action-btn:last-child{margin-bottom:0;}
+.btn-save,.btn-preview,.btn-print{background:var(--sand-light);color:var(--terra-deep);border:1px solid var(--sand);}
+.btn-save:hover,.btn-preview:hover,.btn-print:hover{background:var(--sand);}
+.btn-export{background:var(--terra-deep);color:var(--white);}
+.btn-export:hover{background:var(--terra);}
+.save-note{font-size:0.74rem;color:var(--ink-soft);font-style:italic;margin-top:8px;text-align:center;}
+.legal-note{background:#FFF8E8;border:1px solid var(--ochre);border-radius:var(--r);padding:13px 15px;font-size:0.8rem;color:var(--ink-mid);}
+.legal-note ul{padding-left:15px;margin-top:7px;}
+.legal-note li{margin-bottom:4px;color:var(--ink-soft);}
+.modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,18,8,0.72);backdrop-filter:blur(4px);overflow-y:auto;padding:36px 20px;}
+.modal.open{display:flex;align-items:flex-start;justify-content:center;}
+.modal-inner{background:var(--white);border-radius:var(--r-lg);max-width:680px;width:100%;padding:36px;font-family:'Times New Roman',serif;font-size:12pt;line-height:1.55;position:relative;}
+.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;background:var(--sand);color:var(--ink);font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.modal-inner h2{font-size:15pt;text-align:center;margin-bottom:18px;font-family:'Times New Roman',serif;}
+.will-clause{margin-bottom:10px;}
+.will-clause-num{font-weight:700;}
+.sig-line{display:inline-block;min-width:260px;border-bottom:1px solid #333;margin:14px 0 4px;}
+footer{background:var(--ink);padding:22px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+footer img{height:34px;filter:invert(1);opacity:0.8;}
+footer p{color:rgba(250,243,229,0.38);font-size:0.76rem;}
+@media print{.topbar,.sidebar,.modal,.add-row-btn,.gift-del{display:none!important;}body{background:#fff;}.hero{background:#fff;border-bottom:2px solid var(--terra-deep);border-radius:0;box-shadow:none;padding:14px 0;}.hero h1{color:var(--terra-deep)!important;}.section{box-shadow:none;border:1px solid var(--sand);break-inside:avoid;margin-bottom:10px;}.page{display:block;}}
+/* Lang */
+body[data-lang="en"] .pt-content{display:none;}
+body[data-lang="pt"] .en-content{display:none;}
+</style>
+</head>
+<body data-lang="pt">
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <img src="alice-prata-logo.png" alt="Alice Prata"/>
+    <div>
+      <div class="title">Will Kit</div>
+      <div class="subtitle pt-content">Modelo de Testamento — Flórida</div>
+      <div class="subtitle en-content">Will Template — Florida</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="saveNote" style="font-size:0.78rem;color:var(--terra);display:none;"></span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT-BR</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <img src="alice-prata-logo.png" alt="Alice Prata"/>
+    <div>
+      <h1 class="pt-content">Seu Last Will &amp; Testament — pronto para imprimir e assinar.</h1>
+      <h1 class="en-content">Your Last Will &amp; Testament — ready to print and sign.</h1>
+      <p class="pt-content">Preencha em português, visualize, e exporte o PDF em inglês com o Self-Proving Affidavit (F.S. § 732.503).</p>
+      <p class="en-content">Fill out the form, preview, and export the English PDF with the Self-Proving Affidavit (F.S. § 732.503).</p>
+    </div>
+  </div>
+</header>
+
+<div class="disclaimer-wrap">
+  <div class="disclaimer">
+    <strong>⚠️ <span class="pt-content">AVISO LEGAL:</span><span class="en-content">LEGAL NOTICE:</span></strong>
+    <span class="pt-content"> Este modelo é informativo. Para validade plena, recomenda-se revisão por advogado licenciado. Alice Prata não é advogada.</span>
+    <span class="en-content"> This template is informational. For full legal validity, review by a licensed attorney is recommended. Alice Prata is not an attorney.</span>
+  </div>
+</div>
+
+<div class="page">
+<div class="form-col">
+<form id="willForm">
+
+<!-- 1 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">1</div>
+    <h2 class="pt-content">Informações Pessoais</h2>
+    <h2 class="en-content">Personal Information</h2>
+  </div>
+  <p class="section-desc pt-content">Estes dados identificam você como testador(a).</p>
+  <p class="section-desc en-content">These details identify you as the testator.</p>
+  <div class="field-grid field-grid-2">
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Nome legal completo<span class="sub">Exatamente como aparece no passaporte ou driver's license.</span></span>
+      <span class="lbl en-content">Full legal name<span class="sub">Exactly as it appears on passport or driver's license.</span></span>
+      <input id="w_name" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Cidade<span class="sub">Ex.: Tampa, Orlando.</span></span>
+      <span class="lbl en-content">City<span class="sub">E.g.: Tampa, Orlando.</span></span>
+      <input id="w_city" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Estado<span class="sub">Para este modelo, use Florida.</span></span>
+      <span class="lbl en-content">State<span class="sub">For this template, use Florida.</span></span>
+      <input id="w_state" class="fi" type="text" value="Florida"/>
+    </label>
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Profissão / Ocupação<span class="sub">Ex.: Insurance Agent, Teacher, Homemaker.</span></span>
+      <span class="lbl en-content">Employment / Occupation<span class="sub">E.g.: Insurance Agent, Teacher, Homemaker.</span></span>
+      <input id="w_job" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 2 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">2</div>
+    <h2 class="pt-content">Inventariante (Trustee / Executor)</h2>
+    <h2 class="en-content">Trustee / Executor</h2>
+  </div>
+  <p class="section-desc pt-content">Pessoa de confiança que administrará seu testamento. Indique também um suplente.</p>
+  <p class="section-desc en-content">Trusted person who will administer your will. Also indicate a backup.</p>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Trustee principal<span class="sub">Nome legal completo.</span></span>
+      <span class="lbl en-content">Primary Trustee<span class="sub">Full legal name.</span></span>
+      <input id="w_trustee" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Trustee suplente<span class="sub">Caso o primeiro faleça ou recuse o cargo.</span></span>
+      <span class="lbl en-content">Backup Trustee<span class="sub">In case the first predeceases or declines.</span></span>
+      <input id="w_trustee2" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 3 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">3</div>
+    <h2 class="pt-content">Doações Específicas</h2>
+    <h2 class="en-content">Specific Gifts</h2>
+  </div>
+  <p class="section-desc pt-content">Liste pessoas que receberão um item específico ou uma quantia em dinheiro.</p>
+  <p class="section-desc en-content">List people who will receive a specific item or sum of money.</p>
+  <div class="gifts-list" id="giftsList"></div>
+  <button type="button" class="add-row-btn" id="addGiftBtn" onclick="addGift()"></button>
+</div>
+
+<!-- 4 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">4</div>
+    <h2 class="pt-content">Animais de Estimação</h2>
+    <h2 class="en-content">Pets</h2>
+  </div>
+  <p class="section-desc pt-content">Quem cuidará dos seus pets e o valor reservado para eles.</p>
+  <p class="section-desc en-content">Who will care for your pets and funds reserved for their care.</p>
+  <div class="field-grid field-grid-2">
+    <label class="field">
+      <span class="lbl pt-content">Tutor(a) principal dos pets</span>
+      <span class="lbl en-content">Primary Pet Guardian</span>
+      <input id="w_pet1" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Suplente / Local alternativo</span>
+      <span class="lbl en-content">Backup / Alternative location</span>
+      <input id="w_pet2" class="fi" type="text"/>
+    </label>
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Valor do Pet Fund (USD)</span>
+      <span class="lbl en-content">Pet Fund Amount (USD)</span>
+      <input id="w_petfund" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 5 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">5</div>
+    <h2 class="pt-content">Beneficiários do Resíduo</h2>
+    <h2 class="en-content">Residue Beneficiaries</h2>
+  </div>
+  <p class="section-desc pt-content">Quem herda o restante depois de pagas as dívidas e doações específicas.</p>
+  <p class="section-desc en-content">Who inherits the remainder after debts and specific gifts are paid.</p>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Beneficiário(a) principal<span class="sub">Geralmente cônjuge ou filho(a).</span></span>
+      <span class="lbl en-content">Primary beneficiary<span class="sub">Usually spouse or child.</span></span>
+      <input id="w_res1" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Beneficiários suplentes (separados por vírgula)<span class="sub">Receberão em partes iguais se o principal falecer antes.</span></span>
+      <span class="lbl en-content">Backup beneficiaries (comma-separated)<span class="sub">Receive in equal shares if primary predeceases.</span></span>
+      <input id="w_res2" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 6 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">6</div>
+    <h2 class="pt-content">Últimas Vontades</h2>
+    <h2 class="en-content">Final Wishes</h2>
+  </div>
+  <p class="lbl pt-content" style="margin-bottom:8px;">Como deseja que seus restos mortais sejam tratados:</p>
+  <p class="lbl en-content" style="margin-bottom:8px;">How you wish your remains to be treated:</p>
+  <div class="radio-group">
+    <label class="radio-opt"><input type="radio" name="burial" value="buried"/>
+      <span class="pt-content">Sepultado(a)</span><span class="en-content">Buried</span>
+    </label>
+    <label class="radio-opt"><input type="radio" name="burial" value="cremated"/>
+      <span class="pt-content">Cremado(a)</span><span class="en-content">Cremated</span>
+    </label>
+  </div>
+</div>
+
+</form>
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+  <div class="actions-card">
+    <h3 class="pt-content">Ações</h3>
+    <h3 class="en-content">Actions</h3>
+    <button class="action-btn btn-save" onclick="saveData()">
+      💾 <span class="pt-content">Salvar</span><span class="en-content">Save</span>
+    </button>
+    <button class="action-btn btn-preview" onclick="openPreview()">
+      👁 <span class="pt-content">Pré-visualizar</span><span class="en-content">Preview</span>
+    </button>
+    <button class="action-btn btn-export" onclick="exportPrint()">
+      📄 <span class="pt-content">Exportar PDF</span><span class="en-content">Export PDF</span>
+    </button>
+    <p class="save-note pt-content">Salvo automaticamente neste dispositivo.</p>
+    <p class="save-note en-content">Auto-saved on this device.</p>
+  </div>
+  <div class="legal-note">
+    <strong class="pt-content">📌 Para validade na Flórida:</strong>
+    <strong class="en-content">📌 For validity in Florida:</strong>
+    <ul class="pt-content"><li>Assinar na presença de 2 testemunhas</li><li>Testemunhas também assinam</li><li>Reconhecer firma (Self-Proving Affidavit — incluído)</li><li>Revisão por advogado recomendada</li></ul>
+    <ul class="en-content"><li>Sign in presence of 2 witnesses</li><li>Both witnesses also sign</li><li>Notarize (Self-Proving Affidavit — included)</li><li>Attorney review recommended</li></ul>
+  </div>
+</div>
+</div>
+
+<div class="modal" id="previewModal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closePreview()">✕</button>
+    <div id="previewContent"></div>
+  </div>
+</div>
+
+<footer>
+  <img src="alice-prata-logo.png" alt="Alice Prata"/>
+  <p class="pt-content">Will Kit — Alice Prata · Modelo informativo. Não substitui aconselhamento jurídico.</p>
+  <p class="en-content">Will Kit — Alice Prata · Informational template. Does not replace legal advice.</p>
+</footer>
+
+<script>
+const SAVE_KEY='ap_will_v2';
+const isEN=()=>document.body.dataset.lang==='en';
+
+function setLang(lang){
+  document.body.dataset.lang=lang;
+  document.getElementById('btnPT').classList.toggle('active',lang==='pt');
+  document.getElementById('btnEN').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  localStorage.setItem('ap_lang_will',lang);
+  updateDynamicLabels();
+}
+(function(){updateDynamicLabels();})(); // Always defaults to PT on load
+
+function updateDynamicLabels(){
+  const btn=document.getElementById('addGiftBtn');
+  if(btn)btn.textContent=isEN()?'+ Add gift':'+ Adicionar doação';
+  document.querySelectorAll('.gift-row').forEach(r=>{
+    const t=r.querySelector('.gift-type');
+    const pp=r.querySelector('.gift-person');
+    const ii=r.querySelector('.gift-item');
+    if(t){
+      const sel=t.value;
+      t.innerHTML=`<option value="item">${isEN()?'Item':'Item'}</option><option value="money">${isEN()?'Money ($)':'Dinheiro ($)'}</option><option value="property">${isEN()?'Property':'Imóvel'}</option>`;
+      t.value=sel;
+    }
+    if(pp)pp.placeholder=isEN()?'Person (name)':'Pessoa (nome)';
+    if(ii)ii.placeholder=isEN()?'Item or amount':'Item ou valor';
+  });
+}
+
+let giftCount=0;
+function addGift(type='',person='',item=''){
+  giftCount++;
+  const row=document.createElement('div');
+  row.className='gift-row';
+  row.innerHTML=`
+    <select class="fi gift-type"><option value="item">${isEN()?'Item':'Item'}</option><option value="money">${isEN()?'Money ($)':'Dinheiro ($)'}</option><option value="property">${isEN()?'Property':'Imóvel'}</option></select>
+    <input type="text" class="fi gift-person" placeholder="${isEN()?'Person (name)':'Pessoa (nome)'}" value="${person}"/>
+    <input type="text" class="fi gift-item" placeholder="${isEN()?'Item or amount':'Item ou valor'}" value="${item}"/>
+    <button type="button" class="gift-del" onclick="this.closest('.gift-row').remove();autoSave()">×</button>`;
+  if(type){const s=row.querySelector('.gift-type');if(s)s.value=type;}
+  row.addEventListener('input',autoSave);
+  document.getElementById('giftsList').appendChild(row);
+}
+addGift();
+
+let st;
+function autoSave(){clearTimeout(st);st=setTimeout(saveData,700);}
+document.getElementById('willForm').addEventListener('input',autoSave);
+document.getElementById('willForm').addEventListener('change',autoSave);
+
+function v(id){return(document.getElementById(id)||{}).value||'';}
+function ph(val,fb){return val&&val.trim()?val.trim():(fb||'__________');}
+
+function readForm(){
+  const gifts=[];
+  document.querySelectorAll('.gift-row').forEach(r=>{gifts.push({type:r.querySelector('.gift-type')?.value||'',person:r.querySelector('.gift-person')?.value||'',item:r.querySelector('.gift-item')?.value||''}); });
+  return{name:v('w_name'),city:v('w_city'),state:v('w_state'),job:v('w_job'),trustee:v('w_trustee'),trustee2:v('w_trustee2'),pet1:v('w_pet1'),pet2:v('w_pet2'),petfund:v('w_petfund'),res1:v('w_res1'),res2:v('w_res2'),burial:document.querySelector('input[name="burial"]:checked')?.value||'buried',gifts};
+}
+
+function saveData(){
+  const d=readForm();
+  localStorage.setItem(SAVE_KEY,JSON.stringify(d));
+  const n=document.getElementById('saveNote');
+  n.textContent=isEN()?'✓ Saved':'✓ Salvo';n.style.display='inline';
+  setTimeout(()=>n.style.display='none',1800);
+}
+
+function loadData(){
+  const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;
+  try{
+    const d=JSON.parse(raw);
+    ['w_name','w_city','w_state','w_job','w_trustee','w_trustee2','w_pet1','w_pet2','w_petfund','w_res1','w_res2'].forEach(id=>{const k=id.replace('w_','');const el=document.getElementById(id);if(el&&d[k])el.value=d[k];});
+    if(d.name&&document.getElementById('w_name'))document.getElementById('w_name').value=d.name;
+    if(d.city&&document.getElementById('w_city'))document.getElementById('w_city').value=d.city;
+    if(d.state&&document.getElementById('w_state'))document.getElementById('w_state').value=d.state;
+    if(d.job&&document.getElementById('w_job'))document.getElementById('w_job').value=d.job;
+    if(d.trustee&&document.getElementById('w_trustee'))document.getElementById('w_trustee').value=d.trustee;
+    if(d.trustee2&&document.getElementById('w_trustee2'))document.getElementById('w_trustee2').value=d.trustee2;
+    if(d.pet1&&document.getElementById('w_pet1'))document.getElementById('w_pet1').value=d.pet1;
+    if(d.pet2&&document.getElementById('w_pet2'))document.getElementById('w_pet2').value=d.pet2;
+    if(d.petfund&&document.getElementById('w_petfund'))document.getElementById('w_petfund').value=d.petfund;
+    if(d.res1&&document.getElementById('w_res1'))document.getElementById('w_res1').value=d.res1;
+    if(d.res2&&document.getElementById('w_res2'))document.getElementById('w_res2').value=d.res2;
+    if(d.burial){const r=document.querySelector(`input[name="burial"][value="${d.burial}"]`);if(r)r.checked=true;}
+    if(d.gifts&&d.gifts.length){document.getElementById('giftsList').innerHTML='';giftCount=0;d.gifts.forEach(g=>addGift(g.type,g.person,g.item));}
+  }catch(e){}
+}
+loadData();
+
+function buildGifts(gifts){
+  const v=gifts.filter(g=>g.person||g.item);
+  if(!v.length)return'<p>No specific gifts designated.</p>';
+  return v.map(g=>`<p>I give to <strong>${ph(g.person)}</strong>: <strong>${ph(g.item)}</strong>.</p>`).join('');
+}
+
+function renderWill(d){
+  const N=ph(d.name),C=ph(d.city),S=ph(d.state,'Florida'),J=ph(d.job),T=ph(d.trustee),T2=ph(d.trustee2),P1=ph(d.pet1),P2=ph(d.pet2),PF=ph(d.petfund,'__________'),R1=ph(d.res1),R2=ph(d.res2),BUR=d.burial==='cremated'?'cremated':'buried';
+  return`<h2>My Last Will and Testament</h2>
+<div class="will-clause"><p><span class="will-clause-num">1.</span> I want to create my Last Will and Testament.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">2.</span> My full legal name is ${N}, and I live in ${C}, ${S}, United States of America, and I am of sound mind.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">3.</span> I am of the age of majority in my State.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">4.</span> I am employed as a ${J}.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">5.</span> I revoke all my former Wills and Codicils.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">6.</span> In this Will 'decide' or 'decides' means, when referring to a decision of any person, a decision made in that person's sole, absolute and uncontrolled discretion to the extent permitted by law.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">7.</span> The expression "My Trustee" wherever used in this my Will shall mean the person or persons from time to time acting in the office of Executor, Trustee and Personal Representative of this my Will, and wherever the singular or masculine are used throughout this Will, the same shall be construed as meaning the plural or feminine or body corporate where the context so requires.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">8.</span> I hereby appoint ${T} sole Executor and Trustee of this my Will, but if this person should predecease me or die without having proved this my Will or if they should relinquish their right to act as my Executor, then I appoint ${T2} to be the Executor and Trustee of this my Will.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">9.</span> I GIVE, DEVISE AND BEQUEATH all my property of every nature and kind to my Trustee to deal with as follows:</p><p style="margin:8px 0;">To pay out and charge to the capital of my general estate (in exoneration of all beneficiaries) my debts and funeral and testamentary expenses including all estate and inheritance and succession and probate and other taxes, duties, and fees and with power to commute or prepay any such taxes, duties, and fees.</p><p style="margin:8px 0;">I direct my Trustee to make the following specific gifts:</p>${buildGifts(d.gifts||[])}</div>
+<div class="will-clause"><p><span class="will-clause-num">10.</span> (A) Subject to the prior payment of all my just debts, funeral and testamentary expenses and all estate, inheritance, succession, probate and other taxes and duties, I give, devise and bequeath all the rest, residue and remainder of my estate, both real and personal, of whatsoever nature and wheresoever situate, to ${R1}.</p><p style="margin-top:8px;">(B) If ${R1} should predecease me or die within thirty (30) days of my death, I give my residue estate in equal shares to: ${R2}.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">11.</span> I give ${P1} custody and care of all pets that I own at the time of my death, together with a sum of $${PF} as a Pet Fund for their care, maintenance, and veterinary expenses. If ${P1} is unable or unwilling to accept custody, I direct the pets to be placed with ${P2}, or, failing that, with a reputable animal shelter or humane society.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">12.</span> My Trustee shall have full power and authority in their sole and absolute discretion to carry on any business forming part of my estate and to exercise all powers with respect thereto as if my Trustee were the sole owner of such business.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">13.</span> My Trustee shall have full power and authority in their sole and absolute discretion: to sell, call in, and convert to money any part of my estate not already in the form of money; to retain any investment forming part of my estate; to invest and re-invest my estate; and to exercise any discretion or authority which my Trustee considers in the best interests of my estate and my beneficiaries.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">14.</span> My Trustee shall have such powers to invest my Estate as is authorized by the law of my State.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">15.</span> In the event a person under the age of majority is entitled to any part of my estate, I direct my Trustee to hold such child's entitlement in trust for the benefit of such child until such child reaches the age of majority, provided however that my Trustee may pay so much of the income or capital of such child's entitlement as my Trustee decides is advisable for the care, maintenance, education and benefit of that child.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">16.</span> I want my remains to be ${BUR}.</p></div>
+<div class="will-clause"><p><span class="will-clause-num">17.</span> My Trustee may exercise any rights, powers and privileges in connection with any digital or electronic information or property and online accounts (collectively, my 'Digital Assets') forming part of my estate to the same extent as I could if I were alive, including: (a) managing, accessing, retrieving, distributing, transferring, and securely deleting any Digital Assets; (b) obtaining, accessing, modifying, and managing my passwords and electronic credentials; (c) managing or closing accounts (including email, social media, cloud storage, and electronic commerce accounts); (d) managing or disposing of domain names; (e) continuing operation of or dismantling websites; (f) protecting my Digital Assets and related intellectual property; (g) protecting my personal information; (h) accessing and managing my digital devices; and (i) accessing digital wallets and managing any associated digital currencies or cryptocurrencies.</p></div>
+<div style="margin-top:30px;">
+  <p>I have signed this Will on the _____ day of _______________, 20____.</p>
+  <p style="margin-top:22px;"><span class="sig-line"></span><br/>${N}<br/><em>Testator</em></p>
+  <p style="margin-top:18px;">SIGNED by the above named Testator ${N} as their Last Will in the presence of us both present at the same time who at their request and in their presence and in the presence of each other have hereunto subscribed our names as witnesses:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:18px;">
+    <div><p><span class="sig-line" style="min-width:160px;"></span><br/>Witness #1 Signature</p><p style="margin-top:8px;">Name ____________________________<br/>Occupation ______________________<br/>Address _________________________</p></div>
+    <div><p><span class="sig-line" style="min-width:160px;"></span><br/>Witness #2 Signature</p><p style="margin-top:8px;">Name ____________________________<br/>Occupation ______________________<br/>Address _________________________</p></div>
+  </div>
+</div>`;
+}
+
+function renderAffidavit(d){
+  const N=ph(d.name);
+  return`<div style="page-break-before:always;padding-top:28px;">
+<h2 style="text-align:center;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:18px;">Self-Proving Affidavit<br/><small style="font-size:0.72em;">(Florida Statute § 732.503)</small></h2>
+<p><strong>STATE OF FLORIDA</strong><br/>COUNTY OF __________________</p>
+<p style="margin-top:10px;">I, ${N}, declare to the officer taking my acknowledgment of this instrument, and to the subscribing witnesses, that I signed this instrument as my Last Will and Testament.</p>
+<p style="margin-top:20px;"><span class="sig-line"></span><br/>Testator: ${N}</p>
+<p style="margin-top:18px;">We, ______________________________ and ______________________________, have been sworn by the officer signing below, and declare to that officer on our oaths that the testator declared the instrument to be the testator's Last Will and Testament and signed it in our presence and that we each signed the instrument as a witness in the presence of the testator and of each other.</p>
+<p style="margin-top:20px;"><span class="sig-line"></span><br/>Witness #1 Signature<br/>Printed Name: ______________________________<br/>Address: ______________________________</p>
+<p style="margin-top:16px;"><span class="sig-line"></span><br/>Witness #2 Signature<br/>Printed Name: ______________________________<br/>Address: ______________________________</p>
+<p style="margin-top:20px;">Acknowledged and subscribed before me by the testator, ${N}, who is personally known to me or who has produced ______________________________ as identification, and sworn to and subscribed before me by the witnesses, who are personally known to me or who have produced ______________________________ and ______________________________, respectively, as identification, and subscribed by me in the presence of the testator and the subscribing witnesses, all on this _____ day of ______________, 20____.</p>
+<p style="margin-top:24px;"><span class="sig-line"></span><br/>Notary Public — State of Florida<br/>Printed Name: ______________________________<br/>My Commission Expires: ______________________________<br/><br/>[NOTARY SEAL]</p>
+</div>`;
+}
+
+function openPreview(){
+  saveData();
+  const d=readForm();
+  document.getElementById('previewContent').innerHTML=renderWill(d)+renderAffidavit(d);
+  document.getElementById('previewModal').classList.add('open');
+}
+function closePreview(){document.getElementById('previewModal').classList.remove('open');}
+document.getElementById('previewModal').addEventListener('click',e=>{if(e.target===document.getElementById('previewModal'))closePreview();});
+
+function exportPrint(){
+  saveData();
+  const d=readForm();
+  const N=ph(d.name,'Testator');
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Last Will and Testament of ${N}</title>
+<style>body{margin:0;font-family:'Times New Roman',serif;font-size:12pt;color:#111;line-height:1.55;}.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1in;background:#FAF3E5;page-break-after:always;}.cover h1{font-size:26pt;color:#8C3E2A;margin-bottom:10px;}.cover .name{font-size:17pt;color:#3A2418;margin-bottom:28px;}.cover .meta{font-size:10pt;color:#6B4A3A;}.rule{width:90px;height:2px;background:#8C3E2A;margin:14px auto 22px;}.body{padding:.9in 1in 1in;}h2{font-size:15pt;text-align:center;margin-bottom:18px;}p{margin:0 0 10px;text-align:justify;}.will-clause{margin-bottom:10px;}.will-clause-num{font-weight:bold;}.sig-line{display:inline-block;min-width:260px;border-bottom:1px solid #333;margin:14px 0 4px;}@page{size:letter;margin:.75in;}</style>
+
+</head><body><div class="cover"><div class="rule"></div><h1>Last Will and Testament</h1><div class="rule"></div><p class="name">of ${N}</p><p class="meta">Prepared ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})} · State of Florida, USA<br/>Informational template — review with a licensed Florida attorney recommended.<br/>Alice Prata Will Kit · aliceprata.com</p></div><div class="body">${renderWill(d)}${renderAffidavit(d)}</div></body></html>`);
+  w.document.close();
+  setTimeout(()=>{w.focus();w.print();},700);
+}
+</script>
+</body>
+</html>
