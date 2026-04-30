@@ -192,6 +192,39 @@ body[data-lang="pt"] .en-content{display:none;}
 
 <div class="section">
   <div class="section-header"><div class="section-num">3</div>
+    <h2 class="pt-content">Guardião dos Filhos Menores</h2>
+    <h2 class="en-content">Guardian for Minor Children</h2>
+  </div>
+  <p class="section-desc pt-content">Se você tiver filhos menores de idade, indique quem cuidará deles. Esta é uma das decisões mais importantes do testamento.</p>
+  <p class="section-desc en-content">If you have minor children, indicate who will care for them. This is one of the most important decisions in the will.</p>
+  <div class="field-grid field-grid-2">
+    <label class="field">
+      <span class="lbl pt-content">Guardião(a) principal<span class="sub">Nome legal completo. Geralmente um familiar de confiança.</span></span>
+      <span class="lbl en-content">Primary Guardian<span class="sub">Full legal name. Usually a trusted family member.</span></span>
+      <input id="w_guardian1" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Guardião(a) suplente<span class="sub">Caso o primeiro não possa ou recuse.</span></span>
+      <span class="lbl en-content">Backup Guardian<span class="sub">In case the first is unable or declines.</span></span>
+      <input id="w_guardian2" class="fi" type="text"/>
+    </label>
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Nomes e datas de nascimento dos filhos menores</span>
+      <span class="lbl en-content">Names and dates of birth of minor children</span>
+      <textarea id="w_children" class="fi" rows="3"></textarea>
+    </label>
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Instruções especiais para criação (religião, educação, valores)</span>
+      <span class="lbl en-content">Special instructions for upbringing (religion, education, values)</span>
+      <textarea id="w_child_instructions" class="fi" rows="2"></textarea>
+    </label>
+  </div>
+</div>
+
+<!-- 4 -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">4</div>
     <h2 class="pt-content">Doações Específicas</h2>
     <h2 class="en-content">Specific Gifts</h2>
   </div>
@@ -204,7 +237,7 @@ body[data-lang="pt"] .en-content{display:none;}
 <!-- 4 -->
 
 <div class="section">
-  <div class="section-header"><div class="section-num">4</div>
+  <div class="section-header"><div class="section-num">5</div>
     <h2 class="pt-content">Animais de Estimação</h2>
     <h2 class="en-content">Pets</h2>
   </div>
@@ -229,10 +262,83 @@ body[data-lang="pt"] .en-content{display:none;}
   </div>
 </div>
 
+<!-- 7 - Real Estate -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">6</div>
+    <h2 class="pt-content">Bens Imóveis e Propriedades</h2>
+    <h2 class="en-content">Real Estate and Property</h2>
+  </div>
+  <p class="section-desc pt-content">Liste os imóveis e veículos que fazem parte do seu patrimônio.</p>
+  <p class="section-desc en-content">List real estate and vehicles that are part of your estate.</p>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Imóvel principal (endereço completo)</span>
+      <span class="lbl en-content">Primary residence (full address)</span>
+      <input id="w_property1" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Outros imóveis (endereços)</span>
+      <span class="lbl en-content">Other properties (addresses)</span>
+      <textarea id="w_property2" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Veículos (marca, modelo, ano)</span>
+      <span class="lbl en-content">Vehicles (make, model, year)</span>
+      <textarea id="w_vehicles" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Outros bens de valor (joias, arte, coleções)</span>
+      <span class="lbl en-content">Other valuables (jewelry, art, collections)</span>
+      <textarea id="w_valuables" class="fi" rows="2"></textarea>
+    </label>
+  </div>
+</div>
+
+<!-- 8 - Digital Assets -->
+
+<div class="section">
+  <div class="section-header"><div class="section-num">7</div>
+    <h2 class="pt-content">Bens Digitais e Contas Online</h2>
+    <h2 class="en-content">Digital Assets and Online Accounts</h2>
+  </div>
+  <p class="section-desc pt-content">Instruções sobre suas contas digitais. Não escreva senhas aqui — apenas onde encontrá-las.</p>
+  <p class="section-desc en-content">Instructions about your digital accounts. Do not write passwords here — only guidance on where to find them.</p>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Gerenciador de senhas ou onde estão guardadas</span>
+      <span class="lbl en-content">Password manager or where passwords are stored</span>
+      <input id="w_passwords" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Redes sociais (o que deseja que aconteça com cada conta)</span>
+      <span class="lbl en-content">Social media (what you want done with each account)</span>
+      <textarea id="w_social" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Email principal e instruções</span>
+      <span class="lbl en-content">Primary email and instructions</span>
+      <input id="w_email_acct" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Criptomoedas / carteiras digitais (onde estão / como acessar)</span>
+      <span class="lbl en-content">Cryptocurrency / digital wallets (where they are / how to access)</span>
+      <textarea id="w_crypto" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Sites, domínios ou negócios online</span>
+      <span class="lbl en-content">Websites, domains or online businesses</span>
+      <textarea id="w_websites" class="fi" rows="2"></textarea>
+    </label>
+  </div>
+</div>
+
+<!-- 9 - Residue Beneficiaries -->
+
 <!-- 5 -->
 
 <div class="section">
-  <div class="section-header"><div class="section-num">5</div>
+  <div class="section-header"><div class="section-num">8</div>
     <h2 class="pt-content">Beneficiários do Resíduo</h2>
     <h2 class="en-content">Residue Beneficiaries</h2>
   </div>
@@ -255,7 +361,7 @@ body[data-lang="pt"] .en-content{display:none;}
 <!-- 6 -->
 
 <div class="section">
-  <div class="section-header"><div class="section-num">6</div>
+  <div class="section-header"><div class="section-num">9</div>
     <h2 class="pt-content">Últimas Vontades</h2>
     <h2 class="en-content">Final Wishes</h2>
   </div>
@@ -372,7 +478,17 @@ function ph(val,fb){return val&&val.trim()?val.trim():(fb||'__________');}
 function readForm(){
   const gifts=[];
   document.querySelectorAll('.gift-row').forEach(r=>{gifts.push({type:r.querySelector('.gift-type')?.value||'',person:r.querySelector('.gift-person')?.value||'',item:r.querySelector('.gift-item')?.value||''}); });
-  return{name:v('w_name'),city:v('w_city'),state:v('w_state'),job:v('w_job'),trustee:v('w_trustee'),trustee2:v('w_trustee2'),pet1:v('w_pet1'),pet2:v('w_pet2'),petfund:v('w_petfund'),res1:v('w_res1'),res2:v('w_res2'),burial:document.querySelector('input[name="burial"]:checked')?.value||'buried',gifts};
+  return{name:v('w_name'),city:v('w_city'),state:v('w_state'),job:v('w_job'),
+    trustee:v('w_trustee'),trustee2:v('w_trustee2'),
+    guardian1:v('w_guardian1'),guardian2:v('w_guardian2'),
+    children:v('w_children'),child_instructions:v('w_child_instructions'),
+    pet1:v('w_pet1'),pet2:v('w_pet2'),petfund:v('w_petfund'),
+    property1:v('w_property1'),property2:v('w_property2'),
+    vehicles:v('w_vehicles'),valuables:v('w_valuables'),
+    passwords:v('w_passwords'),social:v('w_social'),
+    email_acct:v('w_email_acct'),crypto:v('w_crypto'),websites:v('w_websites'),
+    res1:v('w_res1'),res2:v('w_res2'),
+    burial:document.querySelector('input[name="burial"]:checked')?.value||'buried',gifts};
 }
 
 function saveData(){
@@ -394,9 +510,22 @@ function loadData(){
     if(d.job&&document.getElementById('w_job'))document.getElementById('w_job').value=d.job;
     if(d.trustee&&document.getElementById('w_trustee'))document.getElementById('w_trustee').value=d.trustee;
     if(d.trustee2&&document.getElementById('w_trustee2'))document.getElementById('w_trustee2').value=d.trustee2;
+    if(d.guardian1&&document.getElementById('w_guardian1'))document.getElementById('w_guardian1').value=d.guardian1;
+    if(d.guardian2&&document.getElementById('w_guardian2'))document.getElementById('w_guardian2').value=d.guardian2;
+    if(d.children&&document.getElementById('w_children'))document.getElementById('w_children').value=d.children;
+    if(d.child_instructions&&document.getElementById('w_child_instructions'))document.getElementById('w_child_instructions').value=d.child_instructions;
     if(d.pet1&&document.getElementById('w_pet1'))document.getElementById('w_pet1').value=d.pet1;
     if(d.pet2&&document.getElementById('w_pet2'))document.getElementById('w_pet2').value=d.pet2;
     if(d.petfund&&document.getElementById('w_petfund'))document.getElementById('w_petfund').value=d.petfund;
+    if(d.property1&&document.getElementById('w_property1'))document.getElementById('w_property1').value=d.property1;
+    if(d.property2&&document.getElementById('w_property2'))document.getElementById('w_property2').value=d.property2;
+    if(d.vehicles&&document.getElementById('w_vehicles'))document.getElementById('w_vehicles').value=d.vehicles;
+    if(d.valuables&&document.getElementById('w_valuables'))document.getElementById('w_valuables').value=d.valuables;
+    if(d.passwords&&document.getElementById('w_passwords'))document.getElementById('w_passwords').value=d.passwords;
+    if(d.social&&document.getElementById('w_social'))document.getElementById('w_social').value=d.social;
+    if(d.email_acct&&document.getElementById('w_email_acct'))document.getElementById('w_email_acct').value=d.email_acct;
+    if(d.crypto&&document.getElementById('w_crypto'))document.getElementById('w_crypto').value=d.crypto;
+    if(d.websites&&document.getElementById('w_websites'))document.getElementById('w_websites').value=d.websites;
     if(d.res1&&document.getElementById('w_res1'))document.getElementById('w_res1').value=d.res1;
     if(d.res2&&document.getElementById('w_res2'))document.getElementById('w_res2').value=d.res2;
     if(d.burial){const r=document.querySelector(`input[name="burial"][value="${d.burial}"]`);if(r)r.checked=true;}
