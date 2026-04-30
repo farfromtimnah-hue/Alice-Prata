@@ -35,9 +35,9 @@ border-radius:0 0 24px 24px;
 box-shadow:0 6px 24px rgba(140,62,42,0.18);
 }
 .header-logo{
-height:64px;width:auto;
+height:80px;width:auto;
 background:var(–white);border-radius:14px;
-padding:8px 12px;flex-shrink:0;
+padding:8px 14px;flex-shrink:0;
 }
 .header-text h1{
 font-family:‘Lora’,serif;font-size:clamp(1.3rem,3vw,1.9rem);
@@ -175,9 +175,11 @@ td a::after{content:” (” attr(href) “)”;font-size:0.72em;color:var(–in
 .table-wrap{box-shadow:none;}
 }
 
-/* LANG */
-[data-lang=“en”] .pt-only{display:none;}
-[data-lang=“pt”] .en-only{display:none;}
+/* LANG — PT default */
+.en-only{display:none!important;}
+[data-lang=“en”] .en-only{display:block!important;}
+[data-lang=“en”] .en-only.inline-el{display:inline!important;}
+[data-lang=“en”] .pt-only{display:none!important;}
 </style>
 
 </head>
