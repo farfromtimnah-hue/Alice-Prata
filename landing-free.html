@@ -4,44 +4,16 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title data-pt="Alice Prata — Recursos Gratuitos para Sua Família" data-en="Alice Prata — Free Resources for Your Family">Alice Prata — Recursos Gratuitos para Sua Família</title>
-<meta name="description" content="Guia de Emergência Familiar + Will Kit gratuitos. Para famílias que falam português. Sem compromisso, sem pressão.">
+<title>Alice Prata — Recursos para Sua Família</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --terra-deep: #8C3E2A;
-  --terra: #B5553F;
-  --terra-light: #C76A4F;
-  --sand: #E8D5B7;
-  --sand-light: #F4E6CD;
-  --sand-cream: #FAF3E5;
-  --ink: #1A1208;
-  --ink-mid: #3A2418;
-  --ink-soft: #6B4A3A;
-  --ochre: #C9A24A;
-  --white: #FFFFFF;
-  --r: 16px;
-  --r-lg: 24px;
-}
+:root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;--r:16px;--r-lg:24px;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{
-  font-family:'Nunito',system-ui,sans-serif;
-  font-size:16px;
-  color:var(--ink);
-  background:var(--sand-cream);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-h1,h2,h3,h4{
-  font-family:'Lora',Georgia,serif;
-  line-height:1.2;
-  color:var(--ink);
-}
+body{font-family:'Nunito',system-ui,sans-serif;font-size:16px;color:var(--ink);background:var(--sand-cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Lora',Georgia,serif;line-height:1.2;color:var(--ink);}
 h1{font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:700;}
 h2{font-size:clamp(1.8rem,4vw,2.75rem);font-weight:700;}
 h3{font-size:clamp(1.2rem,2.8vw,1.6rem);font-weight:600;}
@@ -50,384 +22,123 @@ p{color:var(--ink-mid);line-height:1.75;}
 a{color:var(--terra);text-decoration:none;}
 img{max-width:100%;display:block;}
 .container{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
-.container-sm{width:100%;max-width:720px;margin:0 auto;padding:0 24px;}
-
-/* ---- LANG TOGGLE ---- */
-.lang-bar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(250,243,229,0.96);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(181,85,63,0.12);
-  padding:12px 24px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.lang-logo{height:38px;width:auto;}
+/* LANG — PT default */
+.en{display:none!important;}
+[data-lang="en"] .en{display:block!important;}
+[data-lang="en"] .en.inline-el{display:inline!important;}
+[data-lang="en"] .en.flex-el{display:flex!important;}
+[data-lang="en"] .pt{display:none!important;}
+/* LANG BAR */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,243,229,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(181,85,63,0.12);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;}
+.lang-logo{height:52px;width:auto;}
 .lang-toggle{display:flex;gap:4px;background:var(--sand);border-radius:999px;padding:4px;}
-.lang-btn{
-  padding:6px 18px;border-radius:999px;border:none;cursor:pointer;
-  font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;
-  letter-spacing:0.05em;transition:all 0.2s;background:transparent;color:var(--ink-soft);
-}
+.lang-btn{padding:6px 18px;border-radius:999px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;transition:all 0.2s;background:transparent;color:var(--ink-soft);}
 .lang-btn.active{background:var(--terra-deep);color:var(--white);}
-
-/* ---- HERO ---- */
-.hero{
-  padding-top:82px;
-  background:
-    radial-gradient(ellipse 700px 400px at 100% 0%, rgba(201,162,74,0.1), transparent 60%),
-    radial-gradient(ellipse 600px 400px at 0% 100%, rgba(181,85,63,0.08), transparent 60%),
-    linear-gradient(180deg, var(--sand-cream) 0%, var(--sand-light) 100%);
-}
-.hero-inner{
-  display:grid;grid-template-columns:1fr;
-  gap:48px;align-items:center;
-  padding:64px 0 80px;
-}
-@media(min-width:860px){
-  .hero-inner{grid-template-columns:1.05fr 0.95fr;gap:56px;}
-}
-.eyebrow{
-  display:inline-block;
-  background:rgba(181,85,63,0.12);
-  color:var(--terra-deep);
-  border:1px solid rgba(181,85,63,0.25);
-  font-size:0.78rem;font-weight:700;
-  letter-spacing:0.14em;text-transform:uppercase;
-  padding:8px 18px;border-radius:999px;margin-bottom:22px;
-}
+/* HERO */
+.hero{padding-top:90px;background:radial-gradient(ellipse 700px 400px at 100% 0%,rgba(201,162,74,0.1),transparent 60%),linear-gradient(180deg,var(--sand-cream) 0%,var(--sand-light) 100%);}
+.hero-inner{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;padding:60px 0 76px;}
+@media(min-width:860px){.hero-inner{grid-template-columns:1.05fr 0.95fr;gap:56px;}}
+.eyebrow{display:inline-block;background:rgba(181,85,63,0.12);color:var(--terra-deep);border:1px solid rgba(181,85,63,0.25);font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:8px 18px;border-radius:999px;margin-bottom:22px;}
 .hero h1{margin-bottom:18px;}
 .hero h1 em{font-style:italic;color:var(--terra);}
-.hero-sub{
-  font-size:clamp(1.05rem,2.2vw,1.18rem);
-  color:var(--ink-soft);max-width:520px;margin-bottom:12px;
-}
-.hero-sub-note{
-  font-size:0.92rem;color:var(--ink-soft);opacity:0.8;
-  max-width:480px;margin-bottom:32px;
-  font-style:italic;
-}
-.btn{
-  display:inline-block;padding:16px 32px;border-radius:var(--r);
-  font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;
-  cursor:pointer;border:none;transition:all 0.2s;text-align:center;text-decoration:none;
-}
-.btn-primary{
-  background:var(--terra-deep);color:var(--white);
-  box-shadow:0 4px 20px rgba(140,62,42,0.28);
-}
-.btn-primary:hover{background:var(--terra);transform:translateY(-2px);box-shadow:0 8px 28px rgba(140,62,42,0.38);}
-.btn-secondary{
-  background:transparent;color:var(--terra-deep);border:2px solid var(--terra-deep);
-}
+.hero-sub{font-size:clamp(1.05rem,2.2vw,1.18rem);color:var(--ink-soft);max-width:520px;margin-bottom:10px;}
+.hero-sub-note{font-size:0.92rem;color:var(--ink-soft);opacity:0.78;max-width:480px;margin-bottom:32px;font-style:italic;}
+.btn{display:inline-block;padding:16px 32px;border-radius:var(--r);font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;border:none;transition:all 0.2s;text-align:center;text-decoration:none;}
+.btn-primary{background:var(--terra-deep);color:var(--white);box-shadow:0 4px 20px rgba(140,62,42,0.28);}
+.btn-primary:hover{background:var(--terra);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--terra-deep);border:2px solid var(--terra-deep);}
 .btn-secondary:hover{background:var(--terra-deep);color:var(--white);}
 .btn-large{font-size:1.1rem;padding:20px 40px;}
-.btn-ghost{
-  background:transparent;color:var(--ink-soft);
-  font-size:0.9rem;padding:10px 0;
-  text-decoration:underline;text-underline-offset:4px;
-}
-
 .cta-stack{display:flex;flex-direction:column;gap:12px;max-width:380px;}
-.no-pressure{
-  font-size:0.83rem;color:var(--ink-soft);opacity:0.75;
-  display:flex;align-items:center;gap:8px;
-}
-.no-pressure svg{flex-shrink:0;}
-
-/* Hero free cards */
+.no-pressure{font-size:0.83rem;color:var(--ink-soft);opacity:0.75;display:flex;align-items:center;gap:8px;}
 .free-cards{display:flex;flex-direction:column;gap:16px;}
-.free-card{
-  background:var(--white);border-radius:var(--r-lg);
-  padding:24px 24px 24px 20px;
-  box-shadow:0 4px 24px rgba(140,62,42,0.09);
-  display:flex;align-items:flex-start;gap:18px;
-  border-left:4px solid var(--terra);
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-.free-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(140,62,42,0.14);}
-.free-card-icon{
-  width:48px;height:48px;border-radius:14px;
-  background:rgba(181,85,63,0.1);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;flex-shrink:0;
-}
+.free-card{background:var(--white);border-radius:var(--r-lg);padding:22px;box-shadow:0 4px 24px rgba(140,62,42,0.09);display:flex;align-items:flex-start;gap:16px;border-left:4px solid var(--terra);}
+.free-card-icon{width:46px;height:46px;border-radius:13px;background:rgba(181,85,63,0.1);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
 .free-card h4{color:var(--ink);margin-bottom:4px;font-family:'Nunito',sans-serif;font-weight:700;}
-.free-card p{font-size:0.9rem;color:var(--ink-soft);margin:0;}
-.free-badge{
-  display:inline-block;margin-top:8px;
-  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--terra-deep);background:rgba(181,85,63,0.1);
-  padding:3px 10px;border-radius:999px;
-}
-
-/* ---- WHY THIS MATTERS ---- */
-.why-matters{
-  padding:80px 0;
-  background:var(--ink);
-}
-.why-matters .section-label{
-  font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--terra-light);margin-bottom:16px;
-}
-.why-matters h2{color:var(--white);margin-bottom:16px;}
+.free-card p{font-size:0.9rem;color:var(--ink-soft);margin:0 0 7px;}
+.free-badge{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra-deep);background:rgba(181,85,63,0.1);padding:3px 10px;border-radius:999px;}
+/* WHY */
+.why-matters{padding:80px 0;background:var(--ink);}
+.section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra-light);margin-bottom:14px;}
+.why-matters h2{color:var(--white);margin-bottom:14px;}
 .why-matters h2 em{font-style:italic;color:var(--terra-light);}
-.why-matters .lead{
-  color:rgba(250,243,229,0.75);font-size:1.05rem;
-  max-width:640px;margin-bottom:48px;
-}
-.scenario-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
-}
-.scenario{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(181,85,63,0.2);
-  border-radius:var(--r);
-  padding:28px 24px;
-}
-.scenario .q{
-  font-family:'Lora',serif;font-style:italic;
-  font-size:1.05rem;color:var(--white);
-  line-height:1.45;margin-bottom:12px;
-}
-.scenario .a{font-size:0.88rem;color:rgba(250,243,229,0.6);line-height:1.6;}
-
-/* ---- WHAT YOU GET ---- */
-.what-you-get{padding:96px 0;background:var(--sand-cream);}
-.section-tag{
-  display:inline-block;
-  font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--terra);background:rgba(181,85,63,0.1);
-  padding:6px 14px;border-radius:999px;margin-bottom:18px;
-}
-.resources-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:28px;
-  margin-top:48px;
-}
-.resource-card{
-  background:var(--white);border-radius:var(--r-lg);
-  overflow:hidden;
-  box-shadow:0 4px 28px rgba(140,62,42,0.09);
-}
-.resource-card-top{
-  background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);
-  padding:36px 32px 28px;
-}
-.resource-card-top .big-icon{font-size:2.8rem;margin-bottom:14px;}
-.resource-card-top h3{color:var(--white);margin-bottom:8px;}
-.resource-card-top .value{
-  display:inline-block;
-  background:rgba(255,255,255,0.15);
-  color:rgba(255,255,255,0.9);
-  font-size:0.8rem;font-weight:700;letter-spacing:0.08em;
-  padding:4px 12px;border-radius:999px;
-  text-decoration:line-through;
-}
-.resource-card-body{padding:28px 32px;}
-.resource-card-body p{font-size:0.95rem;color:var(--ink-soft);margin-bottom:16px;}
-.resource-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.resource-list li{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:0.9rem;color:var(--ink-mid);
-}
-.resource-list .dot{
-  width:18px;height:18px;border-radius:50%;
-  background:rgba(181,85,63,0.15);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:2px;font-size:0.65rem;color:var(--terra-deep);
-}
-.free-tag{
-  display:inline-block;margin-top:20px;
-  background:var(--terra-deep);color:var(--white);
-  font-size:0.85rem;font-weight:700;padding:8px 18px;border-radius:999px;
-}
-
-/* ---- ABOUT ALICE (soft, human) ---- */
-.about{
-  padding:80px 0;
-  background:var(--sand-light);
-}
-.about-inner{
-  display:grid;grid-template-columns:1fr;
-  gap:48px;align-items:center;
-}
+.lead{color:rgba(250,243,229,0.72);font-size:1.02rem;max-width:640px;margin-bottom:40px;}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
+.scenario{background:rgba(255,255,255,0.05);border:1px solid rgba(181,85,63,0.2);border-radius:var(--r);padding:24px 20px;}
+.scenario-q{font-family:'Lora',serif;font-style:italic;font-size:1rem;color:var(--white);line-height:1.45;margin-bottom:10px;}
+.scenario-a{font-size:0.87rem;color:rgba(250,243,229,0.62);line-height:1.6;}
+/* WHAT YOU GET */
+.what-you-get{padding:90px 0;background:var(--sand-cream);}
+.section-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--terra);background:rgba(181,85,63,0.1);padding:6px 14px;border-radius:999px;margin-bottom:16px;}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:40px;}
+.resource-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 28px rgba(140,62,42,0.09);}
+.resource-card-top{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:30px 26px 22px;}
+.resource-card-top .big-icon{font-size:2.5rem;margin-bottom:10px;}
+.resource-card-top h3{color:var(--white);margin-bottom:7px;}
+.resource-card-top .value{display:inline-block;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.88);font-size:0.78rem;font-weight:700;padding:3px 10px;border-radius:999px;text-decoration:line-through;}
+.resource-card-body{padding:24px 26px;}
+.resource-card-body p{font-size:0.93rem;color:var(--ink-soft);margin-bottom:13px;}
+.resource-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.resource-list li{display:flex;align-items:flex-start;gap:9px;font-size:0.88rem;color:var(--ink-mid);}
+.resource-list .dot{width:17px;height:17px;border-radius:50%;background:rgba(181,85,63,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:0.63rem;color:var(--terra-deep);}
+.free-tag{display:inline-block;margin-top:16px;background:var(--terra-deep);color:var(--white);font-size:0.84rem;font-weight:700;padding:7px 16px;border-radius:999px;}
+/* ABOUT */
+.about{padding:76px 0;background:var(--sand-light);}
+.about-inner{display:grid;grid-template-columns:1fr;gap:44px;align-items:center;}
 @media(min-width:860px){.about-inner{grid-template-columns:1fr 1fr;}}
-.about-photo-placeholder{
-  background:linear-gradient(145deg,var(--sand) 0%,var(--terra-light) 100%);
-  border-radius:var(--r-lg);
-  aspect-ratio:4/5;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:16px;
-  box-shadow:0 12px 40px rgba(140,62,42,0.18);
-  position:relative;overflow:hidden;
-}
-.about-photo-placeholder::before{
-  content:'';position:absolute;top:-40px;left:-40px;
-  width:200px;height:200px;border-radius:50%;
-  background:rgba(255,255,255,0.1);
-}
-.about-photo-placeholder .photo-note{
-  font-size:0.8rem;color:rgba(250,243,229,0.7);
-  text-align:center;padding:0 24px;z-index:1;
-}
-.about-photo-placeholder .heart{font-size:3rem;z-index:1;}
-.about-photo-placeholder .placeholder-label{
-  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(250,243,229,0.5);z-index:1;
-}
-.about-text .section-tag{margin-bottom:18px;}
-.about-text h2{margin-bottom:20px;}
-.about-text p{color:var(--ink-soft);font-size:1rem;margin-bottom:18px;}
-.about-text .signature{
-  font-family:'Lora',serif;font-size:1.4rem;font-style:italic;
-  color:var(--terra-deep);margin-top:8px;
-}
-.heart-tattoo-note{
-  display:flex;align-items:center;gap:14px;
-  background:var(--white);border-radius:var(--r);
-  padding:16px 20px;margin-top:24px;
-  box-shadow:0 2px 12px rgba(140,62,42,0.07);
-}
-.heart-tattoo-note .icon{font-size:1.5rem;flex-shrink:0;}
-.heart-tattoo-note p{font-size:0.88rem;color:var(--ink-soft);margin:0;font-style:italic;}
-
-/* ---- FORM SECTION ---- */
-.form-section{
-  padding:96px 0;
-  background:var(--sand-cream);
-}
-.form-head{text-align:center;margin-bottom:48px;}
-.form-head h2{margin-bottom:14px;}
-.form-head .lead{
-  color:var(--ink-soft);font-size:1.05rem;
-  max-width:580px;margin:0 auto 12px;
-}
-.form-head .sub-note{
-  font-size:0.9rem;color:var(--ink-soft);opacity:0.75;
-  font-style:italic;max-width:480px;margin:0 auto;
-}
-.form-card{
-  background:var(--white);border-radius:var(--r-lg);
-  padding:48px 44px;
-  max-width:600px;margin:0 auto;
-  box-shadow:0 8px 48px rgba(140,62,42,0.1);
-}
-@media(max-width:600px){.form-card{padding:32px 20px;}}
-.form-group{margin-bottom:20px;}
-.form-label{
-  display:block;font-size:0.88rem;font-weight:700;color:var(--ink);
-  margin-bottom:6px;
-}
-.form-input{
-  width:100%;padding:14px 16px;
-  border:1.5px solid var(--sand);border-radius:var(--r);
-  font-family:'Nunito',sans-serif;font-size:1rem;color:var(--ink);
-  background:var(--sand-cream);transition:border-color 0.2s;outline:none;
-}
+.about-photo-placeholder{background:linear-gradient(145deg,var(--sand) 0%,var(--terra-light) 100%);border-radius:var(--r-lg);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;box-shadow:0 12px 40px rgba(140,62,42,0.18);}
+.photo-note{font-size:0.8rem;color:rgba(250,243,229,0.7);text-align:center;padding:0 24px;}
+.placeholder-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(250,243,229,0.45);}
+.about-text h2{margin-bottom:17px;}
+.about-text p{color:var(--ink-soft);font-size:1rem;margin-bottom:15px;}
+.signature{font-family:'Lora',serif;font-size:1.35rem;font-style:italic;color:var(--terra-deep);margin-top:8px;}
+.heart-note{display:flex;align-items:center;gap:13px;background:var(--white);border-radius:var(--r);padding:15px 18px;margin-top:20px;box-shadow:0 2px 12px rgba(140,62,42,0.07);}
+.heart-note .icon{font-size:1.4rem;flex-shrink:0;}
+.heart-note p{font-size:0.87rem;color:var(--ink-soft);margin:0;font-style:italic;}
+/* FORM */
+.form-section{padding:90px 0;background:var(--sand-cream);}
+.form-head{text-align:center;margin-bottom:40px;}
+.form-head h2{margin-bottom:12px;}
+.form-head .lead-text{color:var(--ink-soft);font-size:1.02rem;max-width:540px;margin:0 auto 10px;}
+.form-head .sub-note{font-size:0.9rem;color:var(--ink-soft);opacity:0.72;font-style:italic;max-width:460px;margin:0 auto;}
+.form-card{background:var(--white);border-radius:var(--r-lg);padding:40px;max-width:560px;margin:0 auto;box-shadow:0 8px 48px rgba(140,62,42,0.1);}
+@media(max-width:600px){.form-card{padding:26px 18px;}}
+.form-group{margin-bottom:17px;}
+.form-label{display:block;font-size:0.85rem;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.form-input{width:100%;padding:13px 14px;border:1.5px solid var(--sand);border-radius:var(--r);font-family:'Nunito',sans-serif;font-size:1rem;color:var(--ink);background:var(--sand-cream);transition:border-color 0.2s;outline:none;}
 .form-input:focus{border-color:var(--terra);}
-.form-input::placeholder{color:var(--ink-soft);opacity:0.55;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:500px){.form-row{grid-template-columns:1fr;}}
-.form-submit{width:100%;margin-top:4px;}
-.form-privacy{
-  text-align:center;margin-top:16px;
-  font-size:0.83rem;color:var(--ink-soft);opacity:0.7;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.form-section-divider{
-  border:none;border-top:1px solid var(--sand);
-  margin:28px 0;
-}
-.soft-insurance-offer{
-  background:var(--sand-light);
-  border-radius:var(--r);
-  padding:24px 24px;
-  border:1px solid var(--sand);
-}
-.soft-insurance-offer p{
-  font-size:0.92rem;color:var(--ink-soft);margin-bottom:12px;
-}
-.soft-insurance-offer .opt-in-label{
-  display:flex;align-items:flex-start;gap:12px;cursor:pointer;
-}
-.soft-insurance-offer input[type="checkbox"]{
-  width:18px;height:18px;flex-shrink:0;margin-top:2px;
-  accent-color:var(--terra-deep);cursor:pointer;
-}
-.soft-insurance-offer .opt-in-text{
-  font-size:0.88rem;color:var(--ink-mid);line-height:1.5;
-}
-
-/* ---- GENTLE INSURANCE MENTION ---- */
-.insurance-mention{
-  padding:64px 0;
-  background:var(--sand-light);
-  border-top:1px solid var(--sand);
-}
-.mention-card{
-  max-width:700px;margin:0 auto;
-  background:var(--white);border-radius:var(--r-lg);
-  padding:40px;
-  box-shadow:0 4px 20px rgba(140,62,42,0.07);
-  display:flex;flex-direction:column;gap:16px;
-}
-@media(min-width:680px){.mention-card{flex-direction:row;align-items:flex-start;gap:28px;}}
-.mention-icon{
-  font-size:2.4rem;flex-shrink:0;
-}
-.mention-card h3{color:var(--terra-deep);margin-bottom:10px;}
-.mention-card p{font-size:0.95rem;color:var(--ink-soft);}
-
-/* ---- FOOTER ---- */
-footer{background:var(--ink);padding:48px 0 32px;}
-.footer-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:32px;margin-bottom:36px;
-}
-.footer-logo p{color:rgba(250,243,229,0.55);font-size:0.88rem;margin-top:12px;}
-footer h5{
-  color:var(--white);font-family:'Nunito',sans-serif;
-  font-weight:700;font-size:0.85rem;letter-spacing:0.08em;
-  text-transform:uppercase;margin-bottom:14px;
-}
-footer a{display:block;color:rgba(250,243,229,0.55);font-size:0.88rem;margin-bottom:8px;}
+.form-submit{width:100%;margin-top:5px;}
+.form-privacy{text-align:center;margin-top:14px;font-size:0.83rem;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;gap:8px;}
+.divider-line{border:none;border-top:1px solid var(--sand);margin:22px 0;}
+.soft-offer{background:var(--sand-light);border-radius:var(--r);padding:18px;border:1px solid var(--sand);}
+.soft-offer p{font-size:0.9rem;color:var(--ink-soft);margin-bottom:11px;}
+.opt-in-label{display:flex;align-items:flex-start;gap:11px;cursor:pointer;}
+.opt-in-label input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--terra-deep);}
+.opt-in-text{font-size:0.87rem;color:var(--ink-mid);line-height:1.5;}
+/* INSURANCE MENTION */
+.insurance-mention{padding:56px 0;background:var(--sand-light);border-top:1px solid var(--sand);}
+.mention-card{max-width:700px;margin:0 auto;background:var(--white);border-radius:var(--r-lg);padding:34px;box-shadow:0 4px 20px rgba(140,62,42,0.07);display:flex;flex-direction:column;gap:13px;}
+@media(min-width:680px){.mention-card{flex-direction:row;align-items:flex-start;gap:24px;}}
+.mention-icon{font-size:2.1rem;flex-shrink:0;}
+.mention-card h3{color:var(--terra-deep);margin-bottom:8px;}
+.mention-card p{font-size:0.93rem;color:var(--ink-soft);}
+/* FOOTER */
+footer{background:var(--ink);padding:42px 0 26px;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;margin-bottom:32px;}
+footer h5{color:var(--white);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:13px;}
+footer a{display:block;color:rgba(250,243,229,0.55);font-size:0.88rem;margin-bottom:7px;}
 footer a:hover{color:var(--sand);}
-.footer-bottom{
-  border-top:1px solid rgba(250,243,229,0.1);
-  padding-top:24px;
-  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
-}
+.footer-bottom{border-top:1px solid rgba(250,243,229,0.1);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;}
 .footer-bottom p{color:rgba(250,243,229,0.35);font-size:0.78rem;}
-.footer-disclaimer{color:rgba(250,243,229,0.3);font-size:0.76rem;margin-top:10px;line-height:1.55;}
-
-/* ---- STICKY CTA (mobile) ---- */
-.sticky-cta{
-  position:fixed;bottom:0;left:0;right:0;z-index:50;
-  background:var(--white);border-top:1px solid var(--sand);
-  padding:12px 20px;display:none;
-}
+.footer-disclaimer{color:rgba(250,243,229,0.28);font-size:0.75rem;margin-top:9px;line-height:1.55;}
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--white);border-top:1px solid var(--sand);padding:12px 20px;display:none;}
 @media(max-width:768px){.sticky-cta{display:block;}}
 .sticky-cta .btn{width:100%;display:block;text-align:center;}
-
-.lang-btn-link{display:inline-block;margin-top:16px;}
-body.en [class="pt"].lang-btn-link{display:none;}
-body:not(.en) [class="en"].lang-btn-link{display:none;}
-body.en [class="pt"]{display:none;}
-body.en [class="en"]{display:block;}
-body.en [class="en"].inline{display:inline;}
-[class="pt"].inline{display:inline;}
 </style>
-
 </head>
-<body>
-
-<!-- LANG BAR -->
-
+<body data-lang="pt">
 <nav class="lang-bar">
   <img src="alice-prata-logo.png" alt="Alice Prata" class="lang-logo"/>
   <div class="lang-toggle">
@@ -435,297 +146,250 @@ body.en [class="en"].inline{display:inline;}
     <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
   </div>
 </nav>
-
-<!-- ===== HERO ===== -->
-
 <section class="hero">
   <div class="container">
     <div class="hero-inner">
       <div>
-        <div class="pt">
-          <span class="eyebrow">100% gratuito — sem compromisso</span>
-          <h1>Recursos para proteger sua família <em>hoje mesmo</em></h1>
-          <p class="hero-sub">Dois documentos que toda família deveria ter — mas que quase ninguém sabe que existe. Em português. Sem custo para você.</p>
-          <p class="hero-sub-note">Se quiser conversar sobre mais, Alice está disponível — mas sem pressão alguma.</p>
+        <span class="eyebrow pt">Sem custo — sem compromisso</span>
+        <span class="eyebrow en">No cost — no commitment</span>
+        <h1 class="pt">Recursos para proteger sua família <em>hoje mesmo</em></h1>
+        <h1 class="en">Resources to protect your family <em>starting today</em></h1>
+        <p class="hero-sub pt">Dois documentos que toda família deveria ter — em português, sem custo para você.</p>
+        <p class="hero-sub en">Two documents every family should have — in Portuguese, no cost to you.</p>
+        <p class="hero-sub-note pt">Se quiser conversar sobre mais, Alice está disponível — mas sem pressão alguma.</p>
+        <p class="hero-sub-note en">If you'd like to talk about more, Alice is available — but absolutely no pressure.</p>
+        <div class="cta-stack">
+          <a href="#form" class="btn btn-primary btn-large pt">Quero Meus Recursos</a>
+          <a href="#form" class="btn btn-primary btn-large en">Get My Resources</a>
+          <div class="no-pressure">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="pt">Sem cartão de crédito. Sem compromisso.</span>
+            <span class="en">No credit card. No commitment.</span>
+          </div>
         </div>
-        <div class="en">
-          <span class="eyebrow">100% free — no commitment</span>
-          <h1>Resources to protect your family <em>starting today</em></h1>
-          <p class="hero-sub">Two documents every family should have — but almost nobody knows exists. In Portuguese. No cost to you.</p>
-          <p class="hero-sub-note">If you'd like to talk about more, Alice is available — but absolutely no pressure.</p>
+      </div>
+      <div class="free-cards">
+        <div class="free-card">
+          <div class="free-card-icon">📋</div>
+          <div>
+            <h4 class="pt">Guia de Emergência Familiar</h4>
+            <h4 class="en">Family Emergency Guide</h4>
+            <p class="pt">Tudo que sua família precisa saber se algo acontecer com você.</p>
+            <p class="en">Everything your family needs to know if something happens to you.</p>
+            <span class="free-badge pt">Sem custo</span>
+            <span class="free-badge en">No cost</span>
+          </div>
         </div>
-
-```
-    <div class="cta-stack">
-      <a href="#form" class="btn btn-primary btn-large" class="pt">Quero Meus Recursos</a>
-      <a href="#form" class="btn btn-primary btn-large" class="en">Get My Resources</a>
-      <div class="no-pressure">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span class="pt">Sem cartão de crédito. Sem compromisso de compra.</span>
-        <span class="en">No credit card. No purchase commitment.</span>
+        <div class="free-card">
+          <div class="free-card-icon">📜</div>
+          <div>
+            <h4 class="pt">Will Kit — Modelo de Testamento</h4>
+            <h4 class="en">Will Kit — Testament Template</h4>
+            <p class="pt">Um modelo para organizar seus desejos com clareza.</p>
+            <p class="en">A template to organize your wishes clearly.</p>
+            <span class="free-badge pt">Sem custo</span>
+            <span class="free-badge en">No cost</span>
+          </div>
+        </div>
+        <div class="free-card" style="border-left-color:var(--ochre);">
+          <div class="free-card-icon">📊</div>
+          <div>
+            <h4 class="pt">Lista das principais seguradoras</h4>
+            <h4 class="en">Top insurance carrier contact list</h4>
+            <p class="pt">Telefones e portais das 20 maiores seguradoras. Bilíngue PT/EN.</p>
+            <p class="en">Phones and portals for the top 20 carriers. Bilingual PT/EN.</p>
+            <span class="free-badge pt">Sem custo</span>
+            <span class="free-badge en">No cost</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Free cards preview -->
-  <div class="free-cards">
-    <div class="free-card">
-      <div class="free-card-icon">📋</div>
-      <div>
-        <h4 class="pt">Guia de Emergência Familiar</h4>
-        <h4 class="en">Family Emergency Guide</h4>
-        <p class="pt">Tudo que sua família precisa saber se algo acontecer com você — em português e inglês.</p>
-        <p class="en">Everything your family needs to know if something happens to you — in Portuguese and English.</p>
-        <span class="free-badge" class="pt">Sem custo</span>
-        <span class="free-badge" class="en">No cost</span>
-      </div>
-    </div>
-    <div class="free-card">
-      <div class="free-card-icon">📜</div>
-      <div>
-        <h4 class="pt">Will Kit — Modelo de Testamento</h4>
-        <h4 class="en">Will Kit — Testament Template</h4>
-        <p class="pt">Um modelo com linguagem revisada por advogados para você organizar seus desejos com clareza. Alice te guia pelo preenchimento.</p>
-        <p class="en">A template with lawyer-reviewed language to organize your wishes clearly. Alice guides you through it.</p>
-        <span class="free-badge" class="pt">Sem custo</span>
-        <span class="free-badge" class="en">No cost</span>
-      </div>
-    </div>
-
-  </div>
-</div>
-```
-
   </div>
 </section>
-
-<!-- ===== WHY THIS MATTERS ===== -->
-
 <section class="why-matters">
   <div class="container">
-    <p class="section-label" class="pt">Por que isso importa</p>
-    <p class="section-label" class="en">Why this matters</p>
+    <p class="section-label pt">Por que isso importa</p>
+    <p class="section-label en">Why this matters</p>
     <h2 class="pt">A maioria das famílias nunca pensa nisso — <em>até precisar</em></h2>
     <h2 class="en">Most families never think about this — <em>until they need it</em></h2>
-    <p class="lead" class="pt">A maioria das famílias nunca para para pensar nisso — até precisar. E quando precisa, é tarde demais para organizar com calma. Esses recursos existem para que você tenha um plano antes que precise de um.</p>
-    <p class="lead" class="en">Most families never stop to think about this — until they need it. And when they do, it's too late to organize calmly. These resources exist so you have a plan before you need one.</p>
-
-```
-<div class="scenario-grid">
-  <div class="scenario">
-    <div class="q" class="pt">"Se algo acontecesse com você amanhã, sua família saberia quem ligar primeiro?"</div>
-    <div class="q" class="en">"If something happened to you tomorrow, would your family know who to call first?"</div>
-    <div class="a" class="pt">O Guia de Emergência responde isso. Com nomes, telefones, apólices e instruções — no idioma de cada pessoa.</div>
-    <div class="a" class="en">The Emergency Guide answers that. With names, phones, policies and instructions — in each person's language.</div>
-  </div>
-  <div class="scenario">
-    <div class="q" class="pt">"Sua família no Brasil saberia o que fazer aqui nos EUA?"</div>
-    <div class="q" class="en">"Would your family in Brazil know what to do here in the US?"</div>
-    <div class="a" class="pt">O guia é bilíngue. O que está em português aqui, está explicado em inglês também. Para quem precisar agir de lá.</div>
-    <div class="a" class="en">The guide is bilingual. What's in Portuguese here is also explained in English. For whoever needs to act from there.</div>
-  </div>
-  <div class="scenario">
-    <div class="q" class="pt">"Você sabe o que acontece com seus bens se você partir sem um testamento?"</div>
-    <div class="q" class="en">"Do you know what happens to your assets if you pass without a will?"</div>
-    <div class="a" class="pt">O Will Kit te ajuda a documentar seus desejos com clareza. A linguagem já foi revisada por advogados. Alice senta com você e te guia pelo preenchimento.</div>
-    <div class="a" class="en">The Will Kit helps you document your wishes clearly. The language has already been reviewed by attorneys. Alice sits with you and guides you through filling it out.</div>
-  </div>
-  <div class="scenario">
-    <div class="q" class="pt">"Quem cuida do seu filho se algo acontecer com você e seu cônjuge?"</div>
-    <div class="q" class="en">"Who cares for your child if something happens to both you and your spouse?"</div>
-    <div class="a" class="pt">Essa decisão precisa estar documentada. O Will Kit inclui um lugar para isso. Para que nunca fique em aberto.</div>
-    <div class="a" class="en">That decision needs to be documented. The Will Kit includes a place for that. So it never remains unanswered.</div>
-  </div>
-</div>
-```
-
+    <p class="lead pt">Esses recursos existem para que você tenha um plano antes de precisar de um.</p>
+    <p class="lead en">These resources exist so you have a plan before you need one.</p>
+    <div class="scenario-grid">
+      <div class="scenario">
+        <div class="scenario-q pt">"Se algo acontecesse com você amanhã, sua família saberia quem ligar primeiro?"</div>
+        <div class="scenario-q en">"If something happened to you tomorrow, would your family know who to call first?"</div>
+        <div class="scenario-a pt">O Guia de Emergência responde isso — com nomes, telefones, apólices e instruções.</div>
+        <div class="scenario-a en">The Emergency Guide answers that — with names, phones, policies and instructions.</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-q pt">"Sua família no Brasil saberia o que fazer aqui nos EUA?"</div>
+        <div class="scenario-q en">"Would your family in Brazil know what to do here in the US?"</div>
+        <div class="scenario-a pt">O guia é bilíngue. O que está em português, está explicado em inglês também.</div>
+        <div class="scenario-a en">The guide is bilingual. What's in Portuguese is also explained in English.</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-q pt">"Você sabe o que acontece com seus bens se você partir sem um testamento?"</div>
+        <div class="scenario-q en">"Do you know what happens to your assets if you pass without a will?"</div>
+        <div class="scenario-a pt">O Will Kit te ajuda a documentar seus desejos antes de formalizar com um advogado.</div>
+        <div class="scenario-a en">The Will Kit helps you document your wishes before formalizing with an attorney.</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-q pt">"Quem cuida do seu filho se algo acontecer com você e seu cônjuge?"</div>
+        <div class="scenario-q en">"Who cares for your child if something happens to both you and your spouse?"</div>
+        <div class="scenario-a pt">Essa decisão precisa estar documentada. O Will Kit inclui um lugar para isso.</div>
+        <div class="scenario-a en">That decision needs to be documented. The Will Kit includes a place for that.</div>
+      </div>
+    </div>
   </div>
 </section>
-
-<!-- ===== WHAT YOU GET ===== -->
-
 <section class="what-you-get">
   <div class="container">
     <div style="text-align:center;">
-      <div class="section-tag" class="pt">O que você recebe — gratuitamente</div>
-      <div class="section-tag" class="en">What you receive — for free</div>
+      <div class="section-tag pt">O que você recebe</div>
+      <div class="section-tag en">What you receive</div>
       <h2 class="pt">Dois documentos. Uma paz de espírito.</h2>
       <h2 class="en">Two documents. One peace of mind.</h2>
     </div>
-
-```
-<div class="resources-grid">
-  <!-- Emergency Guide -->
-  <div class="resource-card">
-    <div class="resource-card-top">
-      <div class="big-icon">📋</div>
-      <h3 class="pt">Guia de Emergência Familiar</h3>
-      <h3 class="en">Family Emergency Guide</h3>
-      <span class="value">$97</span>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-card-top">
+          <div class="big-icon">📋</div>
+          <h3 class="pt">Guia de Emergência Familiar</h3>
+          <h3 class="en">Family Emergency Guide</h3>
+          <span class="value">$97</span>
+        </div>
+        <div class="resource-card-body">
+          <p class="pt">Um documento bilíngue que sua família preenche uma vez — e que pode fazer toda a diferença no momento mais difícil.</p>
+          <p class="en">A bilingual document your family fills out once — and that can make all the difference in the hardest moment.</p>
+          <ul class="resource-list">
+            <li><span class="dot">✓</span><span class="pt">Contatos de emergência nos EUA e no Brasil</span><span class="en">Emergency contacts in the US and Brazil</span></li>
+            <li><span class="dot">✓</span><span class="pt">Informações de apólices de seguro</span><span class="en">Insurance policy information</span></li>
+            <li><span class="dot">✓</span><span class="pt">Localização de documentos importantes</span><span class="en">Location of important documents</span></li>
+            <li><span class="dot">✓</span><span class="pt">Desejos de sepultamento / repatriação</span><span class="en">Burial / repatriation wishes</span></li>
+            <li><span class="dot">✓</span><span class="pt">Instruções em português e inglês</span><span class="en">Instructions in Portuguese and English</span></li>
+          </ul>
+          <span class="free-tag pt">Sem custo</span>
+          <span class="free-tag en">No cost</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <div class="resource-card-top">
+          <div class="big-icon">📜</div>
+          <h3 class="pt">Will Kit — Modelo de Testamento</h3>
+          <h3 class="en">Will Kit — Testament Template</h3>
+          <span class="value">$497</span>
+        </div>
+        <div class="resource-card-body">
+          <p class="pt">Um ponto de partida para organizar seus desejos legais antes de formalizar com um advogado.</p>
+          <p class="en">A starting point to organize your legal wishes before formalizing with an attorney.</p>
+          <ul class="resource-list">
+            <li><span class="dot">✓</span><span class="pt">Modelo de testamento completo</span><span class="en">Complete testament template</span></li>
+            <li><span class="dot">✓</span><span class="pt">Designação de guardião para filhos</span><span class="en">Guardian designation for children</span></li>
+            <li><span class="dot">✓</span><span class="pt">Distribuição de bens</span><span class="en">Asset distribution</span></li>
+            <li><span class="dot">✓</span><span class="pt">Orientações para formalizar com advogado</span><span class="en">Guidance on formalizing with an attorney</span></li>
+            <li><span class="dot">✓</span><span class="pt">Preenchimento em português, exportação em inglês</span><span class="en">Fill in Portuguese, export in English</span></li>
+          </ul>
+          <span class="free-tag pt">Sem custo</span>
+          <span class="free-tag en">No cost</span>
+        </div>
+      </div>
     </div>
-    <div class="resource-card-body">
-      <p class="pt">Um documento bilíngue que sua família pode preencher uma vez — e que pode fazer toda a diferença no momento mais difícil.</p>
-      <p class="en">A bilingual document your family fills out once — and that can make all the difference in the hardest moment.</p>
-      <ul class="resource-list">
-        <li><span class="dot">✓</span><span class="pt">Contatos de emergência nos EUA e no Brasil</span><span class="en">Emergency contacts in the US and Brazil</span></li>
-        <li><span class="dot">✓</span><span class="pt">Informações de apólices de seguro</span><span class="en">Insurance policy information</span></li>
-        <li><span class="dot">✓</span><span class="pt">Localização de documentos importantes</span><span class="en">Location of important documents</span></li>
-        <li><span class="dot">✓</span><span class="pt">Desejos de sepultamento / repatriação</span><span class="en">Burial / repatriation wishes</span></li>
-        <li><span class="dot">✓</span><span class="pt">Instruções em português e inglês</span><span class="en">Instructions in Portuguese and English</span></li>
-      </ul>
-      <span class="free-tag" class="pt">Sem custo</span>
-      <span class="free-tag" class="en">No cost</span>
-    </div>
-  </div>
-
-  <!-- Will Kit -->
-  <div class="resource-card">
-    <div class="resource-card-top">
-      <div class="big-icon">📜</div>
-      <h3 class="pt">Will Kit — Modelo de Testamento</h3>
-      <h3 class="en">Will Kit — Testament Template</h3>
-      <span class="value">$497</span>
-    </div>
-    <div class="resource-card-body">
-      <p class="pt">Um modelo de testamento com linguagem revisada por advogados — para que você possa organizar seus desejos com clareza e confiança. Alice senta com você para te ajudar a entender cada parte.</p>
-      <p class="en">A testament template with lawyer-reviewed language — so you can organize your wishes with clarity and confidence. Alice sits with you to help you understand each section.</p>
-      <ul class="resource-list">
-        <li><span class="dot">✓</span><span class="pt">Modelo de testamento completo</span><span class="en">Complete testament template</span></li>
-        <li><span class="dot">✓</span><span class="pt">Designação de guardião para filhos</span><span class="en">Guardian designation for children</span></li>
-        <li><span class="dot">✓</span><span class="pt">Distribuição de bens</span><span class="en">Asset distribution</span></li>
-        <li><span class="dot">✓</span><span class="pt">Linguagem revisada por advogados</span><span class="en">Lawyer-reviewed language</span></li>
-        <li><span class="dot">✓</span><span class="pt">Explicações em linguagem simples</span><span class="en">Explanations in plain language</span></li>
-      </ul>
-      <span class="free-tag" class="pt">Sem custo</span>
-      <span class="free-tag" class="en">No cost</span>
-    </div>
-  </div>
-</div>
-```
-
   </div>
 </section>
-
-<!-- ===== ABOUT ALICE ===== -->
-
 <section class="about">
   <div class="container">
     <div class="about-inner">
       <div class="about-photo-placeholder">
-        <span class="heart">🫀</span>
-        <p class="photo-note" class="pt">Foto de Alice aqui<br><small>— substitua por foto real</small></p>
-        <p class="photo-note" class="en">Alice's photo here<br><small>— replace with real photo</small></p>
+        <span style="font-size:3rem;">🫀</span>
+        <p class="photo-note pt">Foto de Alice aqui</p>
+        <p class="photo-note en">Alice's photo here</p>
         <span class="placeholder-label">PLACEHOLDER</span>
       </div>
-
-```
-  <div class="about-text">
-    <div class="section-tag" class="pt">Quem está por trás disso</div>
-    <div class="section-tag" class="en">Who is behind this</div>
-    <h2 class="pt">Alice não faz isso por comissão.<br>Ela faz porque já esteve do outro lado.</h2>
-    <h2 class="en">Alice doesn't do this for commission.<br>She does it because she's been on the other side.</h2>
-
-    <p class="pt">Quando Alice estava em Dallas, seu coração parou. Por 15 minutos, não havia pulso. Seu marido fez RCP enquanto o socorro chegava. Seu bebê de 5 meses estava no quarto ao lado.</p>
-    <p class="pt">Ela sobreviveu. Passou por cirurgia. Tem a cicatriz no peito para provar. E ela e o marido fizeram tatuagens iguais de um coração anatômico — o mesmo que você vê no logo dela.</p>
-    <p class="pt">Esses recursos não são uma estratégia de marketing. São o que Alice queria que toda família já tivesse — antes que precisassem.</p>
-
-    <p class="en">When Alice was in Dallas, her heart stopped. For 15 minutes, there was no pulse. Her husband performed CPR while help was on the way. Her 5-month-old baby was in the next room.</p>
-    <p class="en">She survived. She had surgery. She has the scar on her chest to prove it. And she and her husband got matching anatomical heart tattoos — the same one you see in her logo.</p>
-    <p class="en">These resources aren't a marketing strategy. They're what Alice wished every family already had — before they needed them.</p>
-
-    <div class="signature">— Alice Prata</div>
-
-    <div class="heart-tattoo-note">
-      <span class="icon">🫀</span>
-      <p class="pt">O coração anatômico no logo de Alice representa a tatuagem que ela e seu marido fizeram juntos — o símbolo de que ela voltou.</p>
-      <p class="en">The anatomical heart in Alice's logo represents the matching tattoo she and her husband got together — the symbol that she came back.</p>
+      <div class="about-text">
+        <div class="section-tag pt">Quem está por trás disso</div>
+        <div class="section-tag en">Who is behind this</div>
+        <h2 class="pt">Alice não faz isso por comissão.<br>Ela faz porque viveu isso.</h2>
+        <h2 class="en">Alice doesn't do this for commission.<br>She does it because she lived it.</h2>
+        <p class="pt">Quando Alice estava em Dallas, seu coração parou. Por 15 minutos, não havia pulso. Seu marido fez RCP enquanto o socorro chegava. Seu bebê de 5 meses estava no quarto ao lado.</p>
+        <p class="pt">Ela sobreviveu. Passou por cirurgia. E ela e o marido fizeram tatuagens iguais de um coração anatômico — o mesmo que você vê no logo dela.</p>
+        <p class="pt">Esses recursos não são uma estratégia. São o que Alice queria que toda família já tivesse — antes de precisar.</p>
+        <p class="en">When Alice was in Dallas, her heart stopped. For 15 minutes, there was no pulse. Her husband performed CPR while help was on the way. Her 5-month-old baby was in the next room.</p>
+        <p class="en">She survived. She had surgery. And she and her husband got matching anatomical heart tattoos — the same one you see in her logo.</p>
+        <p class="en">These resources aren't a strategy. They're what Alice wished every family already had — before they needed them.</p>
+        <div class="signature">— Alice Prata</div>
+        <div class="heart-note">
+          <span class="icon">🫀</span>
+          <p class="pt">O coração anatômico no logo representa a tatuagem que ela e seu marido fizeram — o símbolo de que ela voltou.</p>
+          <p class="en">The anatomical heart in her logo represents the matching tattoo she and her husband got — the symbol that she came back.</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-```
-
-  </div>
 </section>
-
-<!-- ===== FORM ===== -->
-
 <section class="form-section" id="form">
   <div class="container">
     <div class="form-head">
-      <div class="section-tag" class="pt">Sem custo — sem compromisso</div>
-      <div class="section-tag" class="en">No cost — no commitment</div>
-      <h2 class="pt">Receba seus recursos — sem custo</h2>
-      <h2 class="en">Get your resources — at no cost</h2>
-      <p class="lead" class="pt">Alice envia o Guia de Emergência e o Will Kit diretamente para você. Sem custo. Sem cartão. Sem lista de cobrança.</p>
-      <p class="lead" class="en">Alice sends you the Emergency Guide and Will Kit directly. No cost. No card. No billing list.</p>
-      <p class="sub-note" class="pt">Se quiser conversar sobre proteção financeira também, há uma opção abaixo — mas é completamente opcional.</p>
-      <p class="sub-note" class="en">If you'd also like to talk about financial protection, there's an option below — but it's completely optional.</p>
+      <div class="section-tag pt">Sem custo — sem compromisso</div>
+      <div class="section-tag en">No cost — no commitment</div>
+      <h2 class="pt">Receba seus recursos agora</h2>
+      <h2 class="en">Get your resources now</h2>
+      <p class="lead-text pt">Alice envia o Guia de Emergência e o Will Kit diretamente para você. Sem custo. Sem cartão.</p>
+      <p class="lead-text en">Alice sends you the Emergency Guide and Will Kit directly. No cost. No card.</p>
+      <p class="sub-note pt">Se quiser conversar sobre proteção financeira também, há uma opção abaixo — completamente opcional.</p>
+      <p class="sub-note en">If you'd also like to talk about financial protection, there's an option below — completely optional.</p>
     </div>
-
-```
-<div class="form-card">
-  <form id="freeForm" onsubmit="submitForm(event)">
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label" class="pt">Nome *</label>
-        <label class="form-label" class="en">First Name *</label>
-        <input type="text" class="form-input" id="firstName" required placeholder="Maria" autocomplete="given-name"/>
+    <div class="form-card">
+      <form id="freeForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label pt">Nome</label>
+            <label class="form-label en">First Name</label>
+            <input type="text" class="form-input" id="firstName" required autocomplete="given-name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label pt">Sobrenome</label>
+            <label class="form-label en">Last Name</label>
+            <input type="text" class="form-input" id="lastName" required autocomplete="family-name"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp</label>
+          <input type="tel" class="form-input" id="phone" required autocomplete="tel"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="email" autocomplete="email"/>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large form-submit">
+          <span class="pt">Enviar Meus Documentos →</span>
+          <span class="en">Send Me My Documents →</span>
+        </button>
+        <hr class="divider-line"/>
+        <div class="soft-offer">
+          <p class="pt"><strong>Opcional:</strong> Gostaria também de uma conversa gratuita com Alice sobre proteção financeira? Em português, sem pressão.</p>
+          <p class="en"><strong>Optional:</strong> Would you also like a free conversation with Alice about financial protection? In Portuguese, no pressure.</p>
+          <label class="opt-in-label">
+            <input type="checkbox" id="insuranceOptIn"/>
+            <span class="opt-in-text pt">Sim, tenho interesse em conversar sobre isso também.</span>
+            <span class="opt-in-text en">Yes, I'm interested in talking about this too.</span>
+          </label>
+        </div>
+        <div class="form-privacy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="pt">Seus dados são privados. Sem spam.</span>
+          <span class="en">Your data is private. No spam.</span>
+        </div>
+      </form>
+      <div id="formSuccess" style="display:none;text-align:center;padding:24px 0;">
+        <div style="font-size:2.5rem;margin-bottom:14px;">🫀</div>
+        <h3 style="color:var(--terra-deep);margin-bottom:12px;" class="pt">Seus documentos estão a caminho!</h3>
+        <h3 style="color:var(--terra-deep);margin-bottom:12px;" class="en">Your documents are on their way!</h3>
+        <p class="pt">Alice entrará em contato via WhatsApp em breve.</p>
+        <p class="en">Alice will reach out via WhatsApp shortly.</p>
       </div>
-      <div class="form-group">
-        <label class="form-label" class="pt">Sobrenome *</label>
-        <label class="form-label" class="en">Last Name *</label>
-        <input type="text" class="form-input" id="lastName" required placeholder="Santos" autocomplete="family-name"/>
-      </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">WhatsApp *</label>
-      <input type="tel" class="form-input" id="phone" required placeholder="+1 (555) 000-0000" autocomplete="tel"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-input" id="email" placeholder="maria@email.com" autocomplete="email"/>
-    </div>
-
-    <button type="submit" class="btn btn-primary btn-large form-submit">
-      <span class="pt">Marcar Minha Sessão com Alice →</span>
-      <span class="en">Schedule My Session with Alice →</span>
-    </button>
-
-    <hr class="form-section-divider"/>
-
-    <!-- Soft insurance opt-in -->
-    <div class="soft-insurance-offer">
-      <p class="pt"><strong>Opcional:</strong> Também gostaria de uma análise de necessidades gratuita com Alice? Ela pode ajudar a entender se um seguro de vida faz sentido para o seu momento — sem pressão e em português.</p>
-      <p class="en"><strong>Optional:</strong> Would you also like a free needs analysis with Alice? She can help you understand if life insurance makes sense for your situation — no pressure, in Portuguese.</p>
-      <label class="opt-in-label">
-        <input type="checkbox" id="insuranceOptIn"/>
-        <span class="opt-in-text" class="pt">Sim, tenho interesse em conversar sobre proteção financeira também.</span>
-        <span class="opt-in-text" class="en">Yes, I'm interested in talking about financial protection too.</span>
-      </label>
-    </div>
-
-    <div class="form-privacy">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span class="pt">Seus dados são privados. Sem spam. Nunca.</span>
-      <span class="en">Your data is private. No spam. Ever.</span>
-    </div>
-  </form>
-
-  <div id="formSuccess" style="display:none;text-align:center;padding:24px 0;">
-    <div style="font-size:2.5rem;margin-bottom:16px;">🫀</div>
-    <h3 style="color:var(--terra-deep);margin-bottom:12px;" class="pt">Seus documentos estão a caminho!</h3>
-    <h3 style="color:var(--terra-deep);margin-bottom:12px;" class="en">Your documents are on their way!</h3>
-    <p class="pt">Alice entrará em contato com você via WhatsApp em breve. Obrigada por dar esse passo para proteger sua família.</p>
-    <p class="en">Alice will reach out to you via WhatsApp shortly. Thank you for taking this step to protect your family.</p>
-  </div>
-</div>
-```
-
   </div>
 </section>
-
-<!-- ===== GENTLE INSURANCE MENTION ===== -->
-
 <section class="insurance-mention">
   <div class="container">
     <div class="mention-card">
@@ -733,30 +397,26 @@ body.en [class="en"].inline{display:inline;}
       <div>
         <h3 class="pt">Se quiser ir além dos documentos…</h3>
         <h3 class="en">If you'd like to go beyond the documents…</h3>
-        <p class="pt">Alice também é agente licenciada de seguros de vida. Se em algum momento você quiser entender se você se qualifica para cobertura — sem compromisso, em português — ela está disponível para uma conversa de 30 minutos. Sem pressão. Sem jargão. Se não fizer sentido para você, tudo bem também.</p>
-        <p class="en">Alice is also a licensed life insurance agent. If at any point you'd like to understand whether you qualify for coverage — no commitment, in Portuguese — she's available for a 30-minute conversation. No pressure. No jargon. If it doesn't make sense for you, that's okay too.</p>
-        <a href="landing-insurance.html" class="btn btn-secondary lang-btn-link" class="pt">Saiba mais sobre seguro de vida →</a>
-        <a href="landing-insurance.html" class="btn btn-secondary lang-btn-link" class="en">Learn more about life insurance →</a>
+        <p class="pt">Alice também é agente licenciada de seguros de vida. Se quiser entender se você se qualifica para cobertura — sem compromisso, em português — ela está disponível para uma conversa de 30 minutos.</p>
+        <p class="en">Alice is also a licensed life insurance agent. If you'd like to understand whether you qualify for coverage — no commitment, in Portuguese — she's available for a 30-minute conversation.</p>
+        <a href="landing-insurance.html" style="display:inline-block;margin-top:13px;" class="btn btn-secondary pt">Saber mais sobre seguro de vida →</a>
+        <a href="landing-insurance.html" style="display:inline-block;margin-top:13px;" class="btn btn-secondary en">Learn more about life insurance →</a>
       </div>
     </div>
   </div>
 </section>
-
-<!-- ===== FOOTER ===== -->
-
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-logo">
-        <img src="alice-prata-logo.png" alt="Alice Prata" style="height:50px;filter:invert(1);opacity:0.85;"/>
-        <p class="pt">Recursos gratuitos para famílias que falam português. Guia de Emergência, Will Kit e mais — sem custo, sem pressão.</p>
-        <p class="en">Free resources for Portuguese-speaking families. Emergency Guide, Will Kit and more — no cost, no pressure.</p>
+      <div>
+        <img src="alice-prata-logo.png" alt="Alice Prata" style="height:52px;filter:invert(1);opacity:0.85;margin-bottom:13px;"/>
+        <p class="pt" style="color:rgba(250,243,229,0.55);font-size:0.87rem;">Recursos para famílias brasileiras. Em português, com cuidado.</p>
+        <p class="en" style="color:rgba(250,243,229,0.55);font-size:0.87rem;">Resources for Brazilian families. In Portuguese, with care.</p>
       </div>
       <div>
         <h5 class="pt">Contato</h5>
         <h5 class="en">Contact</h5>
         <a href="tel:+12144485917">+1 (214) 448-5917</a>
-        <a href="mailto:hello@aliceprata.com">hello@aliceprata.com <span style="font-size:0.72rem;opacity:0.5;">(PLACEHOLDER)</span></a>
         <a href="https://wa.me/12144485917" target="_blank">WhatsApp →</a>
       </div>
       <div>
@@ -768,55 +428,29 @@ body.en [class="en"].inline{display:inline;}
         <a href="landing-insurance.html" class="en">About life insurance</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Alice Prata. <span class="pt">Todos os direitos reservados.</span><span class="en">All rights reserved.</span></p>
-    </div>
-    <p class="footer-disclaimer" class="pt">Alice Prata é agente licenciada de seguros de vida. O Guia de Emergência Familiar e o Will Kit são materiais educativos sem custo. O Will Kit contém linguagem revisada por advogados para situações simples e diretas. Para necessidades complexas, Alice pode indicar um profissional.</p>
-    <p class="footer-disclaimer" class="en">Alice Prata is a licensed life insurance agent. The Family Emergency Guide and Will Kit are no-cost educational materials. The Will Kit contains lawyer-reviewed language for straightforward situations. For complex needs, Alice can refer you to a professional.</p>
+    <div class="footer-bottom"><p>© 2025 Alice Prata.</p></div>
+    <p class="footer-disclaimer pt">Alice Prata é agente licenciada de seguros de vida. O Guia de Emergência e o Will Kit são materiais educativos. O Will Kit não substitui a assessoria de um advogado licenciado.</p>
+    <p class="footer-disclaimer en">Alice Prata is a licensed life insurance agent. The Emergency Guide and Will Kit are educational materials. The Will Kit does not replace advice from a licensed attorney.</p>
   </div>
 </footer>
-
-<!-- Sticky mobile CTA -->
-
 <div class="sticky-cta">
-  <a href="#form" class="btn btn-primary" class="pt">Marcar Minha Sessão com Alice</a>
-  <a href="#form" class="btn btn-primary" class="en">Schedule My Session with Alice</a>
+  <a href="#form" class="btn btn-primary pt">Quero Meus Documentos</a>
+  <a href="#form" class="btn btn-primary en">Get My Documents</a>
 </div>
-
 <script>
-function setLang(lang) {
-  document.body.classList.toggle('en', lang === 'en');
-  document.getElementById('btnPT').classList.toggle('active', lang === 'pt');
-  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-  document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
-  localStorage.setItem('ap_lang', lang);
+function setLang(lang){
+  document.body.dataset.lang=lang;
+  document.getElementById('btnPT').classList.toggle('active',lang==='pt');
+  document.getElementById('btnEN').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang==='en'?'en':'pt-BR';
 }
-// Always defaults to PT on load
-
-function submitForm(e) {
+function submitForm(e){
   e.preventDefault();
-  const wantsInsurance = document.getElementById('insuranceOptIn').checked;
-  // TODO: Send to webhook — include wantsInsurance flag to route appropriately in Trello
-  document.getElementById('freeForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+  document.getElementById('freeForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
 }
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
-  });
-}, {threshold:0.1});
-document.querySelectorAll('.free-card, .scenario, .resource-card, .mention-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(18px)';
-  el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-  observer.observe(el);
-});
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
+document.querySelectorAll('.free-card,.scenario,.resource-card,.mention-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity 0.45s ease,transform 0.45s ease';obs.observe(el);});
 </script>
-
 </body>
 </html>
