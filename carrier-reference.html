@@ -1,216 +1,394 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Folha de Sinistros — Alice Prata</title>
+<title>Folha de Sinistros — Alice Prata · Agent Claims Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;}
+:root{
+  --terra-deep:#8C3E2A; --terra:#B5553F; --terra-light:#C76A4F;
+  --sand:#E8D5B7; --sand-light:#F4E6CD; --sand-cream:#FAF3E5;
+  --ink:#1A1208; --ink-mid:#3A2418; --ink-soft:#6B4A3A;
+  --ochre:#C9A24A; --white:#FFFFFF;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+body{
+  font-family:'Nunito',system-ui,sans-serif;
+  background:var(--sand-cream);color:var(--ink);
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
 h1,h2,h3{font-family:'Lora',Georgia,serif;line-height:1.2;}
-h2{font-size:1.35rem;font-weight:700;color:var(--terra-deep);border-bottom:2px solid var(--sand);padding-bottom:10px;margin:32px 0 16px;}
+h2{font-size:1.35rem;font-weight:700;color:var(--terra-deep);
+   border-bottom:2px solid var(--sand);padding-bottom:10px;margin:32px 0 16px;}
 h3{font-size:1.05rem;font-weight:600;color:var(--ink);}
-/* LANG — PT default */
-.en{display:none!important;}
-[data-lang="en"] .en{display:block!important;}
-[data-lang="en"] .en.il{display:inline!important;}
-[data-lang="en"] .pt{display:none!important;}
-header{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:24px 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-radius:0 0 24px 24px;box-shadow:0 6px 24px rgba(140,62,42,0.18);}
-.header-logo{height:80px;width:auto;background:var(--white);border-radius:14px;padding:8px 14px;flex-shrink:0;}
-.header-text h1{font-family:'Lora',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:var(--white);margin-bottom:4px;}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,var(–terra-deep) 0%,var(–terra-light) 100%);
+padding:24px 32px;
+display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+border-radius:0 0 24px 24px;
+box-shadow:0 6px 24px rgba(140,62,42,0.18);
+}
+.header-logo{
+height:80px;width:auto;
+background:var(–white);border-radius:14px;
+padding:8px 14px;flex-shrink:0;
+}
+.header-text h1{
+font-family:‘Lora’,serif;font-size:clamp(1.3rem,3vw,1.9rem);
+font-weight:700;color:var(–white);margin-bottom:4px;
+}
 .header-text p{color:rgba(250,243,229,0.88);font-size:0.9rem;}
-.header-right{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.lang-bar{position:sticky;top:0;z-index:50;background:rgba(250,243,229,0.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--sand);padding:10px 32px;display:flex;gap:8px;justify-content:flex-end;align-items:center;}
-.lang-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.82rem;background:var(--sand-light);color:var(--terra-deep);border:1px solid var(--sand);padding:7px 16px;border-radius:999px;cursor:pointer;transition:all 0.15s;}
-.lang-btn.active{background:var(--terra-deep);color:var(--white);border-color:var(--terra-deep);}
-.print-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.82rem;background:transparent;color:var(--terra-deep);border:1px solid var(--terra-deep);padding:7px 16px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;}
-.print-btn:hover{background:var(--terra-deep);color:var(--white);}
+.header-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+
+/* LANG TOGGLE */
+.lang-toggle{
+position:sticky;top:0;z-index:50;
+background:rgba(250,243,229,0.96);backdrop-filter:blur(6px);
+border-bottom:1px solid var(–sand);
+padding:10px 32px;display:flex;gap:8px;justify-content:flex-end;align-items:center;
+}
+.lang-btn{
+font-family:‘Nunito’,sans-serif;font-weight:700;font-size:0.82rem;
+background:var(–sand-light);color:var(–terra-deep);
+border:1px solid var(–sand);padding:7px 16px;border-radius:999px;cursor:pointer;
+transition:all 0.15s;
+}
+.lang-btn.active{background:var(–terra-deep);color:var(–white);border-color:var(–terra-deep);}
+.print-btn{
+font-family:‘Nunito’,sans-serif;font-weight:700;font-size:0.82rem;
+background:transparent;color:var(–terra-deep);
+border:1px solid var(–terra-deep);padding:7px 16px;border-radius:999px;cursor:pointer;
+display:flex;align-items:center;gap:6px;
+}
+.print-btn:hover{background:var(–terra-deep);color:var(–white);}
+
 main{max-width:1100px;margin:0 auto;padding:24px 24px 80px;}
-.disclaimer{background:#FFF8E8;border:1px solid var(--ochre);border-left:4px solid var(--ochre);border-radius:12px;padding:14px 18px;margin-bottom:28px;font-size:0.88rem;color:var(--ink-mid);}
-.disclaimer strong{color:var(--terra-deep);}
-.table-wrap{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(140,62,42,0.09);margin-bottom:32px;overflow-x:auto;}
+
+/* DISCLAIMER */
+.disclaimer{
+background:#FFF8E8;border:1px solid var(–ochre);border-left:4px solid var(–ochre);
+border-radius:12px;padding:14px 18px;margin-bottom:28px;
+font-size:0.88rem;color:var(–ink-mid);
+}
+.disclaimer strong{color:var(–terra-deep);}
+
+/* TABLE */
+.table-wrap{
+background:var(–white);border-radius:16px;
+overflow:hidden;box-shadow:0 4px 20px rgba(140,62,42,0.09);
+margin-bottom:32px;
+}
 table{width:100%;border-collapse:collapse;font-size:0.9rem;}
-thead{background:var(--terra-deep);}
-thead th{padding:12px 14px;text-align:left;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.82rem;color:var(--white);letter-spacing:0.05em;text-transform:uppercase;}
-tbody tr:nth-child(even){background:var(--sand-light);}
-tbody tr:nth-child(odd){background:var(--white);}
-tbody tr:hover{background:var(--sand);}
+thead{background:var(–terra-deep);}
+thead th{
+padding:12px 14px;text-align:left;
+font-family:‘Nunito’,sans-serif;font-weight:700;font-size:0.82rem;
+color:var(–white);letter-spacing:0.05em;text-transform:uppercase;
+}
+tbody tr:nth-child(even){background:var(–sand-light);}
+tbody tr:nth-child(odd){background:var(–white);}
+tbody tr:hover{background:var(–sand);}
 td{padding:11px 14px;vertical-align:top;border-bottom:1px solid rgba(232,213,183,0.5);}
-td a{color:var(--terra-deep);font-weight:600;text-decoration:none;}
+td a{color:var(–terra-deep);font-weight:600;text-decoration:none;}
 td a:hover{text-decoration:underline;}
-.rank{font-family:'Lora',serif;font-weight:700;font-size:1.1rem;color:var(--terra-deep);text-align:center;}
-.hours{display:inline-block;font-size:0.78rem;background:var(--sand-light);color:var(--ink-soft);padding:2px 8px;border-radius:6px;white-space:nowrap;}
-.note-pill{display:inline-block;font-size:0.75rem;background:rgba(181,85,63,0.1);color:var(--terra-deep);padding:2px 8px;border-radius:6px;font-weight:600;border:1px solid rgba(181,85,63,0.2);}
+.rank{
+font-family:‘Lora’,serif;font-weight:700;font-size:1.1rem;
+color:var(–terra-deep);text-align:center;
+}
+.hours{
+display:inline-block;font-size:0.78rem;
+background:var(–sand-light);color:var(–ink-soft);
+padding:2px 8px;border-radius:6px;white-space:nowrap;
+}
+.note-pill{
+display:inline-block;font-size:0.75rem;
+background:rgba(181,85,63,0.1);color:var(–terra-deep);
+padding:2px 8px;border-radius:6px;font-weight:600;
+border:1px solid rgba(181,85,63,0.2);
+}
+
+/* PROCESS SECTION */
 .process-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
-.step{background:var(--white);border-radius:14px;padding:20px 24px;box-shadow:0 2px 12px rgba(140,62,42,0.07);display:flex;gap:18px;align-items:flex-start;}
-.step-num{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:var(--terra-deep);color:var(--white);font-family:'Lora',serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;}
-.step-content h3{color:var(--terra-deep);margin-bottom:6px;}
+.step{
+background:var(–white);border-radius:14px;
+padding:20px 24px;
+box-shadow:0 2px 12px rgba(140,62,42,0.07);
+display:flex;gap:18px;align-items:flex-start;
+}
+.step-num{
+width:36px;height:36px;border-radius:50%;flex-shrink:0;
+background:var(–terra-deep);color:var(–white);
+font-family:‘Lora’,serif;font-weight:700;font-size:1rem;
+display:flex;align-items:center;justify-content:center;
+}
+.step-content h3{color:var(–terra-deep);margin-bottom:6px;}
 .step-content ul{padding-left:18px;}
-.step-content li{font-size:0.92rem;color:var(--ink-mid);margin-bottom:4px;}
-.highlight{background:rgba(201,162,74,0.1);border:1px solid rgba(201,162,74,0.3);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:0.88rem;color:var(--ink-mid);}
-.glossary-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:32px;}
+.step-content li{font-size:0.92rem;color:var(–ink-mid);margin-bottom:4px;}
+.step-content .highlight{
+background:rgba(201,162,74,0.1);border:1px solid rgba(201,162,74,0.3);
+border-radius:8px;padding:8px 12px;margin-top:8px;font-size:0.88rem;color:var(–ink-mid);
+}
+
+/* GLOSSARY */
+.glossary-grid{
+display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:32px;
+}
 @media(min-width:700px){.glossary-grid{grid-template-columns:1fr 1fr;}}
-.term-card{background:var(--white);border-left:4px solid var(--terra);border-radius:10px;padding:14px 18px;box-shadow:0 2px 8px rgba(140,62,42,0.06);}
-.term-card strong{font-family:'Nunito',sans-serif;font-weight:700;color:var(--terra-deep);display:block;margin-bottom:4px;}
-.term-card .term-en{font-style:italic;color:var(--ink-soft);font-size:0.83rem;display:block;}
-.term-card p{font-size:0.88rem;color:var(--ink-soft);margin-top:6px;}
-footer{background:var(--ink);padding:28px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+.term-card{
+background:var(–white);border-left:4px solid var(–terra);
+border-radius:10px;padding:14px 18px;
+box-shadow:0 2px 8px rgba(140,62,42,0.06);
+}
+.term-card strong{
+font-family:‘Nunito’,sans-serif;font-weight:700;
+color:var(–terra-deep);display:block;margin-bottom:4px;
+}
+.term-card .term-en{
+font-style:italic;color:var(–ink-soft);font-size:0.83rem;display:block;
+}
+.term-card p{font-size:0.88rem;color:var(–ink-soft);margin-top:6px;}
+
+/* FOOTER */
+footer{
+background:var(–ink);padding:28px 32px;
+display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+justify-content:space-between;
+}
 footer img{height:40px;filter:invert(1);opacity:0.8;}
 footer p{color:rgba(250,243,229,0.5);font-size:0.8rem;max-width:640px;}
-@media print{.lang-bar,.print-btn{display:none!important;}body{background:#fff;}}
+
+/* PRINT */
+@media print{
+.lang-toggle,.print-btn{display:none!important;}
+body{background:#fff;}
+header{background:#fff;border-bottom:2px solid var(–terra-deep);border-radius:0;box-shadow:none;}
+header h1{color:var(–terra-deep)!important;}
+.header-text p{color:var(–ink-soft)!important;}
+.header-logo{background:transparent;padding:0;}
+td a::after{content:” (” attr(href) “)”;font-size:0.72em;color:var(–ink-soft);}
+.table-wrap{box-shadow:none;}
+}
+
+/* LANG — PT default, EN hidden until toggled */
+.en-only{display:none!important;}
+[data-lang=“en”] .en-only{display:block!important;}
+[data-lang=“en”] .en-only.il{display:inline!important;}
+[data-lang=“en”] .pt-only{display:none!important;}
 </style>
+
 </head>
 <body data-lang="pt">
 
 <header>
   <img src="alice-prata-logo.png" alt="Alice Prata" class="header-logo"/>
   <div class="header-text">
-    <h1 class="pt">Folha de Sinistros — Referência da Agente</h1>
-    <h1 class="en">Claims Reference Sheet — Agent Resource</h1>
-    <p class="pt">Top 20 seguradoras dos EUA · Telefones de sinistros · Processo passo a passo · Glossário PT/EN</p>
-    <p class="en">Top 20 US carriers · Claims phones · Step-by-step process · PT/EN glossary</p>
+    <h1 class="pt-only">Folha de Sinistros — Referência da Agente</h1>
+    <h1 class="en-only">Claims Reference Sheet — Agent Resource</h1>
+    <p class="pt-only">Top 20 seguradoras dos EUA · Telefones de sinistros · Processo passo a passo · Glossário PT/EN</p>
+    <p class="en-only">Top 20 US carriers · Claims phones · Step-by-step process · PT/EN glossary</p>
   </div>
 </header>
 
-<div class="lang-bar">
+<div class="lang-toggle">
   <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">🇧🇷 Português</button>
   <button class="lang-btn" id="btnEN" onclick="setLang('en')">🇺🇸 English</button>
   <button class="print-btn" onclick="window.print()">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-    <span class="pt">Imprimir</span><span class="en">Print</span>
+    <span class="pt-only">Imprimir</span><span class="en-only">Print</span>
   </button>
 </div>
 
 <main>
+
   <div class="disclaimer">
-    <strong class="pt">⚠ Uso interno da agente.</strong>
-    <strong class="en">⚠ Agent internal use only.</strong>
-    <span class="pt"> Verifique sempre o telefone no site oficial antes de orientar um cliente. Atualizado 2025.</span>
-    <span class="en"> Always verify the phone number on the carrier's official website before directing a client. Updated 2025.</span>
+    <strong class="pt-only">⚠ Uso interno da agente.</strong>
+    <strong class="en-only">⚠ Agent internal use only.</strong>
+    <span class="pt-only"> Verifique sempre o telefone no site oficial da seguradora antes de orientar um cliente — números de sinistros podem mudar. Atualizado 2025.</span>
+    <span class="en-only"> Always verify the phone number on the carrier's official website before directing a client — claims numbers can change. Updated 2025.</span>
   </div>
 
-  <h2 class="pt">Top 20 Seguradoras de Vida nos EUA</h2>
-  <h2 class="en">Top 20 US Life Insurance Carriers</h2>
-  <p style="font-size:0.88rem;color:var(--ink-soft);margin-bottom:16px;" class="pt">Ranking baseado em prêmios anuais e contagem de apólices (LIMRA / AM Best 2024-2025).</p>
-  <p style="font-size:0.88rem;color:var(--ink-soft);margin-bottom:16px;" class="en">Ranking based on annual premiums and policy count (LIMRA / AM Best 2024-2025).</p>
+  <!-- TOP 20 TABLE -->
+
+  <h2 class="pt-only">Top 20 Seguradoras de Vida nos EUA</h2>
+  <h2 class="en-only">Top 20 US Life Insurance Carriers</h2>
+  <p style="font-size:0.88rem;color:var(--ink-soft);margin-bottom:16px;" class="pt-only">Ranking baseado em prêmios anuais e contagem de apólices (LIMRA / AM Best 2024-2025).</p>
+  <p style="font-size:0.88rem;color:var(--ink-soft);margin-bottom:16px;" class="en-only">Ranking based on annual premiums and policy count (LIMRA / AM Best 2024-2025).</p>
 
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th style="width:36px;">#</th>
-          <th><span class="pt">Companhia</span><span class="en">Company</span></th>
-          <th><span class="pt">Tel. Sinistros</span><span class="en">Claims Phone</span></th>
-          <th><span class="pt">Site / Portal</span><span class="en">Site / Portal</span></th>
-          <th><span class="pt">Horário (ET)</span><span class="en">Hours (ET)</span></th>
-          <th><span class="pt">Observações</span><span class="en">Notes</span></th>
+          <th style="width:42px;">#</th>
+          <th class="pt-only">Companhia</th>        <th class="en-only">Company</th>
+          <th class="pt-only">Tel. Sinistros</th>   <th class="en-only">Claims Phone</th>
+          <th class="pt-only">Site / Portal</th>    <th class="en-only">Site / Portal</th>
+          <th class="pt-only">Horário (ET)</th>     <th class="en-only">Hours (ET)</th>
+          <th class="pt-only">Observações</th>      <th class="en-only">Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="rank">1</td><td>Northwestern Mutual</td><td>(800) 388-8123</td><td><a href="https://www.northwesternmutual.com/claims" target="_blank">northwesternmutual.com/claims</a></td><td><span class="hours">Mon–Fri 7am–6pm CT</span></td><td><span class="pt">Seg–Sex 7am–6pm CT</span><span class="en">Mon–Fri 7am–6pm CT</span></td></tr>
-        <tr><td class="rank">2</td><td>New York Life</td><td>(800) 225-5695</td><td><a href="https://www.newyorklife.com/claims" target="_blank">newyorklife.com/claims</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td><span class="pt">Digitar "Claims" no menu</span><span class="en">Press "Claims" in menu</span></td></tr>
-        <tr><td class="rank">3</td><td>MassMutual</td><td>1-800-272-2216</td><td><a href="https://www.massmutual.com/contact-us" target="_blank">massmutual.com/contact-us</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">4</td><td>Prudential Financial</td><td>1-800-778-2255</td><td><a href="https://www.prudential.com/links/contact-us" target="_blank">prudential.com</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td><span class="note-pill">FL: 1-833-626-1865</span></td></tr>
-        <tr><td class="rank">5</td><td>Lincoln Financial Group</td><td>1-800-487-1485</td><td><a href="https://www.lincolnfinancial.com/claims" target="_blank">lincolnfinancial.com/claims</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">6</td><td>State Farm Life</td><td>1-800-733-0632</td><td><a href="https://www.statefarm.com/claims" target="_blank">statefarm.com/claims</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td><span class="pt">Agente local pode acelerar</span><span class="en">Local agent can expedite</span></td></tr>
-        <tr><td class="rank">7</td><td>MetLife</td><td>1-800-638-5000</td><td><a href="https://www.metlife.com/file-a-claim" target="_blank">metlife.com/file-a-claim</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">8</td><td>Pacific Life</td><td>1-800-347-7787</td><td><a href="https://www.pacificlife.com" target="_blank">pacificlife.com</a></td><td><span class="hours">Mon–Fri 5a–5p PT</span></td><td><span class="pt">Life claims: Seg–Sex 5a–5p PT</span><span class="en">Life claims: Mon–Fri 5a–5p PT</span></td></tr>
-        <tr><td class="rank">9</td><td>Guardian Life</td><td>1-800-441-6455</td><td><a href="https://www.guardianlife.com" target="_blank">guardianlife.com</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">10</td><td>Nationwide</td><td>1-800-848-6331</td><td><a href="https://www.nationwide.com/claims" target="_blank">nationwide.com/claims</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">11</td><td>John Hancock</td><td>1-800-732-5543</td><td><a href="https://www.johnhancock.com" target="_blank">johnhancock.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">12</td><td>Transamerica</td><td>1-800-797-2643</td><td><a href="https://www.transamerica.com" target="_blank">transamerica.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">13</td><td>Mutual of Omaha</td><td>1-800-775-6000</td><td><a href="https://www.mutualofomaha.com" target="_blank">mutualofomaha.com</a></td><td><span class="hours">Mon–Fri 7a–11p CT</span></td><td>—</td></tr>
-        <tr><td class="rank">14</td><td>AIG / Corebridge Financial</td><td>1-800-340-2765</td><td><a href="https://www.corebridgefinancial.com" target="_blank">corebridgefinancial.com</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">15</td><td>Allianz Life</td><td>1-800-950-1962</td><td><a href="https://www.allianzlife.com" target="_blank">allianzlife.com</a></td><td><span class="hours">Mon–Thu 7a–8p · Fri 7a–6:30p CT</span></td><td>—</td></tr>
-        <tr><td class="rank">16</td><td>Principal Financial Group</td><td>1-800-247-9988</td><td><a href="https://www.principal.com" target="_blank">principal.com</a></td><td><span class="hours">Mon–Fri 7a–7p CT</span></td><td>—</td></tr>
-        <tr><td class="rank">17</td><td>Securian / Minnesota Life</td><td>1-800-826-9441</td><td><a href="https://www.securian.com" target="_blank">securian.com</a></td><td><span class="hours">Mon–Fri 7a–7p CT</span></td><td>—</td></tr>
-        <tr><td class="rank">18</td><td>Symetra</td><td>1-800-796-3872</td><td><a href="https://www.symetra.com" target="_blank">symetra.com</a></td><td><span class="hours">Mon–Fri 8a–4:30p PT</span></td><td>—</td></tr>
-        <tr><td class="rank">19</td><td>Penn Mutual</td><td>1-800-523-0650</td><td><a href="https://www.pennmutual.com" target="_blank">pennmutual.com</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td>—</td></tr>
-        <tr><td class="rank">20</td><td>Foresters Financial</td><td>1-800-828-1540</td><td><a href="https://www.foresters.com" target="_blank">foresters.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td>—</td></tr>
+        <tr><td class="rank">1</td><td>Northwestern Mutual</td><td>(800) 388-8123</td><td><a href="https://www.northwesternmutual.com/claims" target="_blank">northwesternmutual.com/claims</a></td><td><span class="hours">Seg–Sex 7am–6pm CT</span></td><td class="pt-only">Atendimento Seg–Sex 7am–6pm CT</td><td class="en-only">Mon–Fri 7am–6pm CT</td></tr>
+        <tr><td class="rank">2</td><td>New York Life</td><td>(800) CALL-NYL · (800) 225-5695</td><td><a href="https://www.newyorklife.com/claims" target="_blank">newyorklife.com/claims</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td class="pt-only">Digitar "Claims" no menu</td><td class="en-only">Press "Claims" in menu</td></tr>
+        <tr><td class="rank">3</td><td>MassMutual</td><td>1-800-272-2216</td><td><a href="https://www.massmutual.com/contact-us" target="_blank">massmutual.com/contact-us</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">4</td><td>Prudential Financial</td><td>1-800-778-2255</td><td><a href="https://www.prudential.com/links/contact-us" target="_blank">prudential.com/links/contact-us</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td><span class="note-pill">FL apólices: 1-833-626-1865</span></td></tr>
+        <tr><td class="rank">5</td><td>Lincoln Financial Group</td><td>1-800-487-1485</td><td><a href="https://www.lincolnfinancial.com/claims" target="_blank">lincolnfinancial.com/claims</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">6</td><td>State Farm Life</td><td>1-800-733-0632</td><td><a href="https://www.statefarm.com/claims" target="_blank">statefarm.com/claims</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td class="pt-only">Acionar agente local pode acelerar</td><td class="en-only">Local agent can expedite</td></tr>
+        <tr><td class="rank">7</td><td>MetLife</td><td>1-800-638-5000</td><td><a href="https://www.metlife.com/file-a-claim" target="_blank">metlife.com/file-a-claim</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">8</td><td>Pacific Life</td><td>1-800-347-7787</td><td><a href="https://www.pacificlife.com" target="_blank">pacificlife.com</a></td><td><span class="hours">Mon–Fri 5a–5p PT</span></td><td class="pt-only">Life claims: Mon–Fri 5a–5p PT</td><td class="en-only">Life claims: Mon–Fri 5a–5p PT</td></tr>
+        <tr><td class="rank">9</td><td>Guardian Life</td><td>1-800-441-6455</td><td><a href="https://www.guardianlife.com" target="_blank">guardianlife.com</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">10</td><td>Nationwide</td><td>1-800-848-6331</td><td><a href="https://www.nationwide.com/claims" target="_blank">nationwide.com/claims</a></td><td><span class="hours">Mon–Fri 8a–8p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">11</td><td>John Hancock</td><td>1-800-732-5543</td><td><a href="https://www.johnhancock.com" target="_blank">johnhancock.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">12</td><td>Transamerica</td><td>1-800-797-2643</td><td><a href="https://www.transamerica.com" target="_blank">transamerica.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">13</td><td>Mutual of Omaha</td><td>1-800-775-6000</td><td><a href="https://www.mutualofomaha.com" target="_blank">mutualofomaha.com</a></td><td><span class="hours">Mon–Fri 7a–11p CT</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">14</td><td>AIG / Corebridge Financial</td><td>1-800-340-2765</td><td><a href="https://www.corebridgefinancial.com" target="_blank">corebridgefinancial.com</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">15</td><td>Allianz Life</td><td>1-800-950-1962</td><td><a href="https://www.allianzlife.com" target="_blank">allianzlife.com</a></td><td><span class="hours">Mon–Thu 7a–8p · Fri 7a–6:30p CT</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">16</td><td>Principal Financial Group</td><td>1-800-247-9988</td><td><a href="https://www.principal.com" target="_blank">principal.com</a></td><td><span class="hours">Mon–Fri 7a–7p CT</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">17</td><td>Securian Financial / Minnesota Life</td><td>1-800-826-9441</td><td><a href="https://www.securian.com" target="_blank">securian.com</a></td><td><span class="hours">Mon–Fri 7a–7p CT</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">18</td><td>Symetra</td><td>1-800-796-3872</td><td><a href="https://www.symetra.com" target="_blank">symetra.com</a></td><td><span class="hours">Mon–Fri 8a–4:30p PT</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">19</td><td>Penn Mutual</td><td>1-800-523-0650</td><td><a href="https://www.pennmutual.com" target="_blank">pennmutual.com</a></td><td><span class="hours">Mon–Fri 8a–6p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
+        <tr><td class="rank">20</td><td>Foresters Financial</td><td>1-800-828-1540</td><td><a href="https://www.foresters.com" target="_blank">foresters.com</a></td><td><span class="hours">Mon–Fri 8a–7p ET</span></td><td class="pt-only">—</td><td class="en-only">—</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h2 class="pt">Processo de Sinistro — Passo a Passo</h2>
-  <h2 class="en">Claims Process — Step by Step</h2>
+  <!-- CLAIMS PROCESS -->
+
+  <h2 class="pt-only">Processo de Sinistro — Passo a Passo</h2>
+  <h2 class="en-only">Claims Process — Step by Step</h2>
+
   <div class="process-steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-content">
-        <h3 class="pt">📞 Primeira ligação (dentro de 24–72h)</h3>
-        <h3 class="en">📞 First call (within 24–72 hours)</h3>
-        <ul class="pt"><li>Ligue para o número de <strong>claims</strong> da seguradora (tabela acima)</li><li>Tenha em mãos: nome completo do segurado, data de nascimento, data do óbito, número da apólice (se conhecido) e seu relacionamento com o segurado</li><li>A seguradora abrirá um <em>claim number</em> — anote</li><li>Enviarão o <strong>"Claimant's Statement / Beneficiary Statement"</strong> por correio ou e-mail (3–5 dias úteis)</li></ul>
-        <ul class="en"><li>Call the carrier's <strong>claims</strong> number (table above)</li><li>Have ready: insured's full name, date of birth, date of death, policy number (if known), your relationship to the insured</li><li>The carrier will open a <em>claim number</em> — write it down</li><li>They will send the <strong>"Claimant's Statement / Beneficiary Statement"</strong> by mail or email (3–5 business days)</li></ul>
+        <h3 class="pt-only">📞 Primeira ligação (dentro de 24–72h)</h3>
+        <h3 class="en-only">📞 First call (within 24–72 hours)</h3>
+        <ul class="pt-only">
+          <li>Ligue para o número de <strong>claims</strong> da seguradora (tabela acima)</li>
+          <li>Tenha em mãos: nome completo do segurado, data de nascimento, data do óbito, número da apólice (se conhecido) e seu relacionamento com o segurado</li>
+          <li>A seguradora abrirá um <em>claim number</em> — anote</li>
+          <li>Enviarão o <strong>"Claimant's Statement / Beneficiary Statement"</strong> por correio ou e-mail (3–5 dias úteis)</li>
+        </ul>
+        <ul class="en-only">
+          <li>Call the carrier's <strong>claims</strong> number (table above)</li>
+          <li>Have ready: insured's full name, date of birth, date of death, policy number (if known), your relationship to the insured</li>
+          <li>The carrier will open a <em>claim number</em> — write it down</li>
+          <li>They will send the <strong>"Claimant's Statement / Beneficiary Statement"</strong> by mail or email (3–5 business days)</li>
+        </ul>
       </div>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h3 class="pt">📄 Documentos necessários</h3>
-        <h3 class="en">📄 Required documents</h3>
-        <ul class="pt"><li><strong>Certidão de óbito original</strong> (certified copy) — peça pelo menos 3 cópias ao funeral home</li><li><strong>Comprovação de identidade</strong> do beneficiário (driver's license / passport)</li><li><strong>Comprovação de relacionamento</strong> (certidão de casamento, certidão de nascimento, etc.)</li><li><strong>SSN ou ITIN do beneficiário</strong> — para retenção de imposto (W-9)</li><li><strong>"Claimant's Statement"</strong> preenchido e assinado</li><li><strong>Apólice original</strong> ou cópia (se localizada)</li></ul>
-        <ul class="en"><li><strong>Original death certificate</strong> (certified copy) — request at least 3 copies from the funeral home</li><li><strong>Beneficiary ID</strong> (driver's license / passport)</li><li><strong>Proof of relationship</strong> (marriage certificate, birth certificate, etc.)</li><li><strong>Beneficiary SSN or ITIN</strong> — for tax withholding (W-9)</li><li><strong>Completed and signed "Claimant's Statement"</strong></li><li><strong>Original policy</strong> or copy (if available)</li></ul>
-        <div class="highlight pt">Se o óbito foi por acidente, a cobertura adicional <strong>"Accidental Death Benefit"</strong> pode ser acionada — solicite <em>police report</em> ou <em>autopsy report</em>.</div>
-        <div class="highlight en">If death was accidental, the <strong>"Accidental Death Benefit"</strong> rider may apply — request <em>police report</em> or <em>autopsy report</em>.</div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h3 class="pt">💰 Pagamento</h3>
-        <h3 class="en">💰 Payment</h3>
-        <ul class="pt"><li>Pela <strong>lei da Flórida (F.S. § 627.461)</strong> a seguradora deve pagar dentro de <strong>30 a 60 dias</strong> após receber prova satisfatória</li><li>Pagamento por cheque, ACH ou conta de retenção (<em>Retained Asset Account</em>)</li><li>Se o falecimento ocorrer dentro do <strong>período de contestabilidade</strong> (2 anos), espere investigação adicional (até 6 meses)</li></ul>
-        <ul class="en"><li>Under <strong>Florida law (F.S. § 627.461)</strong> the carrier must pay within <strong>30 to 60 days</strong> after receiving satisfactory proof</li><li>Payment by check, ACH or retained asset account</li><li>If death occurs within the <strong>contestability period</strong> (2 years), expect additional investigation (up to 6 months)</li></ul>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h3 class="pt">🌍 Beneficiário no Brasil</h3>
-        <h3 class="en">🌍 Beneficiary in Brazil</h3>
-        <ul class="pt"><li>Beneficiário internacional precisa de <strong>ITIN</strong> (W-7 form ao IRS) ou tax treaty form (W-8BEN) para evitar retenção de 30%</li><li>Tradução juramentada da certidão de óbito brasileira pode ser exigida</li><li><strong>Apostille de Haia</strong> acelera o reconhecimento internacional</li><li>Pagamento internacional: wire transfer (taxa $25–$45) ou cheque em USD</li></ul>
-        <ul class="en"><li>International beneficiary needs an <strong>ITIN</strong> (W-7 form to IRS) or tax treaty form (W-8BEN) to avoid 30% withholding</li><li>Sworn translation of Brazilian death certificate may be required</li><li><strong>Hague Apostille</strong> speeds up international recognition</li><li>International payment: wire transfer (fee $25–$45) or check in USD</li></ul>
-      </div>
-    </div>
+
+```
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-content">
+    <h3 class="pt-only">📄 Documentos necessários</h3>
+    <h3 class="en-only">📄 Required documents</h3>
+    <ul class="pt-only">
+      <li><strong>Certidão de óbito original</strong> (certified copy) — peça pelo menos 3 cópias ao funeral home</li>
+      <li><strong>Comprovação de identidade</strong> do beneficiário (driver's license / passport)</li>
+      <li><strong>Comprovação de relacionamento</strong> (certidão de casamento, certidão de nascimento, etc.)</li>
+      <li><strong>SSN ou ITIN do beneficiário</strong> — para retenção de imposto (W-9)</li>
+      <li><strong>"Claimant's Statement"</strong> preenchido e assinado</li>
+      <li><strong>Apólice original</strong> ou cópia (se localizada)</li>
+    </ul>
+    <ul class="en-only">
+      <li><strong>Original death certificate</strong> (certified copy) — request at least 3 copies from the funeral home</li>
+      <li><strong>Beneficiary ID</strong> (driver's license / passport)</li>
+      <li><strong>Proof of relationship</strong> (marriage certificate, birth certificate, etc.)</li>
+      <li><strong>Beneficiary SSN or ITIN</strong> — for tax withholding (W-9)</li>
+      <li><strong>Completed and signed "Claimant's Statement"</strong></li>
+      <li><strong>Original policy</strong> or copy (if available)</li>
+    </ul>
+    <div class="highlight pt-only">Se o óbito foi por acidente, a cobertura adicional <strong>"Accidental Death Benefit"</strong> pode ser acionada — solicite <em>police report</em> ou <em>autopsy report</em>.</div>
+    <div class="highlight en-only">If death was accidental, the <strong>"Accidental Death Benefit"</strong> rider may apply — request <em>police report</em> or <em>autopsy report</em>.</div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-content">
+    <h3 class="pt-only">💰 Pagamento</h3>
+    <h3 class="en-only">💰 Payment</h3>
+    <ul class="pt-only">
+      <li>Pela <strong>lei da Flórida (F.S. § 627.461)</strong> a seguradora deve pagar dentro de <strong>30 a 60 dias</strong> após receber prova satisfatória</li>
+      <li>Pagamento por cheque, ACH ou conta de retenção (<em>Retained Asset Account</em>)</li>
+      <li>Se o falecimento ocorrer dentro do <strong>período de contestabilidade</strong> (2 anos), espere investigação adicional (até 6 meses)</li>
+    </ul>
+    <ul class="en-only">
+      <li>Under <strong>Florida law (F.S. § 627.461)</strong> the carrier must pay within <strong>30 to 60 days</strong> after receiving satisfactory proof</li>
+      <li>Payment by check, ACH or retained asset account</li>
+      <li>If death occurs within the <strong>contestability period</strong> (2 years), expect additional investigation (up to 6 months)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-content">
+    <h3 class="pt-only">🌍 Beneficiário no Brasil</h3>
+    <h3 class="en-only">🌍 Beneficiary in Brazil</h3>
+    <ul class="pt-only">
+      <li>Beneficiário internacional precisa de <strong>ITIN</strong> (W-7 form ao IRS) ou tax treaty form (W-8BEN) para evitar retenção de 30%</li>
+      <li>Tradução juramentada da certidão de óbito brasileira pode ser exigida</li>
+      <li><strong>Apostille de Haia</strong> acelera o reconhecimento internacional</li>
+      <li>Pagamento internacional: wire transfer (taxa $25–$45) ou cheque em USD</li>
+    </ul>
+    <ul class="en-only">
+      <li>International beneficiary needs an <strong>ITIN</strong> (W-7 form to IRS) or tax treaty form (W-8BEN) to avoid 30% withholding</li>
+      <li>Sworn translation of Brazilian death certificate may be required</li>
+      <li><strong>Hague Apostille</strong> speeds up international recognition</li>
+      <li>International payment: wire transfer (fee $25–$45) or check in USD</li>
+    </ul>
+  </div>
+</div>
+```
+
   </div>
 
-  <h2 class="pt">Glossário PT / EN</h2>
-  <h2 class="en">Glossary PT / EN</h2>
+  <!-- GLOSSARY -->
+
+  <h2 class="pt-only">Glossário PT / EN</h2>
+  <h2 class="en-only">Glossary PT / EN</h2>
+
   <div class="glossary-grid">
-    <div class="term-card"><strong>Beneficiário <span class="term-en">/ Beneficiary</span></strong><p class="pt">Pessoa designada para receber o benefício da apólice em caso de morte.</p><p class="en">Person designated to receive the policy benefit upon death.</p></div>
-    <div class="term-card"><strong>Beneficiário Primário <span class="term-en">/ Primary Beneficiary</span></strong><p class="pt">Recebe primeiro; se falecer antes do segurado, vai ao contingente.</p><p class="en">Receives first; if deceased before insured, goes to contingent.</p></div>
-    <div class="term-card"><strong>Beneficiário Contingente <span class="term-en">/ Contingent Beneficiary</span></strong><p class="pt">Substituto do beneficiário primário.</p><p class="en">Backup to the primary beneficiary.</p></div>
-    <div class="term-card"><strong>Período de Contestabilidade <span class="term-en">/ Contestability Period</span></strong><p class="pt">Geralmente 2 anos; a seguradora pode investigar e contestar pagamento por fraude/omissão.</p><p class="en">Generally 2 years; carrier can investigate and contest payment for fraud/omission.</p></div>
-    <div class="term-card"><strong>Incontestabilidade <span class="term-en">/ Incontestability</span></strong><p class="pt">Após 2 anos, a seguradora não pode mais negar pagamento por erros na proposta original.</p><p class="en">After 2 years, carrier can no longer deny payment for errors in the original application.</p></div>
-    <div class="term-card"><strong>Apólice <span class="term-en">/ Policy</span></strong><p class="pt">Contrato entre segurado e seguradora.</p><p class="en">Contract between insured and carrier.</p></div>
-    <div class="term-card"><strong>Term Life <span class="term-en">/ Term Life</span></strong><p class="pt">Seguro temporário (10/20/30 anos), prêmio menor, sem valor em dinheiro.</p><p class="en">Temporary insurance (10/20/30 years), lower premium, no cash value.</p></div>
-    <div class="term-card"><strong>Whole Life <span class="term-en">/ Whole Life</span></strong><p class="pt">Vitalício, com valor em dinheiro acumulado, prêmio fixo.</p><p class="en">Permanent, with accumulated cash value, fixed premium.</p></div>
-    <div class="term-card"><strong>Universal Life (UL) <span class="term-en">/ Universal Life</span></strong><p class="pt">Vitalício flexível, prêmios e benefícios ajustáveis.</p><p class="en">Flexible permanent, adjustable premiums and benefits.</p></div>
-    <div class="term-card"><strong>Rider <span class="term-en">/ Rider</span></strong><p class="pt">Cláusula adicional (ex.: doença terminal, acidente).</p><p class="en">Additional clause (e.g., terminal illness, accident).</p></div>
-    <div class="term-card"><strong>Free-Look Period <span class="term-en">/ Free-Look Period</span></strong><p class="pt">Geralmente 10–30 dias após emissão para cancelar com reembolso total.</p><p class="en">Generally 10–30 days after issue to cancel with full refund.</p></div>
-    <div class="term-card"><strong>Cash Value <span class="term-en">/ Cash Value</span></strong><p class="pt">Saldo acumulado em apólices permanentes; pode ser sacado/emprestado.</p><p class="en">Accumulated balance in permanent policies; can be withdrawn/borrowed.</p></div>
-    <div class="term-card"><strong>ITIN <span class="term-en">/ ITIN</span></strong><p class="pt">Individual Taxpayer Identification Number — para beneficiários sem SSN.</p><p class="en">Individual Taxpayer Identification Number — for beneficiaries without SSN.</p></div>
-    <div class="term-card"><strong>W-9 / W-8BEN</strong><p class="pt">Formulários de retenção de imposto (residente / não-residente).</p><p class="en">Tax withholding forms (resident / non-resident).</p></div>
+    <div class="term-card"><strong>Beneficiário <span class="term-en">Beneficiary</span></strong><p class="pt-only">Pessoa designada para receber o benefício da apólice em caso de morte.</p><p class="en-only">Person designated to receive the policy benefit upon death.</p></div>
+    <div class="term-card"><strong>Beneficiário Primário <span class="term-en">Primary Beneficiary</span></strong><p class="pt-only">Recebe primeiro; se falecer antes do segurado, vai ao contingente.</p><p class="en-only">Receives first; if deceased before insured, goes to contingent.</p></div>
+    <div class="term-card"><strong>Beneficiário Contingente <span class="term-en">Contingent Beneficiary</span></strong><p class="pt-only">Substituto do beneficiário primário.</p><p class="en-only">Backup to the primary beneficiary.</p></div>
+    <div class="term-card"><strong>Período de Contestabilidade <span class="term-en">Contestability Period</span></strong><p class="pt-only">Geralmente 2 anos; a seguradora pode investigar e contestar pagamento por fraude/omissão.</p><p class="en-only">Generally 2 years; carrier can investigate and contest payment for fraud/omission.</p></div>
+    <div class="term-card"><strong>Incontestabilidade <span class="term-en">Incontestability</span></strong><p class="pt-only">Após 2 anos, a seguradora não pode mais negar pagamento por erros na proposta original.</p><p class="en-only">After 2 years, carrier can no longer deny payment for errors in the original application.</p></div>
+    <div class="term-card"><strong>Apólice / Policy <span class="term-en">Policy</span></strong><p class="pt-only">Contrato entre segurado e seguradora.</p><p class="en-only">Contract between insured and carrier.</p></div>
+    <div class="term-card"><strong>Term Life <span class="term-en">Term Life</span></strong><p class="pt-only">Seguro temporário (10/20/30 anos), prêmio menor, sem valor em dinheiro.</p><p class="en-only">Temporary insurance (10/20/30 years), lower premium, no cash value.</p></div>
+    <div class="term-card"><strong>Whole Life <span class="term-en">Whole Life</span></strong><p class="pt-only">Vitalício, com valor em dinheiro acumulado, prêmio fixo.</p><p class="en-only">Permanent, with accumulated cash value, fixed premium.</p></div>
+    <div class="term-card"><strong>Universal Life (UL) <span class="term-en">Universal Life</span></strong><p class="pt-only">Vitalício flexível, prêmios e benefícios ajustáveis.</p><p class="en-only">Flexible permanent, adjustable premiums and benefits.</p></div>
+    <div class="term-card"><strong>Rider <span class="term-en">Rider</span></strong><p class="pt-only">Cláusula adicional (ex.: doença terminal, acidente).</p><p class="en-only">Additional clause (e.g., terminal illness, accident).</p></div>
+    <div class="term-card"><strong>Free-Look Period <span class="term-en">Free-Look Period</span></strong><p class="pt-only">Geralmente 10–30 dias após emissão para cancelar com reembolso total.</p><p class="en-only">Generally 10–30 days after issue to cancel with full refund.</p></div>
+    <div class="term-card"><strong>Cash Value <span class="term-en">Cash Value</span></strong><p class="pt-only">Saldo acumulado em apólices permanentes; pode ser sacado/emprestado.</p><p class="en-only">Accumulated balance in permanent policies; can be withdrawn/borrowed.</p></div>
+    <div class="term-card"><strong>ITIN <span class="term-en">ITIN</span></strong><p class="pt-only">Individual Taxpayer Identification Number — para beneficiários sem SSN.</p><p class="en-only">Individual Taxpayer Identification Number — for beneficiaries without SSN.</p></div>
+    <div class="term-card"><strong>W-9 / W-8BEN <span class="term-en">W-9 / W-8BEN</span></strong><p class="pt-only">Formulários de retenção de imposto (residente / não-residente).</p><p class="en-only">Tax withholding forms (resident / non-resident).</p></div>
   </div>
+
 </main>
 
 <footer>
   <img src="alice-prata-logo.png" alt="Alice Prata"/>
-  <p class="pt">Documento de referência interna — Alice Prata. Atualizado 2025. Verifique sempre os números no site oficial antes de orientar um cliente.</p>
-  <p class="en">Internal reference document — Alice Prata. Updated 2025. Always verify numbers on the carrier's official website before directing a client.</p>
+  <p class="pt-only">Documento de referência interna — Alice Prata. Atualizado 2025. Verifique sempre os números no site oficial da seguradora antes de orientar um cliente.</p>
+  <p class="en-only">Internal reference document — Alice Prata. Updated 2025. Always verify numbers on the carrier's official website before directing a client.</p>
 </footer>
 
 <script>
 function setLang(lang){
-  document.body.dataset.lang=lang;
-  document.getElementById('btnPT').classList.toggle('active',lang==='pt');
-  document.getElementById('btnEN').classList.toggle('active',lang==='en');
-  document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  document.body.dataset.lang = lang;
+  document.getElementById('btnPT').classList.toggle('active', lang==='pt');
+  document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  document.documentElement.lang = lang==='en' ? 'en' : 'pt-BR';
 }
 </script>
+
 </body>
 </html>
