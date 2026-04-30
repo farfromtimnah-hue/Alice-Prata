@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guia de Emergência Familiar — Alice Prata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;--r:14px;--r-lg:20px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Lora',Georgia,serif;line-height:1.2;}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(250,243,229,0.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--sand);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.topbar img{height:36px;}
+.topbar-right{display:flex;align-items:center;gap:8px;}
+.lang-toggle{display:flex;gap:4px;background:var(--sand);border-radius:999px;padding:3px;}
+.lang-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;padding:5px 14px;border-radius:999px;border:none;cursor:pointer;background:transparent;color:var(--ink-soft);transition:all 0.15s;}
+.lang-btn.active{background:var(--terra-deep);color:var(--white);}
+.action-btn{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;padding:7px 14px;border-radius:999px;border:1px solid var(--terra-deep);background:transparent;color:var(--terra-deep);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.15s;}
+.action-btn:hover{background:var(--terra-deep);color:var(--white);}
+.hero{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:36px 32px;border-radius:0 0 24px 24px;box-shadow:0 6px 24px rgba(140,62,42,0.2);}
+.hero-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.hero img{height:68px;background:var(--white);border-radius:14px;padding:8px 12px;flex-shrink:0;}
+.hero h1{font-family:'Lora',serif;font-size:clamp(1.3rem,3.2vw,1.9rem);font-weight:700;color:var(--white);margin-bottom:6px;}
+.hero p{color:rgba(250,243,229,0.85);font-size:0.9rem;max-width:560px;}
+main{max-width:980px;margin:0 auto;padding:24px 20px 80px;}
+.save-bar{background:var(--white);border-radius:var(--r);padding:11px 18px;margin-bottom:18px;border:1px solid var(--sand);display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:0.84rem;color:var(--ink-soft);}
+.save-bar strong{color:var(--terra-deep);}
+.section{background:var(--white);border-radius:var(--r-lg);padding:26px 28px 22px;margin-bottom:16px;box-shadow:0 2px 14px rgba(140,62,42,0.07);}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;border-bottom:2px solid var(--sand-light);padding-bottom:12px;}
+.section-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:var(--terra-deep);color:var(--white);font-family:'Lora',serif;font-weight:700;font-size:0.95rem;display:flex;align-items:center;justify-content:center;}
+.section-header h2{font-size:1.1rem;font-weight:700;color:var(--terra-deep);margin:0;}
+.section-desc{font-size:0.82rem;color:var(--ink-soft);font-style:italic;margin:-8px 0 14px 46px;}
+.field-grid{display:grid;gap:11px;}
+.field-grid-2{grid-template-columns:1fr 1fr;}
+.field-grid-3{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:600px){.field-grid-2,.field-grid-3{grid-template-columns:1fr;}}
+label.field{display:block;}
+.lbl{display:block;font-size:0.8rem;font-weight:700;color:var(--ink-mid);margin-bottom:4px;}
+input.fi,textarea.fi,select.fi{width:100%;padding:10px 12px;border:1.5px solid var(--sand);border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.92rem;color:var(--ink);background:var(--sand-cream);transition:border-color 0.15s;outline:none;resize:vertical;}
+input.fi:focus,textarea.fi:focus,select.fi:focus{border-color:var(--terra);background:var(--white);}
+input.fi::placeholder,textarea.fi::placeholder{color:var(--ink-soft);opacity:0.45;}
+.contact-block{background:var(--sand-cream);border-radius:12px;padding:14px 16px;border:1px solid var(--sand);margin-bottom:10px;}
+.contact-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra-deep);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.num-badge{width:20px;height:20px;border-radius:50%;background:var(--terra-deep);color:var(--white);font-size:0.68rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ins-block{background:var(--sand-cream);border-radius:12px;padding:14px 16px;border:1px solid var(--sand);margin-bottom:10px;}
+.ins-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra-deep);margin-bottom:10px;}
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.radio-opt{display:flex;align-items:center;gap:7px;cursor:pointer;background:var(--sand-cream);border:1.5px solid var(--sand);border-radius:999px;padding:7px 14px;font-size:0.88rem;transition:all 0.15s;}
+.radio-opt input{width:14px;height:14px;accent-color:var(--terra-deep);}
+.radio-opt:has(input:checked){background:rgba(181,85,63,0.1);border-color:var(--terra);color:var(--terra-deep);font-weight:700;}
+.print-cta{background:linear-gradient(135deg,var(--terra-deep),var(--terra-light));border-radius:var(--r-lg);padding:26px 30px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 8px 28px rgba(140,62,42,0.2);margin-bottom:16px;}
+.print-cta p{color:rgba(250,243,229,0.88);font-size:0.95rem;flex:1;min-width:200px;}
+.print-cta button{background:var(--white);color:var(--terra-deep);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;padding:12px 24px;border-radius:var(--r);border:none;cursor:pointer;white-space:nowrap;}
+footer{background:var(--ink);padding:22px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+footer img{height:34px;filter:invert(1);opacity:0.8;}
+footer p{color:rgba(250,243,229,0.4);font-size:0.76rem;}
+@media print{.topbar,.action-btn,.print-cta,.save-bar{display:none!important;}body{background:#fff;}.hero{background:#fff;border-bottom:2px solid var(--terra-deep);border-radius:0;box-shadow:none;padding:16px 0;}.hero h1{color:var(--terra-deep)!important;}.section{box-shadow:none;border:1px solid var(--sand);break-inside:avoid;}.en-content,.pt-content{display:block!important;}}
+/* Lang */
+body[data-lang="en"] .pt-content{display:none;}
+body[data-lang="pt"] .en-content{display:none;}
+</style>
+</head>
+<body data-lang="pt">
+<div class="topbar">
+  <img src="alice-prata-logo.png" alt="Alice Prata"/>
+  <div class="topbar-right">
+    <span id="saveInd" style="font-size:0.8rem;color:var(--terra);display:none;"></span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="action-btn" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <span class="pt-content">Imprimir</span><span class="en-content">Print</span>
+    </button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <img src="alice-prata-logo.png" alt="Alice Prata"/>
+    <div>
+      <h1 class="pt-content">Guia de Emergência Familiar</h1>
+      <h1 class="en-content">Family Emergency Guide</h1>
+      <p class="pt-content">Preencha COMPLETAMENTE — nunca sabemos quem cuidará da nossa família. Guarde em local seguro.</p>
+      <p class="en-content">Fill out COMPLETELY — we never know who will care for our family. Keep in a safe place.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="save-bar">
+  <div>
+    <strong class="pt-content">💾 Salvo automaticamente neste dispositivo.</strong>
+    <strong class="en-content">💾 Auto-saved on this device.</strong>
+  </div>
+  <button class="action-btn" onclick="clearAll()" style="font-size:0.76rem;">
+    <span class="pt-content">Limpar tudo</span><span class="en-content">Clear all</span>
+  </button>
+</div>
+
+<form id="guideForm">
+
+<!-- 1. PERSONAL -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="pt-content">Informações Pessoais</h2>
+    <h2 class="en-content">Personal Information</h2>
+  </div>
+  <p class="section-desc pt-content">Dados básicos para identificação imediata.</p>
+  <p class="section-desc en-content">Basic details for immediate identification.</p>
+  <div class="field-grid field-grid-2">
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Nome completo</span>
+      <span class="lbl en-content">Full name</span>
+      <input id="p_name" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Data de nascimento</span>
+      <span class="lbl en-content">Date of birth</span>
+      <input id="p_dob" class="fi" type="date"/>
+    </label>
+    <label class="field">
+      <span class="lbl">SSN</span>
+      <input id="p_ssn" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl">WhatsApp</span>
+      <input id="p_phone" class="fi" type="tel"/>
+    </label>
+    <label class="field">
+      <span class="lbl">Email</span>
+      <input id="p_email" class="fi" type="email"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Tipo sanguíneo</span>
+      <span class="lbl en-content">Blood type</span>
+      <input id="p_blood" class="fi" type="text"/>
+    </label>
+    <label class="field" style="grid-column:1/-1;">
+      <span class="lbl pt-content">Endereço completo (EUA)</span>
+      <span class="lbl en-content">Full address (US)</span>
+      <input id="p_address" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Médico principal</span>
+      <span class="lbl en-content">Primary doctor</span>
+      <input id="p_doctor" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Plano de saúde</span>
+      <span class="lbl en-content">Health insurance plan</span>
+      <input id="p_health" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 2. US CONTACTS -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="pt-content">Contatos de Emergência — EUA</h2>
+    <h2 class="en-content">Emergency Contacts — United States</h2>
+  </div>
+  <p class="section-desc pt-content">Pessoas nos EUA que devem ser contatadas imediatamente.</p>
+  <p class="section-desc en-content">People in the US who should be contacted immediately.</p>
+  <div id="usContacts"></div>
+</div>
+
+<!-- 3. INTERNATIONAL -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="pt-content">Contatos Internacionais</h2>
+    <h2 class="en-content">International Contacts</h2>
+  </div>
+  <p class="section-desc pt-content">Família ou amigos no exterior que devem ser avisados.</p>
+  <p class="section-desc en-content">Family or friends abroad who should be notified.</p>
+  <div id="intlContacts"></div>
+</div>
+
+<!-- 4. MEDICAL -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="pt-content">Informações Médicas</h2>
+    <h2 class="en-content">Medical Information</h2>
+  </div>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Alergias</span>
+      <span class="lbl en-content">Allergies</span>
+      <textarea id="m_allergies" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Condições de saúde / diagnósticos</span>
+      <span class="lbl en-content">Health conditions / diagnoses</span>
+      <textarea id="m_conditions" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Medicamentos atuais (nome + dosagem)</span>
+      <span class="lbl en-content">Current medications (name + dosage)</span>
+      <textarea id="m_meds" class="fi" rows="2"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Localização da DNR / Diretiva Antecipada</span>
+      <span class="lbl en-content">Location of DNR / Advance Directive</span>
+      <input id="m_dnr" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Hospital de preferência</span>
+      <span class="lbl en-content">Preferred hospital</span>
+      <input id="m_hospital" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 5. INSURANCE -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="pt-content">Apólices de Seguro</h2>
+    <h2 class="en-content">Insurance Policies</h2>
+  </div>
+  <p class="section-desc pt-content">Liste todos os seguros: vida, saúde, auto, residência, etc.</p>
+  <p class="section-desc en-content">List all insurance: life, health, auto, home, etc.</p>
+  <div id="insuranceList"></div>
+</div>
+
+<!-- 6. FINANCES -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="pt-content">Finanças e Documentos Importantes</h2>
+    <h2 class="en-content">Finances and Important Documents</h2>
+  </div>
+  <div class="field-grid">
+    <label class="field">
+      <span class="lbl pt-content">Banco principal + número da conta</span>
+      <span class="lbl en-content">Primary bank + account number</span>
+      <input id="f_bank" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Localização do testamento / will</span>
+      <span class="lbl en-content">Location of will</span>
+      <input id="f_will" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Nome e contato do advogado</span>
+      <span class="lbl en-content">Attorney name and contact</span>
+      <input id="f_attorney" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Nome e contato do contador</span>
+      <span class="lbl en-content">Accountant name and contact</span>
+      <input id="f_accountant" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Localização de documentos originais (passaporte, green card, certidão)</span>
+      <span class="lbl en-content">Location of original documents (passport, green card, birth cert.)</span>
+      <input id="f_docs" class="fi" type="text"/>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Nota sobre senhas / gerenciador de senhas</span>
+      <span class="lbl en-content">Note about passwords / password manager</span>
+      <textarea id="f_passwords" class="fi" rows="2"></textarea>
+    </label>
+  </div>
+</div>
+
+<!-- 7. FINAL WISHES -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="pt-content">Desejos Finais</h2>
+    <h2 class="en-content">Final Wishes</h2>
+  </div>
+  <div class="field-grid">
+    <div class="field-grid field-grid-2" style="gap:8px;">
+      <div>
+        <p class="lbl pt-content" style="margin-bottom:8px;">Preferência de sepultamento:</p>
+        <p class="lbl en-content" style="margin-bottom:8px;">Burial preference:</p>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="burial" value="burial"/>
+            <span class="pt-content">Sepultamento</span>
+            <span class="en-content">Burial</span>
+          </label>
+          <label class="radio-opt"><input type="radio" name="burial" value="cremation"/>
+            <span class="pt-content">Cremação</span>
+            <span class="en-content">Cremation</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <p class="lbl pt-content" style="margin-bottom:8px;">Local:</p>
+        <p class="lbl en-content" style="margin-bottom:8px;">Location:</p>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="location" value="us"/>
+            <span class="pt-content">Aqui nos EUA</span>
+            <span class="en-content">Here in the US</span>
+          </label>
+          <label class="radio-opt"><input type="radio" name="location" value="brazil"/>
+            <span class="pt-content">Repatriar ao Brasil</span>
+            <span class="en-content">Repatriate to Brazil</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <label class="field">
+      <span class="lbl pt-content">Mensagem para a família</span>
+      <span class="lbl en-content">Message to family</span>
+      <textarea id="w_message" class="fi" rows="4"></textarea>
+    </label>
+    <label class="field">
+      <span class="lbl pt-content">Nome do executor / responsável indicado</span>
+      <span class="lbl en-content">Executor / designated responsible person</span>
+      <input id="w_executor" class="fi" type="text"/>
+    </label>
+  </div>
+</div>
+
+<!-- 8. REFERRAL -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2 class="pt-content">Consentimento de Indicação</h2>
+    <h2 class="en-content">Referral Consent</h2>
+  </div>
+  <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:14px;" class="pt-content">Alice pode entrar em contato com seus contatos dos EUA (Seção 2) para oferecer os mesmos recursos gratuitos? Contatos internacionais nunca são compartilhados.</p>
+  <p style="font-size:0.9rem;color:var(--ink-soft);margin-bottom:14px;" class="en-content">May Alice reach out to your US contacts (Section 2) to offer the same free resources? International contacts are never shared.</p>
+  <div class="radio-group">
+    <label class="radio-opt"><input type="radio" name="consent" value="yes"/>
+      <span class="pt-content">Sim, pode entrar em contato</span>
+      <span class="en-content">Yes, you may reach out</span>
+    </label>
+    <label class="radio-opt"><input type="radio" name="consent" value="no"/>
+      <span class="pt-content">Não, prefiro que não</span>
+      <span class="en-content">No, I prefer not</span>
+    </label>
+  </div>
+</div>
+
+</form>
+
+<div class="print-cta">
+  <p class="pt-content"><strong>Pronto?</strong> Imprima, assine, e guarde em um local que sua família conheça.</p>
+  <p class="en-content"><strong>Ready?</strong> Print, sign, and store somewhere your family knows.</p>
+  <button onclick="window.print()">
+    <span class="pt-content">Imprimir Guia</span>
+    <span class="en-content">Print Guide</span>
+  </button>
+</div>
+</main>
+
+<footer>
+  <img src="alice-prata-logo.png" alt="Alice Prata"/>
+  <p class="pt-content">Guia de Emergência Familiar — Alice Prata · aliceprata.com</p>
+  <p class="en-content">Family Emergency Guide — Alice Prata · aliceprata.com</p>
+</footer>
+
+<script>
+const SAVE_KEY='ap_guide_v2';
+function setLang(lang){
+  document.body.dataset.lang=lang;
+  document.getElementById('btnPT').classList.toggle('active',lang==='pt');
+  document.getElementById('btnEN').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  localStorage.setItem('ap_lang_guide',lang);
+  rebuildDynamic();
+}
+(function(){})(); // Always defaults to PT on load
+
+const isEN=()=>document.body.dataset.lang==='en';
+
+function makeContact(prefix,intl){
+  const d=document.createElement('div');
+  d.className='contact-block';
+  const num=prefix.split('_')[1];
+  const lbl=intl?(isEN()?`International Contact ${num}`:`Contato Internacional ${num}`):(isEN()?`US Contact ${num}`:`Contato EUA ${num}`);
+  d.innerHTML=`<div class="contact-label"><span class="num-badge">${num}</span>${lbl}</div>
+  <div class="field-grid ${intl?'field-grid-3':'field-grid-2'}">
+    <label class="field"><span class="lbl">${isEN()?'Name':'Nome'}</span><input id="${prefix}_name" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Relationship':'Relação'}</span><input id="${prefix}_rel" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Phone':'Telefone'}</span><input id="${prefix}_phone" class="fi" type="tel"/></label>
+    ${intl?`<label class="field" style="grid-column:1/-1;"><span class="lbl">${isEN()?'Country / State':'País / Estado'}</span><input id="${prefix}_country" class="fi" type="text"/></label>`:`<label class="field"><span class="lbl">Email</span><input id="${prefix}_email" class="fi" type="email"/></label>`}
+  </div>`;
+  d.querySelectorAll('input').forEach(el=>el.addEventListener('input',()=>autoSave()));
+  return d;
+}
+
+function makeInsurance(i){
+  const d=document.createElement('div');
+  d.className='ins-block';
+  d.innerHTML=`<div class="ins-label">${isEN()?`Policy ${i}`:`Apólice ${i}`}</div>
+  <div class="field-grid field-grid-3">
+    <label class="field"><span class="lbl">${isEN()?'Carrier':'Seguradora'}</span><input id="ins_${i}_co" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Policy number':'Número'}</span><input id="ins_${i}_num" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Type':'Tipo'}</span><input id="ins_${i}_type" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Coverage amount':'Valor'}</span><input id="ins_${i}_amt" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Beneficiary':'Beneficiário'}</span><input id="ins_${i}_ben" class="fi" type="text"/></label>
+    <label class="field"><span class="lbl">${isEN()?'Claims phone':'Tel. sinistros'}</span><input id="ins_${i}_phone" class="fi" type="tel"/></label>
+  </div>`;
+  d.querySelectorAll('input').forEach(el=>el.addEventListener('input',()=>autoSave()));
+  return d;
+}
+
+function rebuildDynamic(){
+  const saved=getSaved();
+  ['usContacts','intlContacts','insuranceList'].forEach(id=>document.getElementById(id).innerHTML='');
+  for(let i=1;i<=5;i++) document.getElementById('usContacts').appendChild(makeContact(`uc_${i}`,false));
+  for(let i=1;i<=5;i++) document.getElementById('intlContacts').appendChild(makeContact(`ic_${i}`,true));
+  for(let i=1;i<=5;i++) document.getElementById('insuranceList').appendChild(makeInsurance(i));
+  if(saved) restoreData(saved);
+}
+rebuildDynamic();
+
+let saveTimer;
+function autoSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveData,600);}
+document.getElementById('guideForm').addEventListener('input',autoSave);
+document.getElementById('guideForm').addEventListener('change',autoSave);
+
+function saveData(){
+  const data={};
+  document.querySelectorAll('#guideForm input[type=text],#guideForm input[type=email],#guideForm input[type=tel],#guideForm input[type=date],#guideForm textarea').forEach(el=>{if(el.id)data[el.id]=el.value;});
+  document.querySelectorAll('#guideForm input[type=radio]:checked').forEach(el=>{data['r_'+el.name]=el.value;});
+  localStorage.setItem(SAVE_KEY,JSON.stringify(data));
+  const ind=document.getElementById('saveInd');
+  ind.textContent=isEN()?'✓ Saved':'✓ Salvo';ind.style.display='inline';
+  setTimeout(()=>ind.style.display='none',1800);
+}
+
+function getSaved(){const r=localStorage.getItem(SAVE_KEY);try{return r?JSON.parse(r):null;}catch(e){return null;}}
+
+function restoreData(data){
+  Object.entries(data).forEach(([k,v])=>{
+    if(k.startsWith('r_')){const r=document.querySelector(`input[name="${k.slice(2)}"][value="${v}"]`);if(r)r.checked=true;}
+    else{const el=document.getElementById(k);if(el)el.value=v;}
+  });
+}
+
+function clearAll(){
+  const msg=isEN()?'Clear all fields?':'Limpar todos os campos?';
+  if(confirm(msg)){localStorage.removeItem(SAVE_KEY);rebuildDynamic();}
+}
+</script>
+
+</body>
+</html>
