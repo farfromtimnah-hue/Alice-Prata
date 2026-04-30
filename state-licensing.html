@@ -1,107 +1,110 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Non-Resident License Fees — Alice Prata</title>
+<title>Licenciamento por Estado — Alice Prata</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;--green:#1a7a3a;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;}
-header{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:24px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-radius:0 0 20px 20px;box-shadow:0 6px 24px rgba(140,62,42,0.18);}
-header img{height:60px;background:var(--white);border-radius:12px;padding:7px 10px;flex-shrink:0;}
-header h1{font-family:'Lora',serif;font-size:clamp(1.2rem,3vw,1.75rem);font-weight:700;color:var(--white);margin-bottom:4px;}
-header p{color:rgba(250,243,229,0.82);font-size:0.86rem;}
+body{font-family:"Nunito",system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;}
+/* LANG */
+.en{display:none!important;}
+[data-lang="en"] .en{display:block!important;}
+[data-lang="en"] .en.ib{display:inline-block!important;}
+[data-lang="en"] .pt{display:none!important;}
+header{background:linear-gradient(135deg,var(--terra-deep) 0%,var(--terra-light) 100%);padding:22px 26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-radius:0 0 20px 20px;box-shadow:0 6px 24px rgba(140,62,42,0.18);}
+.header-logo{height:72px;background:var(--white);border-radius:12px;padding:8px 12px;flex-shrink:0;}
+header h1{font-family:"Lora",serif;font-size:clamp(1.2rem,3vw,1.7rem);font-weight:700;color:var(--white);margin-bottom:4px;}
+header p{color:rgba(250,243,229,0.82);font-size:0.85rem;}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.lang-toggle{display:flex;gap:4px;background:rgba(255,255,255,0.18);border-radius:999px;padding:4px;}
+.lang-btn{padding:6px 16px;border-radius:999px;border:none;cursor:pointer;font-family:"Nunito",sans-serif;font-size:0.82rem;font-weight:700;transition:all 0.2s;background:transparent;color:rgba(255,255,255,0.8);}
+.lang-btn.active{background:var(--white);color:var(--terra-deep);}
 main{max-width:1100px;margin:0 auto;padding:20px 18px 60px;}
-.disclaimer{background:#FFF8E8;border:1px solid var(--ochre);border-left:4px solid var(--ochre);border-radius:12px;padding:12px 16px;margin-bottom:18px;font-size:0.85rem;color:var(--ink-mid);}
+.disclaimer{background:#FFF8E8;border:1px solid var(--ochre);border-left:4px solid var(--ochre);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:0.85rem;color:var(--ink-mid);}
 .disclaimer strong{color:var(--terra-deep);}
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px;}
-.search-box{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--sand);border-radius:999px;font-family:'Nunito',sans-serif;font-size:0.9rem;color:var(--ink);background:var(--white);outline:none;transition:border-color 0.15s;}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;}
+.search-box{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--sand);border-radius:999px;font-family:"Nunito",sans-serif;font-size:0.9rem;color:var(--ink);background:var(--white);outline:none;transition:border-color 0.15s;}
 .search-box:focus{border-color:var(--terra);}
 .filter-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.fbtn{padding:8px 14px;border-radius:999px;border:1.5px solid var(--sand);background:var(--white);color:var(--ink-soft);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.15s;}
+.fbtn{padding:8px 14px;border-radius:999px;border:1.5px solid var(--sand);background:var(--white);color:var(--ink-soft);font-family:"Nunito",sans-serif;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.15s;}
 .fbtn.active{background:var(--terra-deep);color:var(--white);border-color:var(--terra-deep);}
 .fbtn:hover:not(.active){background:var(--sand-light);}
 .table-wrap{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(140,62,42,0.09);}
-table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+table{width:100%;border-collapse:collapse;font-size:0.87rem;}
 thead{background:var(--terra-deep);}
-th{padding:12px 14px;text-align:left;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.78rem;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap;}
+th{padding:11px 13px;text-align:left;font-family:"Nunito",sans-serif;font-weight:700;font-size:0.77rem;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap;}
 th:hover{background:var(--terra);}
-th .sort-arrow{display:inline-block;margin-left:5px;opacity:0.5;font-size:0.75rem;}
-th.sorted-asc .sort-arrow::after{content:'▲';opacity:1;}
-th.sorted-desc .sort-arrow::after{content:'▼';opacity:1;}
-th:not(.sorted-asc):not(.sorted-desc) .sort-arrow::after{content:'⇅';}
+th .sa{display:inline-block;margin-left:4px;opacity:0.5;font-size:0.72rem;}
+th.sorted-asc .sa::after{content:"▲";opacity:1;}
+th.sorted-desc .sa::after{content:"▼";opacity:1;}
+th:not(.sorted-asc):not(.sorted-desc) .sa::after{content:"⇅";}
 tbody tr:nth-child(even){background:var(--sand-light);}
 tbody tr:nth-child(odd){background:var(--white);}
 tbody tr.home-state{background:#FFF3CC!important;}
 tbody tr:hover{background:var(--sand)!important;}
-td{padding:11px 14px;vertical-align:top;border-bottom:1px solid rgba(232,213,183,0.4);}
-.fee-cell{font-weight:800;text-align:center;}
-.fee-low{color:var(--green);}
-.fee-mid{color:var(--ink);}
-.fee-high{color:var(--terra-deep);}
-.fee-zero{color:var(--ochre);font-style:italic;}
+td{padding:10px 13px;vertical-align:top;border-bottom:1px solid rgba(232,213,183,0.4);}
+.fee-low{color:var(--green);font-weight:800;}
+.fee-mid{color:var(--ink);font-weight:700;}
+.fee-high{color:var(--terra-deep);font-weight:800;}
+.fee-special{color:var(--ochre);font-style:italic;font-weight:600;}
 .special-flag{color:var(--terra-deep);font-weight:700;font-size:0.82rem;}
 .special-none{color:var(--ink-soft);font-size:0.82rem;}
-.notes-cell{color:var(--ink-soft);font-size:0.82rem;}
-.home-badge{display:inline-block;background:var(--ochre);color:var(--white);font-size:0.68rem;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:0.06em;text-transform:uppercase;margin-left:6px;}
-.count-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--sand-cream);border-top:1px solid var(--sand);font-size:0.82rem;color:var(--ink-soft);}
-.no-results{text-align:center;padding:48px;color:var(--ink-soft);font-style:italic;}
-footer{background:var(--ink);padding:20px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;margin-top:20px;}
-footer img{height:32px;filter:invert(1);opacity:0.8;}
-footer p{color:rgba(250,243,229,0.38);font-size:0.76rem;}
+.notes-cell{color:var(--ink-soft);font-size:0.81rem;}
+.home-badge{display:inline-block;background:var(--ochre);color:var(--white);font-size:0.67rem;font-weight:800;padding:2px 7px;border-radius:999px;letter-spacing:0.05em;text-transform:uppercase;margin-left:5px;vertical-align:middle;}
+.count-bar{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;background:var(--sand-cream);border-top:1px solid var(--sand);font-size:0.81rem;color:var(--ink-soft);}
+.no-results{text-align:center;padding:44px;color:var(--ink-soft);font-style:italic;}
+footer{background:var(--ink);padding:18px 26px;display:flex;align-items:center;gap:13px;flex-wrap:wrap;justify-content:space-between;margin-top:18px;}
+footer img{height:36px;filter:invert(1);opacity:0.8;}
+footer p{color:rgba(250,243,229,0.38);font-size:0.75rem;}
 @media(max-width:700px){th:nth-child(3),td:nth-child(3){display:none;}}
 </style>
 </head>
-<body>
+<body data-lang="pt">
 <header>
-  <img src="alice-prata-logo.png" alt="Alice Prata"/>
+  <img src="alice-prata-logo.png" alt="Alice Prata" class="header-logo"/>
   <div>
-    <h1>Non-Resident Life Insurance License Fees</h1>
-    <p>All 50 states + DC · Click any column header to sort · Search by state name</p>
+    <h1 class="pt">Taxas de Licença Não-Residente — Seguro de Vida</h1>
+    <h1 class="en">Non-Resident Life Insurance License Fees</h1>
+    <p class="pt">Todos os 50 estados + DC · Clique no cabeçalho de qualquer coluna para ordenar</p>
+    <p class="en">All 50 states + DC · Click any column header to sort</p>
   </div>
-</header>
-
-<main>
-  <div class="disclaimer"><strong>⚠ Fees current as of 2025.</strong> Always verify at <strong>nipr.com</strong> before applying — fees change annually. Georgia and New York have additional requirements — see Special Requirements column.</div>
-
-  <div class="controls">
-    <input type="text" class="search-box" id="searchBox" placeholder="Search state…" oninput="applyFilters()"/>
-    <div class="filter-btns">
-      <button class="fbtn active" data-filter="all" onclick="setFilter(this,'all')">All States</button>
-      <button class="fbtn" data-filter="low" onclick="setFilter(this,'low')">Under $35</button>
-      <button class="fbtn" data-filter="mid" onclick="setFilter(this,'mid')">$35–$99</button>
-      <button class="fbtn" data-filter="high" onclick="setFilter(this,'high')">$100+</button>
-      <button class="fbtn" data-filter="special" onclick="setFilter(this,'special')">⚠ Special Req.</button>
+  <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
     </div>
   </div>
-
+</header>
+<main>
+  <div class="disclaimer">
+    <strong class="pt">⚠ Taxas atualizadas em 2025.</strong>
+    <strong class="en">⚠ Fees current as of 2025.</strong>
+    <span class="pt"> Sempre verifique em <strong>nipr.com</strong> antes de aplicar — as taxas mudam anualmente. Georgia e Nova York têm exigências especiais.</span>
+    <span class="en"> Always verify at <strong>nipr.com</strong> before applying — fees change annually. Georgia and New York have additional requirements.</span>
+  </div>
+  <div class="controls">
+    <input type="text" class="search-box" id="searchBox" oninput="applyFilters()"/>
+    <div class="filter-btns" id="filterBtns"></div>
+  </div>
   <div class="table-wrap">
     <table id="licenseTable">
-      <thead>
-        <tr>
-          <th onclick="sortTable(0)" id="th0"><span class="sort-arrow"></span> State</th>
-          <th onclick="sortTable(1)" id="th1" class="sorted-asc"><span class="sort-arrow"></span> Non-Res Fee</th>
-          <th onclick="sortTable(2)" id="th2"><span class="sort-arrow"></span> Method</th>
-          <th onclick="sortTable(3)" id="th3"><span class="sort-arrow"></span> Special Requirements</th>
-          <th onclick="sortTable(4)" id="th4"><span class="sort-arrow"></span> Processing Time</th>
-        </tr>
-      </thead>
+      <thead><tr id="tableHeaders"></tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
-    <div class="count-bar"><span id="countLabel">Showing 51 of 51 states</span><span style="font-size:0.78rem;opacity:0.6;">Click column headers to sort</span></div>
+    <div class="count-bar"><span id="countLabel"></span><span style="font-size:0.77rem;opacity:0.55;" class="pt">Clique nos cabeçalhos para ordenar</span><span style="font-size:0.77rem;opacity:0.55;" class="en">Click headers to sort</span></div>
   </div>
 </main>
-
 <footer>
   <img src="alice-prata-logo.png" alt="Alice Prata"/>
-  <p>Alice Prata — Internal Reference · Non-Resident License Fees · Verify at nipr.com before applying · Updated 2025</p>
+  <p class="pt">Alice Prata — Referência Interna · Verifique em nipr.com antes de aplicar · Atualizado 2025</p>
+  <p class="en">Alice Prata — Internal Reference · Verify at nipr.com before applying · Updated 2025</p>
 </footer>
-
 <script>
 const RAW = [
 ["Alabama",50,"Sircon/NIPR","None","1–3 business days"],
@@ -156,86 +159,95 @@ const RAW = [
 ["Wisconsin",50,"Sircon/NIPR","None","1–3 business days"],
 ["Wyoming",30,"Sircon/NIPR","None","1–3 business days"]
 ];
+let sortCol=1,sortAsc=true,activeFilter='all';
+const isEN=()=>document.body.dataset.lang==='en';
 
-let currentData = [...RAW];
-let sortCol = 1;
-let sortAsc = true;
-let activeFilter = 'all';
+const LABELS={
+pt:{
+state:‘Estado’,fee:‘Taxa Não-Residente’,method:‘Método’,special:‘Requisitos Especiais’,notes:‘Prazo’,
+all:‘Todos’,low:‘Menos de $35’,mid:’$35–$99’,high:’$100+’,spec:‘⚠ Req. Especial’,
+showing:‘Mostrando’,of:‘de’,states:‘estados’,
+home:‘Estado base — já licenciada. Sem ação necessária.’,
+ny:’$0 — processo separado (ver req.)’,
+},
+en:{
+state:‘State’,fee:‘Non-Res Fee’,method:‘Method’,special:‘Special Requirements’,notes:‘Processing Time’,
+all:‘All States’,low:‘Under $35’,mid:’$35–$99’,high:’$100+’,spec:‘⚠ Special Req.’,
+showing:‘Showing’,of:‘of’,states:‘states’,
+home:‘Home state — already licensed. No action needed.’,
+ny:’$0 — separate process (see req.)’,
+}
+};
 
-function feeClass(fee, state) {
-  if(state === 'Florida') return 'fee-zero';
-  if(fee === 0) return 'fee-zero';
-  if(fee < 35) return 'fee-low';
-  if(fee < 100) return 'fee-mid';
-  return 'fee-high';
+function L(key){return LABELS[isEN()?‘en’:‘pt’][key]||key;}
+
+function setLang(lang){
+document.body.dataset.lang=lang;
+document.getElementById(‘btnPT’).classList.toggle(‘active’,lang===‘pt’);
+document.getElementById(‘btnEN’).classList.toggle(‘active’,lang===‘en’);
+document.documentElement.lang=lang===‘en’?‘en’:‘pt-BR’;
+buildUI();applyFilters();
+const sb=document.getElementById(‘searchBox’);
+sb.placeholder=isEN()?‘Search state…’:‘Buscar estado…’;
 }
 
-function feeDisplay(fee, state) {
-  if(state === 'Florida') return '<em>Home State</em>';
-  if(state === 'New York') return '$0 <small style="font-size:0.7rem;color:var(--ink-soft);">*see special req.</small>';
-  return '$' + fee;
+function buildUI(){
+const hdrs=document.getElementById(‘tableHeaders’);
+const cols=[‘state’,‘fee’,‘method’,‘special’,‘notes’];
+hdrs.innerHTML=cols.map((c,i)=>`<th onclick="sortTable(${i})" id="th${i}"><span class="sa"></span> ${L(c)}</th>`).join(’’);
+hdrs.querySelectorAll(‘th’)[sortCol].classList.add(sortAsc?‘sorted-asc’:‘sorted-desc’);
+const fb=document.getElementById(‘filterBtns’);
+const filters=[[‘all’],[‘low’],[‘mid’],[‘high’],[‘spec’]];
+fb.innerHTML=filters.map(([f])=>`<button class="fbtn${activeFilter===f?' active':''}" onclick="setFilter(this,'${f}')">${L(f)}</button>`).join(’’);
 }
 
-function render(rows) {
-  const tbody = document.getElementById('tableBody');
-  if(!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="no-results">No states match your search.</td></tr>';
-    document.getElementById('countLabel').textContent = 'No results';
-    return;
-  }
-  tbody.innerHTML = rows.map(r => {
-    const [state,fee,method,special,notes] = r;
-    const isHome = state === 'Florida';
-    const hasSpecial = special !== 'None' && !special.startsWith('HOME');
-    return `<tr class="${isHome?'home-state':''}">
-      <td><strong>${state}</strong>${isHome?'<span class="home-badge">Home</span>':''}</td>
-      <td class="fee-cell"><span class="${feeClass(fee,state)}">${feeDisplay(fee,state)}</span></td>
-      <td>${method}</td>
-      <td class="${hasSpecial?'special-flag':'special-none'}">${special}</td>
-      <td class="notes-cell">${notes}</td>
-    </tr>`;
-  }).join('');
-  const total = RAW.length;
-  document.getElementById('countLabel').textContent = `Showing ${rows.length} of ${total} states`;
+function feeDisplay(fee,state){
+if(state===‘Florida’) return `<em class="fee-special">${isEN()?'Home State':'Estado base'}</em>`;
+if(state===‘New York’) return `<span class="fee-high">$0*</span>`;
+if(fee<35) return `<span class="fee-low">$${fee}</span>`;
+if(fee<100) return `<span class="fee-mid">$${fee}</span>`;
+return `<span class="fee-high">$${fee}</span>`;
 }
 
-function sortTable(col) {
-  if(sortCol === col) { sortAsc = !sortAsc; }
-  else { sortCol = col; sortAsc = true; }
-  document.querySelectorAll('thead th').forEach((th,i) => {
-    th.classList.remove('sorted-asc','sorted-desc');
-    if(i===col) th.classList.add(sortAsc?'sorted-asc':'sorted-desc');
-  });
-  applyFilters();
+function render(rows){
+const tbody=document.getElementById(‘tableBody’);
+if(!rows.length){tbody.innerHTML=`<tr><td colspan="5" class="no-results">${isEN()?'No states match your search.':'Nenhum estado encontrado.'}</td></tr>`;document.getElementById(‘countLabel’).textContent=’’;return;}
+tbody.innerHTML=rows.map(r=>{
+const [state,fee,method,special,notes]=r;
+const isHome=state===‘Florida’;
+const hasSpecial=special!==‘None’&&!special.startsWith(‘HOME’);
+return `<tr class="${isHome?'home-state':''}"> <td><strong>${state}</strong>${isHome?`<span class="home-badge">${isEN()?‘Home’:‘Base’}</span>`:''}</td> <td style="text-align:center;">${feeDisplay(fee,state)}</td> <td>${method}</td> <td class="${hasSpecial?'special-flag':'special-none'}">${special}</td> <td class="notes-cell">${notes}</td> </tr>`;
+}).join(’’);
+document.getElementById(‘countLabel’).textContent=`${L('showing')} ${rows.length} ${L('of')} ${RAW.length} ${L('states')}`;
 }
 
-function setFilter(btn, filter) {
-  activeFilter = filter;
-  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyFilters();
+function sortTable(col){
+if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
+document.querySelectorAll(‘thead th’).forEach((th,i)=>{th.classList.remove(‘sorted-asc’,‘sorted-desc’);if(i===col)th.classList.add(sortAsc?‘sorted-asc’:‘sorted-desc’);});
+applyFilters();
 }
 
-function applyFilters() {
-  const q = document.getElementById('searchBox').value.toLowerCase().trim();
-  let rows = [...RAW];
-  if(q) rows = rows.filter(r => r[0].toLowerCase().includes(q));
-  if(activeFilter === 'low') rows = rows.filter(r => r[1] < 35 && r[0] !== 'Florida');
-  else if(activeFilter === 'mid') rows = rows.filter(r => r[1] >= 35 && r[1] < 100);
-  else if(activeFilter === 'high') rows = rows.filter(r => r[1] >= 100);
-  else if(activeFilter === 'special') rows = rows.filter(r => r[3] !== 'None' && !r[3].startsWith('HOME'));
-  rows.sort((a,b) => {
-    let av = a[sortCol], bv = b[sortCol];
-    if(typeof av === 'string') av = av.toLowerCase();
-    if(typeof bv === 'string') bv = bv.toLowerCase();
-    if(av < bv) return sortAsc ? -1 : 1;
-    if(av > bv) return sortAsc ? 1 : -1;
-    return 0;
-  });
-  render(rows);
+function setFilter(btn,filter){
+activeFilter=filter;
+document.querySelectorAll(’.fbtn’).forEach(b=>b.classList.remove(‘active’));
+btn.classList.add(‘active’);
+applyFilters();
 }
 
-// Initial render sorted by fee ascending
+function applyFilters(){
+const q=document.getElementById(‘searchBox’).value.toLowerCase().trim();
+let rows=[…RAW];
+if(q) rows=rows.filter(r=>r[0].toLowerCase().includes(q));
+if(activeFilter===‘low’) rows=rows.filter(r=>r[1]<35&&r[0]!==‘Florida’);
+else if(activeFilter===‘mid’) rows=rows.filter(r=>r[1]>=35&&r[1]<100);
+else if(activeFilter===‘high’) rows=rows.filter(r=>r[1]>=100);
+else if(activeFilter===‘spec’) rows=rows.filter(r=>r[3]!==‘None’&&!r[3].startsWith(‘HOME’));
+rows.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];if(typeof av===‘string’)av=av.toLowerCase();if(typeof bv===‘string’)bv=bv.toLowerCase();if(av<bv)return sortAsc?-1:1;if(av>bv)return sortAsc?1:-1;return 0;});
+render(rows);
+}
+
+buildUI();
+document.getElementById(‘searchBox’).placeholder=isEN()?‘Search state…’:‘Buscar estado…’;
 applyFilters();
 </script>
 
