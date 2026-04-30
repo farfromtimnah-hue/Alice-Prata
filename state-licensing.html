@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
@@ -12,7 +11,6 @@
 :root{--terra-deep:#8C3E2A;--terra:#B5553F;--terra-light:#C76A4F;--sand:#E8D5B7;--sand-light:#F4E6CD;--sand-cream:#FAF3E5;--ink:#1A1208;--ink-mid:#3A2418;--ink-soft:#6B4A3A;--ochre:#C9A24A;--white:#FFFFFF;--green:#1a7a3a;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:"Nunito",system-ui,sans-serif;background:var(--sand-cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;}
-/* LANG */
 .en{display:none!important;}
 [data-lang="en"] .en{display:block!important;}
 [data-lang="en"] .en.ib{display:inline-block!important;}
@@ -41,9 +39,9 @@ thead{background:var(--terra-deep);}
 th{padding:11px 13px;text-align:left;font-family:"Nunito",sans-serif;font-weight:700;font-size:0.77rem;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap;}
 th:hover{background:var(--terra);}
 th .sa{display:inline-block;margin-left:4px;opacity:0.5;font-size:0.72rem;}
-th.sorted-asc .sa::after{content:"▲";opacity:1;}
-th.sorted-desc .sa::after{content:"▼";opacity:1;}
-th:not(.sorted-asc):not(.sorted-desc) .sa::after{content:"⇅";}
+th.sorted-asc .sa::after{content:"^";opacity:1;}
+th.sorted-desc .sa::after{content:"v";opacity:1;}
+th:not(.sorted-asc):not(.sorted-desc) .sa::after{content:"^v";}
 tbody tr:nth-child(even){background:var(--sand-light);}
 tbody tr:nth-child(odd){background:var(--white);}
 tbody tr.home-state{background:#FFF3CC!important;}
@@ -83,13 +81,13 @@ footer p{color:rgba(250,243,229,0.38);font-size:0.75rem;}
 </header>
 <main>
   <div class="disclaimer">
-    <strong class="pt">⚠ Taxas atualizadas em 2025.</strong>
-    <strong class="en">⚠ Fees current as of 2025.</strong>
-    <span class="pt"> Sempre verifique em <strong>nipr.com</strong> antes de aplicar — as taxas mudam anualmente. Georgia e Nova York têm exigências especiais.</span>
-    <span class="en"> Always verify at <strong>nipr.com</strong> before applying — fees change annually. Georgia and New York have additional requirements.</span>
+    <strong class="pt">Taxas atualizadas em 2025.</strong>
+    <strong class="en">Fees current as of 2025.</strong>
+    <span class="pt"> Sempre verifique em <strong>nipr.com</strong> antes de aplicar. Georgia e Nova York têm exigências especiais.</span>
+    <span class="en"> Always verify at <strong>nipr.com</strong> before applying. Georgia and New York have additional requirements.</span>
   </div>
   <div class="controls">
-    <input type="text" class="search-box" id="searchBox" oninput="applyFilters()"/>
+    <input type="text" class="search-box" id="searchBox" oninput="applyFilters()" placeholder="Buscar estado..."/>
     <div class="filter-btns" id="filterBtns"></div>
   </div>
   <div class="table-wrap">
@@ -97,16 +95,20 @@ footer p{color:rgba(250,243,229,0.38);font-size:0.75rem;}
       <thead><tr id="tableHeaders"></tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
-    <div class="count-bar"><span id="countLabel"></span><span style="font-size:0.77rem;opacity:0.55;" class="pt">Clique nos cabeçalhos para ordenar</span><span style="font-size:0.77rem;opacity:0.55;" class="en">Click headers to sort</span></div>
+    <div class="count-bar">
+      <span id="countLabel"></span>
+      <span class="pt" style="font-size:0.77rem;opacity:0.55;">Clique nos cabecalhos para ordenar</span>
+      <span class="en" style="font-size:0.77rem;opacity:0.55;">Click headers to sort</span>
+    </div>
   </div>
 </main>
 <footer>
   <img src="alice-prata-logo.png" alt="Alice Prata"/>
-  <p class="pt">Alice Prata — Referência Interna · Verifique em nipr.com antes de aplicar · Atualizado 2025</p>
-  <p class="en">Alice Prata — Internal Reference · Verify at nipr.com before applying · Updated 2025</p>
+  <p class="pt">Alice Prata - Referencia Interna - Verifique em nipr.com antes de aplicar - Atualizado 2025</p>
+  <p class="en">Alice Prata - Internal Reference - Verify at nipr.com before applying - Updated 2025</p>
 </footer>
 <script>
-const RAW = [
+var RAW = [
 ["Alabama",50,"Sircon/NIPR","None","1-3 business days"],
 ["Alaska",50,"Sircon/NIPR","None","1-3 business days"],
 ["Arizona",130,"Sircon/NIPR","None","1-3 business days"],
@@ -115,8 +117,8 @@ const RAW = [
 ["Colorado",71,"Sircon/NIPR","None","1-3 business days"],
 ["Connecticut",100,"Sircon/NIPR","None","2-5 business days"],
 ["Delaware",30,"Sircon/NIPR","None","1-3 business days"],
-["Florida",0,"Home State","HOME STATE — already licensed. No action needed.","N/A"],
-["Georgia",65,"Sircon/NIPR","⚠ Citizenship Affidavit required — GA-specific form, must be NOTARIZED, submitted with application","3-7 days — allow extra time"],
+["Florida",0,"Home State","HOME STATE - already licensed. No action needed.","N/A"],
+["Georgia",65,"Sircon/NIPR","** EXTRA STEP: Citizenship Affidavit required - GA-specific form, must be NOTARIZED, submit with application","3-7 days - allow extra time for notarized form"],
 ["Hawaii",90,"Sircon/NIPR","None","2-5 business days"],
 ["Idaho",30,"Sircon/NIPR","None","1-3 business days"],
 ["Illinois",60,"Sircon/NIPR","None","1-3 business days"],
@@ -138,7 +140,7 @@ const RAW = [
 ["New Hampshire",50,"Sircon/NIPR","None","1-3 business days"],
 ["New Jersey",90,"Sircon/NIPR","None","2-5 business days"],
 ["New Mexico",30,"Sircon/NIPR","None","1-3 business days"],
-["New York",0,"Direct — NY DFS","⚠ Must apply directly at dfs.ny.gov — NOT through NIPR. Separate process entirely.","4-8 weeks — NY does not use NIPR"],
+["New York",0,"Direct - NY DFS","** EXTRA STEP: Must apply directly at dfs.ny.gov - NOT through NIPR. Completely separate process.","4-8 weeks - NY does not use NIPR"],
 ["North Carolina",50,"Sircon/NIPR","None","1-3 business days"],
 ["North Dakota",30,"Sircon/NIPR","None","1-3 business days"],
 ["Ohio",50,"Sircon/NIPR","None","1-3 business days"],
@@ -159,97 +161,115 @@ const RAW = [
 ["Wisconsin",50,"Sircon/NIPR","None","1-3 business days"],
 ["Wyoming",30,"Sircon/NIPR","None","1-3 business days"]
 ];
-let sortCol=1,sortAsc=true,activeFilter='all';
-const isEN=()=>document.body.dataset.lang==='en';
 
-const LABELS={
-pt:{
-state:‘Estado’,fee:‘Taxa Não-Residente’,method:‘Método’,special:‘Requisitos Especiais’,notes:‘Prazo’,
-all:‘Todos’,low:‘Menos de $35’,mid:’$35–$99’,high:’$100+’,spec:‘⚠ Req. Especial’,
-showing:‘Mostrando’,of:‘de’,states:‘estados’,
-home:‘Estado base — já licenciada. Sem ação necessária.’,
-ny:’$0 — processo separado (ver req.)’,
-},
-en:{
-state:‘State’,fee:‘Non-Res Fee’,method:‘Method’,special:‘Special Requirements’,notes:‘Processing Time’,
-all:‘All States’,low:‘Under $35’,mid:’$35–$99’,high:’$100+’,spec:‘⚠ Special Req.’,
-showing:‘Showing’,of:‘of’,states:‘states’,
-home:‘Home state — already licensed. No action needed.’,
-ny:’$0 — separate process (see req.)’,
-}
+var sortCol=1,sortAsc=true,activeFilter='all';
+
+function isEN(){return document.body.dataset.lang==='en';}
+
+var LABELS={
+  pt:{state:'Estado',fee:'Taxa Nao-Residente',method:'Metodo',special:'Requisitos Especiais',notes:'Prazo',all:'Todos',low:'Menos de $35',mid:'$35-$99',high:'$100+',spec:'Req. Especial',showing:'Mostrando',of:'de',states:'estados'},
+  en:{state:'State',fee:'Non-Res Fee',method:'Method',special:'Special Requirements',notes:'Processing Time',all:'All States',low:'Under $35',mid:'$35-$99',high:'$100+',spec:'Special Req.',showing:'Showing',of:'of',states:'states'}
 };
 
-function L(key){return LABELS[isEN()?‘en’:‘pt’][key]||key;}
+function L(key){return LABELS[isEN()?'en':'pt'][key]||key;}
 
 function setLang(lang){
-document.body.dataset.lang=lang;
-document.getElementById(‘btnPT’).classList.toggle(‘active’,lang===‘pt’);
-document.getElementById(‘btnEN’).classList.toggle(‘active’,lang===‘en’);
-document.documentElement.lang=lang===‘en’?‘en’:‘pt-BR’;
-buildUI();applyFilters();
-const sb=document.getElementById(‘searchBox’);
-sb.placeholder=isEN()?‘Search state…’:‘Buscar estado…’;
+  document.body.dataset.lang=lang;
+  document.getElementById('btnPT').classList.toggle('active',lang==='pt');
+  document.getElementById('btnEN').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  var sb=document.getElementById('searchBox');
+  if(sb) sb.placeholder=isEN()?'Search state...':'Buscar estado...';
+  buildUI();
+  applyFilters();
 }
 
 function buildUI(){
-const hdrs=document.getElementById(‘tableHeaders’);
-const cols=[‘state’,‘fee’,‘method’,‘special’,‘notes’];
-hdrs.innerHTML=cols.map((c,i)=>`<th onclick="sortTable(${i})" id="th${i}"><span class="sa"></span> ${L(c)}</th>`).join(’’);
-hdrs.querySelectorAll(‘th’)[sortCol].classList.add(sortAsc?‘sorted-asc’:‘sorted-desc’);
-const fb=document.getElementById(‘filterBtns’);
-const filters=[[‘all’],[‘low’],[‘mid’],[‘high’],[‘spec’]];
-fb.innerHTML=filters.map(([f])=>`<button class="fbtn${activeFilter===f?' active':''}" onclick="setFilter(this,'${f}')">${L(f)}</button>`).join(’’);
+  var hdrs=document.getElementById('tableHeaders');
+  if(!hdrs) return;
+  var cols=['state','fee','method','special','notes'];
+  hdrs.innerHTML=cols.map(function(c,i){return '<th onclick="sortTable('+i+')" id="th'+i+'"><span class="sa"></span> '+L(c)+'</th>';}).join('');
+  var allTh=hdrs.querySelectorAll('th');
+  if(allTh[sortCol]) allTh[sortCol].classList.add(sortAsc?'sorted-asc':'sorted-desc');
+  var fb=document.getElementById('filterBtns');
+  if(!fb) return;
+  var filters=['all','low','mid','high','spec'];
+  fb.innerHTML=filters.map(function(f){return '<button class="fbtn'+(activeFilter===f?' active':'')+'" onclick="setFilter(this,\''+f+'\')">'+L(f)+'</button>';}).join('');
 }
 
 function feeDisplay(fee,state){
-if(state===‘Florida’) return `<em class="fee-special">${isEN()?'Home State':'Estado base'}</em>`;
-if(state===‘New York’) return `<span class="fee-high">$0*</span>`;
-if(fee<35) return `<span class="fee-low">$${fee}</span>`;
-if(fee<100) return `<span class="fee-mid">$${fee}</span>`;
-return `<span class="fee-high">$${fee}</span>`;
+  if(state==='Florida') return '<em class="fee-special">'+(isEN()?'Home State':'Estado base')+'</em>';
+  if(state==='New York') return '<span class="fee-high">$0*</span>';
+  if(fee<35) return '<span class="fee-low">$'+fee+'</span>';
+  if(fee<100) return '<span class="fee-mid">$'+fee+'</span>';
+  return '<span class="fee-high">$'+fee+'</span>';
 }
 
 function render(rows){
-const tbody=document.getElementById(‘tableBody’);
-if(!rows.length){tbody.innerHTML=`<tr><td colspan="5" class="no-results">${isEN()?'No states match your search.':'Nenhum estado encontrado.'}</td></tr>`;document.getElementById(‘countLabel’).textContent=’’;return;}
-tbody.innerHTML=rows.map(r=>{
-const [state,fee,method,special,notes]=r;
-const isHome=state===‘Florida’;
-const hasSpecial=special!==‘None’&&!special.startsWith(‘HOME’);
-return `<tr class="${isHome?'home-state':''}"> <td><strong>${state}</strong>${isHome?`<span class="home-badge">${isEN()?‘Home’:‘Base’}</span>`:''}</td> <td style="text-align:center;">${feeDisplay(fee,state)}</td> <td>${method}</td> <td class="${hasSpecial?'special-flag':'special-none'}">${special}</td> <td class="notes-cell">${notes}</td> </tr>`;
-}).join(’’);
-document.getElementById(‘countLabel’).textContent=`${L('showing')} ${rows.length} ${L('of')} ${RAW.length} ${L('states')}`;
+  var tbody=document.getElementById('tableBody');
+  if(!tbody) return;
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="5" class="no-results">'+(isEN()?'No states match your search.':'Nenhum estado encontrado.')+'</td></tr>';
+    document.getElementById('countLabel').textContent='';
+    return;
+  }
+  var html='';
+  for(var i=0;i<rows.length;i++){
+    var r=rows[i];
+    var state=r[0],fee=r[1],method=r[2],special=r[3],notes=r[4];
+    var isHome=state==='Florida';
+    var hasSpecial=special!=='None'&&special.indexOf('HOME')!==0;
+    html+='<tr class="'+(isHome?'home-state':'')+'">'+
+      '<td><strong>'+state+'</strong>'+(isHome?'<span class="home-badge">'+(isEN()?'Home':'Base')+'</span>':'')+'</td>'+
+      '<td style="text-align:center;">'+feeDisplay(fee,state)+'</td>'+
+      '<td>'+method+'</td>'+
+      '<td class="'+(hasSpecial?'special-flag':'special-none')+'">'+special+'</td>'+
+      '<td class="notes-cell">'+notes+'</td>'+
+    '</tr>';
+  }
+  tbody.innerHTML=html;
+  var cl=document.getElementById('countLabel');
+  if(cl) cl.textContent=L('showing')+' '+rows.length+' '+L('of')+' '+RAW.length+' '+L('states');
 }
 
 function sortTable(col){
-if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
-document.querySelectorAll(‘thead th’).forEach((th,i)=>{th.classList.remove(‘sorted-asc’,‘sorted-desc’);if(i===col)th.classList.add(sortAsc?‘sorted-asc’:‘sorted-desc’);});
-applyFilters();
+  if(sortCol===col){sortAsc=!sortAsc;}else{sortCol=col;sortAsc=true;}
+  var allTh=document.querySelectorAll('thead th');
+  for(var i=0;i<allTh.length;i++){allTh[i].classList.remove('sorted-asc','sorted-desc');if(i===col)allTh[i].classList.add(sortAsc?'sorted-asc':'sorted-desc');}
+  applyFilters();
 }
 
 function setFilter(btn,filter){
-activeFilter=filter;
-document.querySelectorAll(’.fbtn’).forEach(b=>b.classList.remove(‘active’));
-btn.classList.add(‘active’);
-applyFilters();
+  activeFilter=filter;
+  var btns=document.querySelectorAll('.fbtn');
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  applyFilters();
 }
 
 function applyFilters(){
-const q=document.getElementById(‘searchBox’).value.toLowerCase().trim();
-let rows=[…RAW];
-if(q) rows=rows.filter(r=>r[0].toLowerCase().includes(q));
-if(activeFilter===‘low’) rows=rows.filter(r=>r[1]<35&&r[0]!==‘Florida’);
-else if(activeFilter===‘mid’) rows=rows.filter(r=>r[1]>=35&&r[1]<100);
-else if(activeFilter===‘high’) rows=rows.filter(r=>r[1]>=100);
-else if(activeFilter===‘spec’) rows=rows.filter(r=>r[3]!==‘None’&&!r[3].startsWith(‘HOME’));
-rows.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];if(typeof av===‘string’)av=av.toLowerCase();if(typeof bv===‘string’)bv=bv.toLowerCase();if(av<bv)return sortAsc?-1:1;if(av>bv)return sortAsc?1:-1;return 0;});
-render(rows);
+  var sb=document.getElementById('searchBox');
+  var q=sb?sb.value.toLowerCase().trim():'';
+  var rows=RAW.slice();
+  if(q) rows=rows.filter(function(r){return r[0].toLowerCase().indexOf(q)!==-1;});
+  if(activeFilter==='low') rows=rows.filter(function(r){return r[1]<35&&r[0]!=='Florida';});
+  else if(activeFilter==='mid') rows=rows.filter(function(r){return r[1]>=35&&r[1]<100;});
+  else if(activeFilter==='high') rows=rows.filter(function(r){return r[1]>=100;});
+  else if(activeFilter==='spec') rows=rows.filter(function(r){return r[3]!=='None'&&r[3].indexOf('HOME')!==0;});
+  rows.sort(function(a,b){
+    var av=a[sortCol],bv=b[sortCol];
+    if(typeof av==='string'){av=av.toLowerCase();bv=bv.toLowerCase();}
+    if(av<bv) return sortAsc?-1:1;
+    if(av>bv) return sortAsc?1:-1;
+    return 0;
+  });
+  render(rows);
 }
 
-buildUI();
-document.getElementById(‘searchBox’).placeholder=isEN()?‘Search state\u2026’:‘Buscar estado\u2026’;
-applyFilters();
+window.onload=function(){
+  buildUI();
+  applyFilters();
+};
 </script>
-
 </body>
 </html>
