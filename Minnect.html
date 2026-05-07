@@ -26,18 +26,18 @@
 –radius:12px;
 –shadow:0 3px 18px rgba(0,0,0,0.09);
 }
-body{font-family:Arial,sans-serif;background:white;color:var(–text);font-size:14px;line-height:1.75}
+body{font-family:Arial,sans-serif;background:white;color:#1a1a1a;font-size:14px;line-height:1.75}
 
 /* HERO */
-.hero{background:linear-gradient(140deg,var(–navy) 0%,var(–navy2) 100%);color:white;padding:44px 32px 38px;text-align:center}
+.hero{background:linear-gradient(140deg,#0f1b2d 0%,#1a2d45 100%);color:white;padding:44px 32px 38px;text-align:center}
 .hero h1{font-family:Georgia,serif;font-size:2rem;font-weight:900;line-height:1.2;margin-bottom:8px}
 .hero h1 span{color:#e8c96a}
 .hero-sub{font-size:.9rem;color:rgba(255,255,255,.72);max-width:480px;margin:0 auto 24px}
 .appstore-btn{display:inline-block;background:white;color:#0f1b2d;font-weight:600;font-size:.85rem;padding:11px 22px;border-radius:50px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 
 /* TOC */
-.toc{background:#f8f9fa;border:1px solid #e5e7eb;border-radius:var(–radius);padding:24px 28px;margin:28px 32px 0}
-.toc h2{font-family:Georgia,serif;font-size:1rem;color:var(–navy);margin-bottom:14px}
+.toc{background:#f8f9fa;border:1px solid #e5e7eb;border-radius:12px;padding:24px 28px;margin:28px 32px 0}
+.toc h2{font-family:Georgia,serif;font-size:1rem;color:#0f1b2d;margin-bottom:14px}
 .toc ol{padding-left:18px;display:grid;gap:7px}
 .toc li{font-size:.88rem;color:#374151}
 
@@ -47,12 +47,12 @@ body{font-family:Arial,sans-serif;background:white;color:var(–text);font-size:
 /* SECTION */
 .section{margin-top:38px}
 .section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.section-num{width:36px;height:36px;border-radius:50%;background:var(–navy);color:white;font-family:Georgia,serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.section-header h2{font-family:Georgia,serif;font-size:1.35rem;color:var(–navy);line-height:1.2}
-.section-header p{font-size:.82rem;color:var(–muted);margin-top:2px}
+.section-num{width:36px;height:36px;border-radius:50%;background:#0f1b2d;color:white;font-family:Georgia,serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-header h2{font-family:Georgia,serif;font-size:1.35rem;color:#0f1b2d;line-height:1.2}
+.section-header p{font-size:.82rem;color:#6b7280;margin-top:2px}
 
 /* CARD */
-.card{background:white;border:1px solid #e5e7eb;border-radius:var(–radius);padding:22px 24px;box-shadow:var(–shadow);margin-bottom:14px}
+.card{background:white;border:1px solid #e5e7eb;border-radius:12px;padding:22px 24px;box-shadow:0 3px 18px rgba(0,0,0,0.09);margin-bottom:14px}
 
 /* STEPS */
 .steps{display:grid;gap:12px}
@@ -65,35 +65,35 @@ body{font-family:Arial,sans-serif;background:white;color:var(–text);font-size:
 .screenshot-row{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0;align-items:flex-start}
 .screenshot-wrap{flex:1;min-width:140px;max-width:180px}
 .screenshot-wrap img{width:100%;border-radius:14px;box-shadow:0 5px 20px rgba(0,0,0,.13);border:1px solid #e5e7eb;display:block}
-.screenshot-caption{font-size:.73rem;color:var(–muted);text-align:center;margin-top:6px;font-style:italic;line-height:1.4}
+.screenshot-caption{font-size:.73rem;color:#6b7280;text-align:center;margin-top:6px;font-style:italic;line-height:1.4}
 
 /* CALLOUTS */
-.tip{background:var(–green-bg);border-left:4px solid var(–green);border-radius:0 var(–radius) var(–radius) 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:#14532d}
-.tip strong{color:var(–green)}
-.warn{background:var(–warn-bg);border-left:4px solid #c9a84c;border-radius:0 var(–radius) var(–radius) 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:var(–warn)}
+.tip{background:#e8f5ee;border-left:4px solid #1d6e47;border-radius:0 12px 12px 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:#14532d}
+.tip strong{color:#1d6e47}
+.warn{background:#fff8e6;border-left:4px solid #c9a84c;border-radius:0 12px 12px 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:#7c4a03}
 .warn strong{color:#92400e}
-.info{background:var(–blue-bg);border-left:4px solid var(–blue);border-radius:0 var(–radius) var(–radius) 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:#1e3a8a}
+.info{background:#eff6ff;border-left:4px solid #1d4ed8;border-radius:0 12px 12px 0;padding:12px 16px;margin:14px 0;font-size:.87rem;color:#1e3a8a}
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85rem}
-thead tr{background:var(–navy);color:white}
+thead tr{background:#0f1b2d;color:white}
 th{padding:9px 12px;text-align:left;font-weight:600;font-size:.8rem}
-td{padding:9px 12px;border-bottom:1px solid var(–cream2)}
+td{padding:9px 12px;border-bottom:1px solid #f0ebe1}
 tbody tr:nth-child(even){background:#f9fafb}
-.keep{color:var(–green);font-weight:600}
+.keep{color:#1d6e47;font-weight:600}
 
 /* CHECKLIST */
-.checklist-card{background:var(–navy);color:white;border-radius:var(–radius);padding:22px 24px;margin-top:14px}
+.checklist-card{background:#0f1b2d;color:white;border-radius:12px;padding:22px 24px;margin-top:14px}
 .checklist-card h3{font-family:Georgia,serif;font-size:1.1rem;color:#e8c96a;margin-bottom:16px}
 .check-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:.88rem}
 .check-box{width:16px;height:16px;border:2px solid #c9a84c;border-radius:3px;flex-shrink:0;margin-top:1px}
 
 /* SCREEN DIVIDER */
-.screen-block{border-top:1px solid var(–cream2);padding-top:18px;margin-top:10px}
-.screen-label{font-weight:600;color:var(–navy);margin-bottom:12px;font-size:.93rem}
+.screen-block{border-top:1px solid #f0ebe1;padding-top:18px;margin-top:10px}
+.screen-label{font-weight:600;color:#0f1b2d;margin-bottom:12px;font-size:.93rem}
 
 /* FOOTER */
-.footer{background:var(–navy);color:rgba(255,255,255,.55);text-align:center;padding:22px;font-size:.8rem;margin-top:48px}
+.footer{background:#0f1b2d;color:rgba(255,255,255,.55);text-align:center;padding:22px;font-size:.8rem;margin-top:48px}
 .footer strong{color:#e8c96a}
 </style>
 
@@ -463,7 +463,7 @@ tbody tr:nth-child(even){background:#f9fafb}
 
 ```
 <div style="margin-top:18px">
-  <p style="font-weight:600;color:var(--navy);margin-bottom:12px;font-size:.9rem">Como Criar um Circle (quando o perfil de Especialista estiver ativo):</p>
+  <p style="font-weight:600;color:#0f1b2d;margin-bottom:12px;font-size:.9rem">Como Criar um Circle (quando o perfil de Especialista estiver ativo):</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
@@ -550,7 +550,7 @@ tbody tr:nth-child(even){background:#f9fafb}
         </tr>
       </tbody>
     </table>
-    <p style="font-size:.78rem;color:var(--muted);margin-top:6px">O Minnect fica com 20% de cada transação. Esses são preços iniciais sugeridos, não os preços obrigatórios da plataforma.</p>
+    <p style="font-size:.78rem;color:#6b7280;margin-top:6px">O Minnect fica com 20% de cada transação. Esses são preços iniciais sugeridos, não os preços obrigatórios da plataforma.</p>
     <div class="tip"><strong>💡 Regra de tempo de resposta:</strong> O Minnect mantém o pagamento do comprador por até 7 dias. Responda perguntas de texto e vídeo em até 24 horas para que os compradores se sintam seguros em pagar. Construa essa reputação desde o início.</div>
   </div>
 </div>
