@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" id="loginHtml">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -14,33 +14,52 @@
 
 <div class="login-page">
   <div class="login-card">
+
+    <!-- Language toggle -->
+    <div class="login-lang-row">
+      <div class="login-lang">
+        <button class="nav-lang-btn active" id="loginBtnPt" type="button" onclick="setLang('pt')">PT</button>
+        <button class="nav-lang-btn"        id="loginBtnEn" type="button" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+
     <img src="../alice-prata-logo.png" alt="Alice Prata" class="login-logo"/>
     <h1 class="login-title">CRM</h1>
-    <p class="login-sub">Área restrita — acesso por convite</p>
+    <p  class="login-sub" id="loginSub"></p>
 
+    <!-- Error / info banners -->
     <div class="login-error" id="loginError"></div>
+    <div class="login-info"  id="loginInfo"></div>
 
+    <!-- Email + password form -->
     <form id="emailForm" onsubmit="signInEmail(event)">
-      <label class="fi-label" for="emailInput">Email</label>
-      <input class="fi" type="email" id="emailInput" required autocomplete="email" placeholder="seu@email.com"/>
+      <label class="fi-label" id="labelEmail" for="emailInput">Email</label>
+      <input class="fi" type="email" id="emailInput"
+             required autocomplete="email" placeholder="seu@email.com"/>
 
-      <label class="fi-label" for="pwInput">Senha</label>
-      <input class="fi" type="password" id="pwInput" required autocomplete="current-password" placeholder="••••••••"/>
+      <label class="fi-label" id="labelPassword" for="pwInput"></label>
+      <input class="fi" type="password" id="pwInput"
+             required autocomplete="current-password" placeholder="••••••••"/>
 
-      <button type="submit" class="submit-btn mt-14" id="emailBtn">Entrar</button>
+      <button type="submit" class="submit-btn mt-14" id="emailBtn"></button>
     </form>
 
-    <div class="login-divider">ou</div>
+    <div class="login-divider" id="loginDivider"></div>
 
-    <button class="google-btn" id="googleBtn" onclick="signInGoogle()">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <!-- Google sign-in — uses signInWithRedirect for reliability on
+         GitHub Pages / Safari / iOS standalone PWA mode.
+         Popup-based auth fails on these environments because it relies
+         on cross-origin postMessage which Safari / ITP blocks. -->
+    <button class="google-btn" id="googleBtn" type="button" onclick="signInGoogle()">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
         <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.859-3.048.859-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
         <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
         <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
       </svg>
-      Entrar com Google
+      <span id="googleBtnText"></span>
     </button>
+
   </div>
 </div>
 
@@ -49,93 +68,241 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="../js/firebase-config.js"></script>
 <script>
-firebase.initializeApp(window.firebaseConfig);
-const auth = firebase.auth();
+// ── i18n strings ──────────────────────────────────────────────────
+const STRINGS = {
+  pt: {
+    sub:             'Área restrita — acesso por convite',
+    email_label:     'Email',
+    pw_label:        'Senha',
+    email_ph:        'seu@email.com',
+    submit:          'Entrar',
+    submitting:      'Entrando…',
+    divider:         'ou',
+    google:          'Entrar com Google',
+    google_loading:  'Redirecionando…',
+    checking:        'Verificando login com Google…',
+    unauthorized:    'Acesso não autorizado. Esta conta não tem permissão para acessar o CRM.',
+    google_error:    'Erro ao entrar com Google. Tente novamente.',
+    domain_error:    'Domínio não autorizado no Firebase. Verifique o Console.',
+    err_not_found:   'Email não encontrado.',
+    err_password:    'Senha incorreta.',
+    err_email:       'Email inválido.',
+    err_credential:  'Email ou senha incorretos.',
+    err_attempts:    'Muitas tentativas. Aguarde e tente novamente.',
+    err_generic:     'Erro ao entrar. Tente novamente.',
+  },
+  en: {
+    sub:             'Restricted area — invite only',
+    email_label:     'Email',
+    pw_label:        'Password',
+    email_ph:        'your@email.com',
+    submit:          'Sign In',
+    submitting:      'Signing in…',
+    divider:         'or',
+    google:          'Sign in with Google',
+    google_loading:  'Redirecting…',
+    checking:        'Verifying Google sign-in…',
+    unauthorized:    'Access not authorized. This account is not allowed to access the CRM.',
+    google_error:    'Error signing in with Google. Please try again.',
+    domain_error:    'Unauthorized domain in Firebase. Check the Console.',
+    err_not_found:   'Email not found.',
+    err_password:    'Incorrect password.',
+    err_email:       'Invalid email address.',
+    err_credential:  'Incorrect email or password.',
+    err_attempts:    'Too many attempts. Please wait and try again.',
+    err_generic:     'Error signing in. Please try again.',
+  },
+};
 
-// Allowlist — must match auth.js exactly.
+// Firebase error code → string key
+const ERR_MAP = {
+  'auth/user-not-found':    'err_not_found',
+  'auth/wrong-password':    'err_password',
+  'auth/invalid-email':     'err_email',
+  'auth/invalid-credential':'err_credential',
+  'auth/too-many-requests': 'err_attempts',
+};
+
+// Persist language across the redirect round-trip via localStorage
+let lang = localStorage.getItem('crm_lang') || 'pt';
+
+function t(key) {
+  return (STRINGS[lang] || STRINGS.pt)[key] || STRINGS.pt[key] || key;
+}
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('crm_lang', l);
+  document.getElementById('loginHtml').lang = l === 'en' ? 'en' : 'pt-BR';
+  document.getElementById('loginBtnPt').classList.toggle('active', l === 'pt');
+  document.getElementById('loginBtnEn').classList.toggle('active', l === 'en');
+  document.getElementById('loginSub').textContent      = t('sub');
+  document.getElementById('labelEmail').textContent    = t('email_label');
+  document.getElementById('labelPassword').textContent = t('pw_label');
+  document.getElementById('emailInput').placeholder    = t('email_ph');
+  document.getElementById('emailBtn').textContent      = t('submit');
+  document.getElementById('loginDivider').textContent  = t('divider');
+  document.getElementById('googleBtnText').textContent = t('google');
+  // Re-translate any visible banner that stores its key
+  const errEl = document.getElementById('loginError');
+  if (errEl.dataset.key) errEl.textContent = t(errEl.dataset.key);
+  const infoEl = document.getElementById('loginInfo');
+  if (infoEl.dataset.key) infoEl.textContent = t(infoEl.dataset.key);
+}
+
+// Render immediately so page text appears before Firebase loads
+setLang(lang);
+
+// ── UI helpers ────────────────────────────────────────────────────
+function showError(key) {
+  const el = document.getElementById('loginError');
+  el.dataset.key = key;
+  el.textContent  = t(key);
+  el.style.display = 'block';
+  clearInfo();
+}
+function clearError() {
+  const el = document.getElementById('loginError');
+  el.style.display = 'none';
+  el.dataset.key = '';
+}
+function showInfo(key) {
+  const el = document.getElementById('loginInfo');
+  el.dataset.key = key;
+  el.textContent  = t(key);
+  el.style.display = 'block';
+}
+function clearInfo() {
+  const el = document.getElementById('loginInfo');
+  el.style.display = 'none';
+  el.dataset.key = '';
+}
+function resetGoogleBtn() {
+  const btn  = document.getElementById('googleBtn');
+  const span = document.getElementById('googleBtnText');
+  btn.disabled    = false;
+  span.textContent = t('google');
+}
+
+// ── Allowlist ─────────────────────────────────────────────────────
 const APPROVED_EMAILS = [
   'alicecorsino12@gmail.com',
   'nlepage.ao.ail@gmail.com',
 ];
-
 function isApproved(user) {
   return APPROVED_EMAILS.includes((user.email || '').toLowerCase().trim());
 }
 
-// Show error from URL param (e.g. redirected back from a protected page).
+// ── URL error param (bounce back from a protected page) ───────────
 (function () {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('error') === 'unauthorized') {
-    showError('Acesso não autorizado. Esta conta não tem permissão para acessar o CRM.');
-    // Clean the URL so refreshing doesn't keep showing the banner.
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('error') === 'unauthorized') {
+    showError('unauthorized');
     history.replaceState(null, '', 'login.html');
   }
 })();
 
-// If already signed in with an approved account, go directly to board.
+// ── Firebase init ─────────────────────────────────────────────────
+firebase.initializeApp(window.firebaseConfig);
+const auth = firebase.auth();
+
+// If we're returning from a Google redirect, show a brief loading state
+// so the user knows something is happening instead of seeing a blank login form.
+if (sessionStorage.getItem('crm_google_pending')) {
+  showInfo('checking');
+}
+
+// getRedirectResult() must be called on every page load.
+// • Normal load (no pending redirect) → resolves with {user: null} — no-op.
+// • Return from successful Google redirect → user state already in
+//   onAuthStateChanged which redirects to board. We just clear the loader.
+// • Return from failed redirect → rejects with the error — we show the message.
+auth.getRedirectResult()
+  .then(function () {
+    sessionStorage.removeItem('crm_google_pending');
+    clearInfo();
+  })
+  .catch(function (err) {
+    sessionStorage.removeItem('crm_google_pending');
+    clearInfo();
+    resetGoogleBtn();
+    if (err.code === 'auth/unauthorized-domain') {
+      showError('domain_error');
+    } else if (
+      err.code === 'auth/user-cancelled' ||
+      err.code === 'auth/popup-closed-by-user'
+    ) {
+      // User cancelled at Google — no message needed
+    } else if (err.code) {
+      // Show the code for diagnosability
+      const el = document.getElementById('loginError');
+      el.dataset.key = '';
+      el.textContent  = t('google_error') + ' [' + err.code + ']';
+      el.style.display = 'block';
+    }
+  });
+
+// onAuthStateChanged handles both redirect-return and email sign-in.
+// Fires as soon as Firebase restores auth state from IndexedDB.
 auth.onAuthStateChanged(function (user) {
   if (!user) return;
   if (!isApproved(user)) {
-    // Signed in but not on the allowlist — sign out and show error immediately.
     auth.signOut();
-    showError('Acesso não autorizado. Esta conta não tem permissão para acessar o CRM.');
+    showError('unauthorized');
     return;
   }
+  // Clear any loading state and go to board
+  clearInfo();
   window.location.href = 'index.html';
 });
 
-function showError(msg) {
-  const el = document.getElementById('loginError');
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-
-function clearError() {
-  const el = document.getElementById('loginError');
-  el.style.display = 'none';
-  el.textContent = '';
-}
-
+// ── Email / password sign-in ──────────────────────────────────────
 async function signInEmail(e) {
   e.preventDefault();
   clearError();
   const btn = document.getElementById('emailBtn');
-  btn.disabled = true;
-  btn.textContent = 'Entrando...';
+  btn.disabled    = true;
+  btn.textContent = t('submitting');
   try {
     await auth.signInWithEmailAndPassword(
       document.getElementById('emailInput').value.trim(),
       document.getElementById('pwInput').value
     );
-    // onAuthStateChanged handles redirect or rejection.
+    // onAuthStateChanged handles the redirect
   } catch (err) {
-    btn.disabled = false;
-    btn.textContent = 'Entrar';
-    const msgs = {
-      'auth/user-not-found':    'Email não encontrado.',
-      'auth/wrong-password':    'Senha incorreta.',
-      'auth/invalid-email':     'Email inválido.',
-      'auth/invalid-credential':'Email ou senha incorretos.',
-      'auth/too-many-requests': 'Muitas tentativas. Aguarde e tente novamente.',
-    };
-    showError(msgs[err.code] || 'Erro ao entrar. Tente novamente.');
+    btn.disabled    = false;
+    btn.textContent = t('submit');
+    showError(ERR_MAP[err.code] || 'err_generic');
   }
 }
 
-async function signInGoogle() {
+// ── Google sign-in — redirect (reliable on GitHub Pages + Safari) ─
+// signInWithPopup fails in these environments because:
+//   1. Safari / ITP blocks cross-origin postMessage from firebaseapp.com
+//   2. iOS standalone PWA mode blocks all popups entirely
+//   3. Some browsers block popups opened from async code paths
+// signInWithRedirect avoids all of this by navigating the tab directly.
+function signInGoogle() {
   clearError();
-  const btn = document.getElementById('googleBtn');
-  btn.disabled = true;
-  try {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await auth.signInWithPopup(provider);
-    // onAuthStateChanged handles redirect or rejection.
-  } catch (err) {
-    btn.disabled = false;
-    if (err.code !== 'auth/popup-closed-by-user') {
-      showError('Erro ao entrar com Google. Tente novamente.');
-    }
-  }
+  const btn  = document.getElementById('googleBtn');
+  const span = document.getElementById('googleBtnText');
+  btn.disabled     = true;
+  span.textContent = t('google_loading');
+
+  // Flag so we show the "Checking…" info banner when the page reloads
+  // after the OAuth round-trip. sessionStorage survives the redirect.
+  sessionStorage.setItem('crm_google_pending', '1');
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithRedirect(provider).catch(function (err) {
+    // This catch only fires if the redirect itself can't start (very rare —
+    // e.g. the Firebase SDK isn't initialised yet). The normal error path
+    // is handled by getRedirectResult() after the page reloads.
+    sessionStorage.removeItem('crm_google_pending');
+    resetGoogleBtn();
+    showError('google_error');
+    console.error('[login] signInWithRedirect failed to start:', err);
+  });
 }
 </script>
 </body>
