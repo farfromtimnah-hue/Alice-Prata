@@ -125,18 +125,45 @@ Local path:         /Users/nicolel/alice-prata/
 
 6. **`crm.apiFetch(endpoint, options)`** is the only way CRM pages should call the API. It attaches the Firebase token automatically and handles 401 → redirect to login.
 
-7. **Color palette (do not deviate):**
+7. **Color palette — dark glassmorphic system (do not deviate):**
    ```css
-   --terra-deep: #8C3E2A   /* primary headings, buttons, stage headers */
-   --terra:      #B5553F   /* hover states, accents */
-   --terra-light:#C76A4F   /* gradients */
-   --sand:       #E8D5B7   /* borders, backgrounds */
-   --sand-light: #F4E6CD   /* section backgrounds */
-   --sand-cream: #FAF3E5   /* page background */
-   --ink:        #1A1208   /* text */
-   --ink-soft:   #6B4A3A   /* muted text */
-   --ochre:      #C9A24A   /* holding stage headers, optional badges */
+   /* Base */
+   --bg:          #0f0e0d   /* near-black atmospheric warm base */
+   --surface-0:   rgba(255,255,255,0.03)  /* panels */
+   --surface-1:   rgba(255,255,255,0.06)  /* cards */
+   --surface-2:   rgba(255,255,255,0.09)  /* hover / elevated */
+   --surface-3:   rgba(255,255,255,0.13)  /* active / selected */
+
+   /* Text */
+   --text-hi:     #f0ebe5   /* primary — warm pearl-white */
+   --text-mid:    #b8ada3   /* secondary — warm stone */
+   --text-lo:     #6e6259   /* tertiary — warm dim */
+
+   /* Accent — muted clay/terracotta, ≤10% of surface area */
+   --accent:      #c4876a
+   --accent-dim:  rgba(196,135,106,0.18)
+   --accent-glow: rgba(196,135,106,0.28)
+
+   /* Borders */
+   --border:      rgba(255,255,255,0.07)
+   --border-mid:  rgba(255,255,255,0.11)
+
+   /* Status */
+   --green:   #5a9e6e   --green-dim:  rgba(90,158,110,0.14)
+   --amber:   #b89050   --amber-dim:  rgba(184,144,80,0.14)
+   --red:     #b85050   --red-dim:    rgba(184,80,80,0.14)
+   --blue:    #6090b8   --blue-dim:   rgba(96,144,184,0.14)
    ```
+
+   **Key design rules:**
+   - Nav uses `backdrop-filter: blur(20px)` on `rgba(15,14,13,0.85)` — not a solid color
+   - Kanban column headers use barely-there tints (no solid fills)
+   - Cards use `--surface-1` with `inset 0 1px 0 rgba(255,255,255,0.06)` top-edge glow
+   - Modals: `rgba(25,23,21,0.96)` with `backdrop-filter: blur(24px)`, dark overlay with `blur(6px)`
+   - Inputs: `rgba(0,0,0,0.28)` dark-fill, accent focus border glow `box-shadow: 0 0 0 3px var(--accent-dim)`
+   - Login card: frosted glass (`rgba(255,255,255,0.05)` + `blur(32px)`) on atmospheric dark bg with subtle radial gradients
+   - Primary buttons use `--accent` (`#c4876a`) with dark text `#0f0e0d`
+   - Section titles and accent elements use `--accent`; most surfaces are near-black/charcoal
 
 ---
 

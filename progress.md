@@ -187,6 +187,11 @@ GET    /api/crm/stages                    list all pipeline stages
 - [x] Created `worker/wrangler.toml` — Worker config
 - [x] Created `worker/src/index.js` — full Cloudflare Worker (~845 lines)
 
+### Session 3 (2026-05-26)
+- [x] Rewrote `crm/css/crm.css` — dark glassmorphic premium design system (near-black base, frosted glass panels, warm accent `#c4876a`, backdrop-filter blur, all class names preserved)
+- [x] Updated `claude-project-rules.md` — replaced old terracota palette with full dark glass token system
+- [x] Updated `handoff.md` and `progress.md` to reflect Session 3 state
+
 ### Session 2 (2026-05-26)
 - [x] Created `js/firebase-config.js` — shared Firebase public config
 - [x] Created `js/form-submit.js` — shared `window.submitToApi()` helper

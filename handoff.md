@@ -4,22 +4,27 @@ _Rewritten at the end of each major work block. Read this first when resuming._
 
 ---
 
-## Just Completed (2026-05-26, Session 2)
+## Just Completed (2026-05-26, Session 3)
 
-Everything in the original build plan through Phase 6 is done and deployed:
+**`crm/css/crm.css` fully redesigned** — dark glassmorphic premium system:
+- Base: near-black `#0f0e0d` warm atmospheric background
+- 4-level frosted surface hierarchy (`rgba(255,255,255,0.03–0.13)`)
+- Nav: `backdrop-filter: blur(20px)` on translucent dark bar, `border-bottom: 1px solid rgba(255,255,255,0.07)`
+- Cards: subtle top-edge inner glow `inset 0 1px 0 rgba(255,255,255,0.06)`
+- Kanban column headers: barely-there color tints (no solid fills)
+- Login: full frosted glass card on atmospheric dark with radial accents
+- Modals: near-black frosted backdrop `blur(24px)`, overlay `blur(6px)`
+- Inputs: `rgba(0,0,0,0.28)` dark fill, terracotta glow on focus
+- Accent: muted clay `#c4876a` — buttons, focus rings, section titles, active nav — <10% surface
+- All class names preserved; logic unchanged
 
-- Full Cloudflare Worker live at `https://alice-prata-crm-api.farfromtimnah.workers.dev`
-- D1 schema applied — 11 tables, 14 pipeline stages seeded, agent_profile initialized
-- All three public forms wired to Worker (landing-insurance, landing-resources, emergency-guide)
-- Full CRM shell: login, Kanban board, lead detail, profile/settings pages
-- All code committed to `crm-build` branch and pushed to GitHub
-- `progress.md`, `claude-project-rules.md`, `handoff.md` created (this session)
+`claude-project-rules.md` updated with the full dark glass design token system.
 
 ---
 
 ## Nothing Half-Done
 
-No files were left in a partial state. Every file that was opened was fully written and committed.
+CSS rewrite is complete. All class names that existed before still exist. No JS, HTML, or Worker files were modified in Session 3.
 
 ---
 
@@ -27,43 +32,44 @@ No files were left in a partial state. Every file that was opened was fully writ
 
 **`progress.md`** — verify it matches actual state, then pick the next pending task.
 
-If the next task is a code change, also read **`claude-project-rules.md`** before touching any form submission, auth, routing, or D1 write path.
+Also read **`claude-project-rules.md`** before touching any form submission, auth, routing, or D1 write path. The Design Direction section now contains the dark glass palette.
 
 ---
 
 ## Exact Next Task
 
-**Step 1 (manual — Alice must do this herself):**
-Go to Firebase Console → Authentication → Settings → Authorized domains.  
-Add `farfromtimnah-hue.github.io`.  
-Without this, Google Sign-In will fail on GitHub Pages.
+**Step 1 (manual — Alice must do this):**
+Firebase Console → Authentication → Settings → Authorized domains → add `farfromtimnah-hue.github.io`.
+Required for Google Sign-In on GitHub Pages.
 
 **Step 2 (requires decision):**
-Merge `crm-build` into `main` to make the CRM live on GitHub Pages.  
-The board is at `crm/index.html`, login at `crm/login.html`.
+Merge `crm-build` into `main` to make the CRM live on GitHub Pages.
+CRM board lives at `crm/index.html`, login at `crm/login.html`.
 
 **Step 3 (first new feature to build):**
-Add a "New Lead" button to the CRM board that lets Alice manually add a lead from a phone call or in-person meeting. This requires:
-- A new modal on `crm/index.html` with name, phone, email, source, state fields
-- A new `POST /api/crm/leads` endpoint in the Worker
-- After save, refresh the board and open the new lead's detail page
+Add a "New Lead" button to the CRM board for manually adding a lead from a phone call or in-person meeting:
+- New modal on `crm/index.html` with name, phone, email, source (dropdown), state fields
+- New `POST /api/crm/leads` endpoint in `worker/src/index.js` (sanitize all fields, INSERT lead + activity_log row, return `{ id }`)
+- After save: refresh board and open the new lead's detail page
 
 ---
 
 ## Warnings / Gotchas
 
-1. **Firebase authorized domain is NOT set yet.** Google Sign-In will fail on GitHub Pages until it is. Email/password login works on any domain.
+1. **Firebase authorized domain is NOT set yet.** Google Sign-In fails on GitHub Pages until it is. Email/password login works on any domain.
 
-2. **`crm-build` is not yet merged to `main`.** GitHub Pages still serves the old `main`. The CRM is not publicly accessible at the GitHub Pages URL yet.
+2. **`crm-build` is not yet merged to `main`.** GitHub Pages still serves old `main`.
 
-3. **D1 schema is already applied to the live database.** Do not re-run `schema.sql` as a whole file. If you need to add a column, use a separate `ALTER TABLE` statement via `wrangler d1 execute --remote --command "ALTER TABLE ..."`.
+3. **D1 schema is already applied.** Do not re-run `schema.sql` as a whole file. Add columns with `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` via `wrangler d1 execute --remote --command "..."`.
 
-4. **The Worker's `ALLOWED_ORIGINS` is set to GitHub Pages + localhost:8080.** If testing locally on a different port, either update wrangler.toml + redeploy, or test against the live Worker from the real GitHub Pages URL.
+4. **Worker `ALLOWED_ORIGINS`** is `https://farfromtimnah-hue.github.io,http://localhost:8080`. Change in `wrangler.toml` + redeploy if testing on a different local port.
 
-5. **`js/firebase-config.js` is the single source of Firebase config.** CRM pages reference it as `../js/firebase-config.js`. Public pages reference it as `js/firebase-config.js`. Do not duplicate the config inline.
+5. **`js/firebase-config.js` is the single source of Firebase config.** CRM pages reference it as `../js/firebase-config.js`. Do not duplicate inline.
 
-6. **The emergency guide "Send to Alice" feature does NOT require the user to be authenticated.** It posts to a public endpoint. The guide is a public page.
+6. **The emergency guide "Send to Alice" feature does NOT require auth.** It posts to a public endpoint.
+
+7. **crm.css is now a dark glassmorphic system.** Do NOT introduce old terracota/sand variables (`--terra-deep`, `--sand-cream`, etc.) — they no longer exist. Use the token system in `claude-project-rules.md`.
 
 ---
 
-_Last updated: 2026-05-26_
+_Last updated: 2026-05-26, Session 3_
