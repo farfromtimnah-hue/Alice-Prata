@@ -222,6 +222,18 @@ Local path:         /Users/nicolel/alice-prata/
 
 ---
 
+## Responsive Breakpoints
+
+| Breakpoint | Rule |
+|---|---|
+| `≤640px` | Nav hides email + title; lead header collapses to 1 column; board col-header sticky uses 93px offset (2-row toolbar) |
+| `≤700px` | Lead sections grid collapses to 1 column |
+| `≤500px` | `.fi-row` collapses to single column |
+
+Do not consolidate these into one breakpoint — each responds to different content needs.
+
+---
+
 ## Do Not Assume
 
 - **Do not assume the Worker URL is correct** without checking `worker/wrangler.toml`. It has been stable but confirm before coding against it.

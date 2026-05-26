@@ -191,6 +191,14 @@ GET    /api/crm/stages                    list all pipeline stages
 - [x] Rewrote `crm/css/crm.css` — dark glassmorphic premium design system (near-black base, frosted glass panels, warm accent `#c4876a`, backdrop-filter blur, all class names preserved)
 - [x] Updated `claude-project-rules.md` — replaced old terracota palette with full dark glass token system
 - [x] Updated `handoff.md` and `progress.md` to reflect Session 3 state
+- [x] Visual QA pass across all four pages (login, board, lead detail, profile) at desktop and mobile (375px)
+- [x] Fixed 6 issues found in QA:
+  - Bug: nav overflows on mobile — added `@media (max-width:640px)` to hide email, hide nav-title, tighten gap
+  - Bug: lead header grid not collapsing on mobile — added mobile override to stack `1fr` + clear `min-width`
+  - Minor: sticky col-header offset was 3px short — corrected to `calc(var(--nav-h) + 56px)`; mobile gets `93px` for 2-row toolbar
+  - Polish: Kanban column header tints too subtle — bumped active 8→12%, holding 7→10%, archive 12→16% opacity
+  - Polish: board section label opacity raised 0.4 → 0.55 for legibility
+  - Polish: column header border opacity bumped to match tint increase
 
 ### Session 2 (2026-05-26)
 - [x] Created `js/firebase-config.js` — shared Firebase public config

@@ -226,7 +226,7 @@ input, textarea, select { font-family: inherit; font-size: 0.95rem; }
   display: flex;
   align-items: center;
   padding: 8px 4px;
-  opacity: 0.4;
+  opacity: 0.55;
 }
 
 /* ── KANBAN COLUMN ────────────────────────────────────────────────── */
@@ -245,22 +245,22 @@ input, textarea, select { font-family: inherit; font-size: 0.95rem; }
   justify-content: space-between;
   gap: 8px;
   position: sticky;
-  top: calc(var(--nav-h) + 53px);
+  top: calc(var(--nav-h) + 56px);
   z-index: 10;
   border: 1px solid var(--border);
 }
-/* barely-there column header tints */
+/* column header tints — subtle but visible against the dark base */
 .col-header.type-active {
-  background: rgba(196,135,106,0.08);
-  border-color: rgba(196,135,106,0.14);
+  background: rgba(196,135,106,0.12);
+  border-color: rgba(196,135,106,0.22);
 }
 .col-header.type-holding {
-  background: rgba(184,144,80,0.07);
-  border-color: rgba(184,144,80,0.14);
+  background: rgba(184,144,80,0.10);
+  border-color: rgba(184,144,80,0.22);
 }
 .col-header.type-archive {
-  background: rgba(110,98,89,0.12);
-  border-color: rgba(110,98,89,0.18);
+  background: rgba(110,98,89,0.16);
+  border-color: rgba(110,98,89,0.26);
 }
 .col-title {
   font-size: 0.76rem;
@@ -894,3 +894,18 @@ input, textarea, select { font-family: inherit; font-size: 0.95rem; }
 .flex-wrap { flex-wrap: wrap; }
 .gap-8 { gap: 8px; }
 .justify-end { justify-content: flex-end; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Nav: hide email + title to prevent overflow on small screens */
+  .crm-nav { padding: 0 12px; gap: 8px; }
+  .nav-title { display: none; }
+  .nav-user span { display: none; }
+
+  /* Lead header: stack lead info above actions on mobile */
+  .lead-header { grid-template-columns: 1fr; }
+  .lead-actions { min-width: 0; }
+
+  /* Board: toolbar wraps to 2 rows on mobile, correct sticky offset */
+  .col-header { top: calc(var(--nav-h) + 93px); }
+}
