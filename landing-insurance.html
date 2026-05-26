@@ -24,9 +24,30 @@
 <section class="faq"><div class="container"><div style="text-align:center;margin-bottom:8px;"><div class="section-tag show-pt">Perguntas comuns</div><div class="section-tag show-en">Common questions</div><h2 class="show-pt">Perguntas frequentes</h2><h2 class="show-en">Frequently asked questions</h2></div><div class="faq-list"><div class="faq-item"><button class="faq-q" type="button"><span class="show-pt">Isso tem custo?</span><span class="show-en">Does this cost anything?</span><span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B4A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner"><span class="show-pt">Nao. A conversa inicial e gratuita e sem compromisso.</span><span class="show-en">No. The initial conversation is free and comes with no obligation.</span></div></div></div><div class="faq-item"><button class="faq-q" type="button"><span class="show-pt">E se eu nao me qualificar?</span><span class="show-en">What if I do not qualify?</span><span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B4A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner"><span class="show-pt">Alice ainda pode orientar voce com o Guia de Emergencia e o Will Kit, dependendo do atendimento oferecido.</span><span class="show-en">Alice can still guide you with the Emergency Guide and Will Kit, depending on the service provided.</span></div></div></div><div class="faq-item"><button class="faq-q" type="button"><span class="show-pt">Alice fala portugues?</span><span class="show-en">Does Alice speak Portuguese?</span><span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#6B4A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner"><span class="show-pt">Sim. A proposta inteira foi escrita para atender familias brasileiras em portugues e ingles.</span><span class="show-en">Yes. The entire page is designed to support Brazilian families in Portuguese and English.</span></div></div></div></div></div></section>
 <footer><div class="container"><div class="footer-grid"><div><img src="alice-prata-logo.png" alt="Alice Prata" style="height:44px;filter:invert(1);opacity:0.85;margin-bottom:12px;"/><p class="show-pt" style="color:rgba(250,243,229,0.55);font-size:0.85rem;">Seguro de vida e orientacao para familias brasileiras.</p><p class="show-en" style="color:rgba(250,243,229,0.55);font-size:0.85rem;">Life insurance and guidance for Brazilian families.</p></div><div><h5 class="show-pt">Contato</h5><h5 class="show-en">Contact</h5><a href="https://wa.me/12144485917" target="_blank">WhatsApp</a><a href="mailto:hello@aliceprata.com">Email</a></div><div><h5 class="show-pt">Navegacao</h5><h5 class="show-en">Navigation</h5><a href="landing-free.html" class="show-pt">Recursos gratuitos</a><a href="landing-free.html" class="show-en">Free resources</a><a href="#form" class="show-pt">Agendar conversa</a><a href="#form" class="show-en">Schedule conversation</a></div></div><div class="footer-bottom"><p>&#169; 2026 Alice Prata</p><p class="show-pt">Seguro de vida e orientacao para familias.</p><p class="show-en">Life insurance and family guidance.</p></div><p class="footer-disclaimer show-pt">Este site tem finalidade informativa e de contato inicial. Cobertura, qualificacao e elegibilidade dependem da analise da seguradora e do perfil de saude.</p><p class="footer-disclaimer show-en">This site is for informational purposes and initial contact. Coverage, qualification, and eligibility depend on insurer review and health profile.</p></div></footer>
 <div class="sticky-cta"><a href="#form" class="btn btn-primary show-pt">Falar com Alice</a><a href="#form" class="btn btn-primary show-en">Speak with Alice</a></div>
+<script src="js/form-submit.js"></script>
 <script>
 function setLang(lang){const body=document.body;const btnPT=document.getElementById('btnPT');const btnEN=document.getElementById('btnEN');if(lang==='en'){body.classList.add('lang-en');btnEN.classList.add('active');btnPT.classList.remove('active');document.documentElement.lang='en';}else{body.classList.remove('lang-en');btnPT.classList.add('active');btnEN.classList.remove('active');document.documentElement.lang='pt-BR';}}
-function submitForm(event){event.preventDefault();document.getElementById('leadForm').style.display='none';document.getElementById('formSuccess').style.display='block';}
+async function submitForm(event){
+  event.preventDefault();
+  const btn=event.target.querySelector('[type=submit]');
+  btn.disabled=true;
+  const payload={
+    firstName:document.getElementById('firstName').value.trim(),
+    lastName:document.getElementById('lastName').value.trim(),
+    phone:document.getElementById('phone').value.trim(),
+    email:document.getElementById('email').value.trim()||undefined,
+    kids:document.getElementById('children').value||undefined,
+    hasInsurance:document.getElementById('hasInsurance').value||undefined
+  };
+  const result=await window.submitToApi('/api/submit/landing-insurance',payload);
+  if(result.ok||result.data?.success){
+    document.getElementById('leadForm').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  } else {
+    btn.disabled=false;
+    alert(document.body.classList.contains('lang-en')?'Something went wrong. Please try again.':'Algo deu errado. Por favor, tente novamente.');
+  }
+}
 document.querySelectorAll('.faq-q').forEach(btn=>{btn.addEventListener('click',function(){const item=btn.closest('.faq-item');item.classList.toggle('open');});});
 </script>
 </body>

@@ -1,0 +1,17 @@
+name = "alice-prata-crm-api"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "alice-prata-crm"
+database_id = "080cb251-6a0e-420d-9865-e2475d9858b5"
+
+[vars]
+FIREBASE_PROJECT_ID = "alice-prata-crm"
+# ALLOWED_ORIGINS — update if you add a custom domain
+ALLOWED_ORIGINS = "https://farfromtimnah-hue.github.io,http://localhost:8080"
+
+# Secrets — set with wrangler secret put:
+#   wrangler secret put FIREBASE_PROJECT_ID   (if you want it secret)
+# Currently set as [vars] because project ID is not sensitive.

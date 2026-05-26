@@ -73,6 +73,10 @@ body[data-lang="pt"] .en-content{display:none;}
       <button class="lang-btn active" id="btnPT" onclick="setLang('pt')">PT</button>
       <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
     </div>
+    <button class="action-btn" id="sendBtn" onclick="sendToAlice()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <span class="pt-content">Enviar para Alice</span><span class="en-content">Send to Alice</span>
+    </button>
     <button class="action-btn" onclick="window.print()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       <span class="pt-content">Imprimir</span><span class="en-content">Print</span>
@@ -355,13 +359,21 @@ body[data-lang="pt"] .en-content{display:none;}
 
 </form>
 
+<div id="sendToast" style="display:none;background:var(--white);border:1px solid var(--sand);border-radius:var(--r);padding:14px 18px;margin-bottom:14px;font-size:0.88rem;color:var(--ink-soft);"></div>
+
 <div class="print-cta">
-  <p class="pt-content"><strong>Pronto?</strong> Imprima, assine, e guarde em um local que sua família conheça.</p>
-  <p class="en-content"><strong>Ready?</strong> Print, sign, and store somewhere your family knows.</p>
-  <button onclick="window.print()">
-    <span class="pt-content">Imprimir Guia</span>
-    <span class="en-content">Print Guide</span>
-  </button>
+  <p class="pt-content"><strong>Pronto?</strong> Envie para Alice guardar com segurança — ou imprima e assine.</p>
+  <p class="en-content"><strong>Ready?</strong> Send to Alice for safekeeping — or print and sign.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <button id="sendBtnMain" onclick="sendToAlice()" style="background:var(--terra-deep);color:var(--white);border:none;border-radius:var(--r);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;padding:12px 24px;cursor:pointer;white-space:nowrap;">
+      <span class="pt-content">Enviar para Alice</span>
+      <span class="en-content">Send to Alice</span>
+    </button>
+    <button onclick="window.print()" style="background:var(--white);color:var(--terra-deep);border:none;border-radius:var(--r);font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;padding:12px 24px;cursor:pointer;white-space:nowrap;">
+      <span class="pt-content">Imprimir Guia</span>
+      <span class="en-content">Print Guide</span>
+    </button>
+  </div>
 </div>
 </main>
 
@@ -371,6 +383,7 @@ body[data-lang="pt"] .en-content{display:none;}
   <p class="en-content">Family Emergency Guide — Alice Prata · aliceprata.com</p>
 </footer>
 
+<script src="js/form-submit.js"></script>
 <script>
 const SAVE_KEY='ap_guide_v2';
 function setLang(lang){
@@ -454,6 +467,48 @@ function restoreData(data){
 function clearAll(){
   const msg=isEN()?'Clear all fields?':'Limpar todos os campos?';
   if(confirm(msg)){localStorage.removeItem(SAVE_KEY);rebuildDynamic();}
+}
+
+function collectGuidePayload(){
+  const data={};
+  // All text/email/tel/date inputs and textareas with an id
+  document.querySelectorAll('#guideForm input[id]:not([type=radio]),#guideForm textarea[id]').forEach(el=>{
+    if(el.value) data[el.id]=el.value;
+  });
+  // Radio buttons — store as r_{name}
+  document.querySelectorAll('#guideForm input[type=radio]:checked').forEach(el=>{
+    data['r_'+el.name]=el.value;
+  });
+  return data;
+}
+
+function showToast(msg, ok){
+  const t=document.getElementById('sendToast');
+  t.textContent=msg;
+  t.style.display='block';
+  t.style.borderColor=ok?'rgba(181,85,63,0.4)':'#c0392b';
+  t.style.color=ok?'var(--terra-deep)':'#c0392b';
+  if(ok) setTimeout(()=>t.style.display='none', 6000);
+}
+
+async function sendToAlice(){
+  const payload=collectGuidePayload();
+  const btn=document.getElementById('sendBtn');
+  const btnMain=document.getElementById('sendBtnMain');
+  if(btn) btn.disabled=true;
+  if(btnMain) btnMain.disabled=true;
+
+  const result=await window.submitToApi('/api/submit/emergency-guide', payload);
+
+  if(result.ok||result.data?.success){
+    const msg=isEN()?'✓ Guide sent to Alice. She will reach out via WhatsApp.':'✓ Guia enviado para Alice. Ela entrará em contato via WhatsApp.';
+    showToast(msg, true);
+  } else {
+    const msg=isEN()?'Something went wrong. Please try again or contact Alice directly.':'Algo deu errado. Tente novamente ou contate Alice diretamente.';
+    showToast(msg, false);
+    if(btn) btn.disabled=false;
+    if(btnMain) btnMain.disabled=false;
+  }
 }
 </script>
 

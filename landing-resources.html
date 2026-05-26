@@ -427,6 +427,7 @@ footer a:hover{color:var(--sand);}
   <a href="#form" class="btn btn-primary pt">Agendar Minha Conversa</a>
   <a href="#form" class="btn btn-primary en">Schedule My Conversation</a>
 </div>
+<script src="js/form-submit.js"></script>
 <script>
 function setLang(lang){
   document.body.dataset.lang=lang;
@@ -434,10 +435,25 @@ function setLang(lang){
   document.getElementById('btnEN').classList.toggle('active',lang==='en');
   document.documentElement.lang=lang==='en'?'en':'pt-BR';
 }
-function submitForm(e){
+async function submitForm(e){
   e.preventDefault();
-  document.getElementById('freeForm').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
+  const btn=e.target.querySelector('[type=submit]');
+  btn.disabled=true;
+  const payload={
+    firstName:document.getElementById('firstName').value.trim(),
+    lastName:document.getElementById('lastName').value.trim(),
+    phone:document.getElementById('phone').value.trim(),
+    email:document.getElementById('email').value.trim()||undefined,
+    insuranceOptIn:document.getElementById('insuranceOptIn').checked?1:0
+  };
+  const result=await window.submitToApi('/api/submit/landing-resources',payload);
+  if(result.ok||result.data?.success){
+    document.getElementById('freeForm').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  } else {
+    btn.disabled=false;
+    alert(document.body.dataset.lang==='en'?'Something went wrong. Please try again.':'Algo deu errado. Por favor, tente novamente.');
+  }
 }
 const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:0.1});
 document.querySelectorAll('.free-card,.scenario,.resource-card,.mention-card').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity 0.45s ease,transform 0.45s ease';obs.observe(el);});
