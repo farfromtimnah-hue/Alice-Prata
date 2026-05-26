@@ -4,7 +4,18 @@ _Rewritten at the end of each major work block. Read this first when resuming._
 
 ---
 
-## Just Completed (2026-05-26, Session 3)
+## Just Completed (2026-05-26, Session 3 — Visual QA pass)
+
+**Visual QA complete — 6 issues found and fixed in `crm/css/crm.css`:**
+- Mobile nav overflow fixed (`@media ≤640px`: hide email, hide "CRM" title, tighten padding)
+- Mobile lead header now stacks vertically (grid collapses to 1fr, actions min-width cleared)
+- Kanban col-header sticky offset corrected: desktop `+56px`, mobile `+93px` (2-row toolbar)
+- Column header tints increased: active 8→12%, holding 7→10%, archive 12→16%
+- Board section label opacity raised 0.4→0.55
+
+**QA sign-offs:** login frosted glass ✓ · dark inputs ✓ · board toolbar ✓ · notes/activity ✓ · profile/settings ✓ · mobile stacking ✓
+
+---
 
 **`crm/css/crm.css` fully redesigned** — dark glassmorphic premium system:
 - Base: near-black `#0f0e0d` warm atmospheric background
@@ -69,6 +80,10 @@ Add a "New Lead" button to the CRM board for manually adding a lead from a phone
 6. **The emergency guide "Send to Alice" feature does NOT require auth.** It posts to a public endpoint.
 
 7. **crm.css is now a dark glassmorphic system.** Do NOT introduce old terracota/sand variables (`--terra-deep`, `--sand-cream`, etc.) — they no longer exist. Use the token system in `claude-project-rules.md`.
+
+8. **Mobile nav breakpoint is `≤640px`.** Below that width: email hidden, nav-title hidden. Above 640px: full nav shows. Do not lower this breakpoint — 640px is the minimum comfortable width for the board layout.
+
+9. **The `@media (max-width:500px)` breakpoint in `.fi-row` is intentional.** Profile form inputs collapse to single-column at 500px. The lead header collapses at 640px. These are different breakpoints for different content.
 
 ---
 

@@ -191,6 +191,23 @@ GET    /api/crm/stages                    list all pipeline stages
 - [x] Rewrote `crm/css/crm.css` — dark glassmorphic premium design system (near-black base, frosted glass panels, warm accent `#c4876a`, backdrop-filter blur, all class names preserved)
 - [x] Updated `claude-project-rules.md` — replaced old terracota palette with full dark glass token system
 - [x] Updated `handoff.md` and `progress.md` to reflect Session 3 state
+- [x] Visual QA pass across all four pages (login, board, lead detail, profile) at desktop and mobile (375px)
+- [x] Fixed 6 issues found in QA:
+  - Bug: nav overflows on mobile — added `@media (max-width:640px)` to hide email, hide nav-title, tighten gap
+  - Bug: lead header grid not collapsing on mobile — added mobile override to stack `1fr` + clear `min-width`
+  - Minor: sticky col-header offset was 3px short — corrected to `calc(var(--nav-h) + 56px)`; mobile gets `93px` for 2-row toolbar
+  - Polish: Kanban column header tints too subtle — bumped active 8→12%, holding 7→10%, archive 12→16% opacity
+  - Polish: board section label opacity raised 0.4 → 0.55 for legibility
+  - Polish: column header border opacity bumped to match tint increase
+- [x] **iOS/Safari full hardening pass** — applied across ALL pages (CRM + public forms):
+  - `crm/css/crm.css`: `-webkit-fill-available` on html/body; `100dvh` fallbacks; `env(safe-area-inset-*)` on nav, toolbar, board, modal, toast, login; modal becomes bottom sheet at ≤640px (`92dvh`, rounded top); all form controls at `1rem` (16px) to prevent iOS auto-zoom; `44×44px` touch targets on all interactive elements; `-webkit-appearance: none` and tap-highlight reset globally; `-webkit-overflow-scrolling: touch` on scroll containers
+  - All 4 CRM HTML pages: `viewport-fit=cover`, `format-detection`, Apple PWA meta tags
+  - `landing-insurance.html`: `viewport-fit=cover`, `format-detection`, safe-area on fixed lang-bar + hero offset + sticky-cta bottom, `-webkit-appearance` on inputs, 44px touch targets
+  - `landing-resources.html`: same as insurance (same structure, hero uses 90px offset)
+  - `family-emergency-guide.html`: `viewport-fit=cover`, `format-detection`, safe-area on sticky topbar, **CRITICAL: input.fi font-size bumped 0.92rem → 1rem** (was causing iOS auto-zoom), 44px touch targets, safe-area bottom on footer/print-cta
+- [x] **Access control — allowlist enforcement**:
+  - `crm/js/auth.js`: added `APPROVED_EMAILS` check; unapproved sessions signed out and redirected to `login.html?error=unauthorized` (page stays hidden throughout — no content flash)
+  - `crm/login.html`: same allowlist check on login page itself (prevents double-navigation bounce); `?error=unauthorized` param shows clear error message and cleans URL; added `auth/invalid-credential` error code; subtitle updated to "acesso por convite"
 
 ### Session 2 (2026-05-26)
 - [x] Created `js/firebase-config.js` — shared Firebase public config
@@ -250,11 +267,11 @@ GET    /api/crm/stages                    list all pipeline stages
 
 - Worker deployed and responding: `curl -X OPTIONS https://alice-prata-crm-api.farfromtimnah.workers.dev/api/submit/landing-insurance` returns 204 with correct CORS headers
 - D1 database: 11 tables, 14 pipeline stages, 1 agent_profile row (empty)
-- All code committed to `crm-build` (HEAD: cf02bc4)
-- `crm-build` pushed to `https://github.com/farfromtimnah-hue/Alice-Prata`
+- All code committed to `crm-build` (HEAD: `95f6aa1` — iOS hardening public pages)
+- `crm-build` NOT yet pushed to remote after Session 3 work — push before merging to main
 
 ---
 
 ## Last Updated
 
-2026-05-26, end of Session 2.
+2026-05-26, end of Session 3.

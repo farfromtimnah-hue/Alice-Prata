@@ -2,7 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <title>CRM — Alice Prata</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/crm.css"/>
@@ -13,7 +16,7 @@
   <div class="login-card">
     <img src="../alice-prata-logo.png" alt="Alice Prata" class="login-logo"/>
     <h1 class="login-title">CRM</h1>
-    <p class="login-sub">Área restrita — agente autorizada</p>
+    <p class="login-sub">Área restrita — acesso por convite</p>
 
     <div class="login-error" id="loginError"></div>
 
@@ -49,9 +52,36 @@
 firebase.initializeApp(window.firebaseConfig);
 const auth = firebase.auth();
 
-// If already signed in, go directly to board
-auth.onAuthStateChanged(user => {
-  if (user) window.location.href = 'index.html';
+// Allowlist — must match auth.js exactly.
+const APPROVED_EMAILS = [
+  'alicecorsino12@gmail.com',
+  'nlepage.ao.ail@gmail.com',
+];
+
+function isApproved(user) {
+  return APPROVED_EMAILS.includes((user.email || '').toLowerCase().trim());
+}
+
+// Show error from URL param (e.g. redirected back from a protected page).
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('error') === 'unauthorized') {
+    showError('Acesso não autorizado. Esta conta não tem permissão para acessar o CRM.');
+    // Clean the URL so refreshing doesn't keep showing the banner.
+    history.replaceState(null, '', 'login.html');
+  }
+})();
+
+// If already signed in with an approved account, go directly to board.
+auth.onAuthStateChanged(function (user) {
+  if (!user) return;
+  if (!isApproved(user)) {
+    // Signed in but not on the allowlist — sign out and show error immediately.
+    auth.signOut();
+    showError('Acesso não autorizado. Esta conta não tem permissão para acessar o CRM.');
+    return;
+  }
+  window.location.href = 'index.html';
 });
 
 function showError(msg) {
@@ -77,14 +107,15 @@ async function signInEmail(e) {
       document.getElementById('emailInput').value.trim(),
       document.getElementById('pwInput').value
     );
-    // onAuthStateChanged will redirect
+    // onAuthStateChanged handles redirect or rejection.
   } catch (err) {
     btn.disabled = false;
     btn.textContent = 'Entrar';
     const msgs = {
-      'auth/user-not-found':  'Email não encontrado.',
-      'auth/wrong-password':  'Senha incorreta.',
-      'auth/invalid-email':   'Email inválido.',
+      'auth/user-not-found':    'Email não encontrado.',
+      'auth/wrong-password':    'Senha incorreta.',
+      'auth/invalid-email':     'Email inválido.',
+      'auth/invalid-credential':'Email ou senha incorretos.',
       'auth/too-many-requests': 'Muitas tentativas. Aguarde e tente novamente.',
     };
     showError(msgs[err.code] || 'Erro ao entrar. Tente novamente.');
@@ -98,7 +129,7 @@ async function signInGoogle() {
   try {
     const provider = new firebase.auth.GoogleAuthProvider();
     await auth.signInWithPopup(provider);
-    // onAuthStateChanged will redirect
+    // onAuthStateChanged handles redirect or rejection.
   } catch (err) {
     btn.disabled = false;
     if (err.code !== 'auth/popup-closed-by-user') {

@@ -4,6 +4,17 @@
 (function () {
   const API = 'https://alice-prata-crm-api.farfromtimnah.workers.dev';
 
+  // Allowlist — only these two accounts may access the CRM.
+  const APPROVED_EMAILS = [
+    'alicecorsino12@gmail.com',
+    'nlepage.ao.ail@gmail.com',
+  ];
+
+  function isApproved(user) {
+    const email = (user.email || '').toLowerCase().trim();
+    return APPROVED_EMAILS.includes(email);
+  }
+
   // Hide body until auth is resolved to avoid flash of protected content.
   document.documentElement.style.visibility = 'hidden';
 
@@ -22,6 +33,13 @@
 
   window.crm.firebaseAuth.onAuthStateChanged(function (user) {
     if (user) {
+      if (!isApproved(user)) {
+        // Signed in but not on the allowlist — sign out and show error.
+        window.crm.firebaseAuth.signOut().then(function () {
+          window.location.href = 'login.html?error=unauthorized';
+        });
+        return;
+      }
       document.documentElement.style.visibility = '';
       window.crm.currentUser = user;
       const emailEl = document.getElementById('navUserEmail');
