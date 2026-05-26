@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Perfil — Alice Prata CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/crm.css"/>
+</head>
+<body>
+
+<nav class="crm-nav">
+  <img src="../alice-prata-logo.png" alt="Alice Prata" class="nav-logo"/>
+  <span class="nav-title">CRM</span>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Board</a>
+    <a href="profile.html" class="nav-link active">Perfil</a>
+  </div>
+  <div class="nav-lang">
+    <button class="nav-lang-btn active" data-lang-btn="pt" onclick="crm.setLang('pt')">PT</button>
+    <button class="nav-lang-btn" data-lang-btn="en" onclick="crm.setLang('en')">EN</button>
+  </div>
+  <div class="nav-user">
+    <span id="navUserEmail"></span>
+    <button class="nav-signout" onclick="crm.signOut()">Sair</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="settings-page" id="settingsPage">
+    <div class="loading-state"><span class="spinner"></span><span>Carregando...</span></div>
+  </div>
+</div>
+
+<!-- Carrier modal -->
+<div class="modal-overlay hidden" id="carrierModal">
+  <div class="modal">
+    <div class="modal-title" id="carrierModalTitle">Seguradora</div>
+    <input type="hidden" id="carrierId"/>
+    <label class="fi-label">Nome da seguradora *</label>
+    <input class="fi" id="c_name" type="text"/>
+    <div class="fi-row">
+      <div>
+        <label class="fi-label">Tel. sinistros</label>
+        <input class="fi" id="c_claims" type="tel"/>
+      </div>
+      <div>
+        <label class="fi-label">Tel. geral</label>
+        <input class="fi" id="c_general" type="tel"/>
+      </div>
+    </div>
+    <label class="fi-label">Email</label>
+    <input class="fi" id="c_email" type="email"/>
+    <label class="fi-label">Portal (URL)</label>
+    <input class="fi" id="c_portal" type="url" placeholder="https://"/>
+    <label class="fi-label mt-8">Observações</label>
+    <textarea class="fi" id="c_notes" rows="2"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('carrierModal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCarrier()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/profile.js"></script>
+</body>
+</html>

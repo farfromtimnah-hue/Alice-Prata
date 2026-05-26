@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lead — Alice Prata CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/crm.css"/>
+</head>
+<body>
+
+<nav class="crm-nav">
+  <img src="../alice-prata-logo.png" alt="Alice Prata" class="nav-logo"/>
+  <span class="nav-title">CRM</span>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link" data-i18n="ui.active">Board</a>
+    <a href="profile.html" class="nav-link" data-i18n="ui.profile_title">Perfil</a>
+  </div>
+  <div class="nav-lang">
+    <button class="nav-lang-btn active" data-lang-btn="pt" onclick="crm.setLang('pt')">PT</button>
+    <button class="nav-lang-btn" data-lang-btn="en" onclick="crm.setLang('en')">EN</button>
+  </div>
+  <div class="nav-user">
+    <span id="navUserEmail"></span>
+    <button class="nav-signout" onclick="crm.signOut()">Sair</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="lead-page" id="leadPage">
+    <div class="loading-state"><span class="spinner"></span><span>Carregando...</span></div>
+  </div>
+</div>
+
+<!-- Appointment modal -->
+<div class="modal-overlay hidden" id="apptModal">
+  <div class="modal">
+    <div class="modal-title" id="apptModalTitle">Reunião</div>
+    <div id="apptModalBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('apptModal')">Cancelar</button>
+      <button class="btn btn-primary" id="apptSaveBtn" onclick="saveAppointment()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Archive modal -->
+<div class="modal-overlay hidden" id="archiveModal">
+  <div class="modal">
+    <div class="modal-title">Arquivar Lead</div>
+    <label class="fi-label">Motivo do arquivamento</label>
+    <select class="fi" id="archiveType">
+      <option value="no_sale">Sem venda</option>
+      <option value="not_qualified">Não qualificado</option>
+      <option value="active_policyholder">Segurado ativo (pólice entregue)</option>
+    </select>
+    <label class="fi-label mt-8" id="archiveReasonLabel">Observação</label>
+    <textarea class="fi" id="archiveReason" rows="3" placeholder="Descreva brevemente..."></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('archiveModal')">Cancelar</button>
+      <button class="btn btn-danger" onclick="doArchive()">Arquivar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Policy modal -->
+<div class="modal-overlay hidden" id="policyModal">
+  <div class="modal">
+    <div class="modal-title" id="policyModalTitle">Apólice</div>
+    <div class="fi-row">
+      <div>
+        <label class="fi-label">Seguradora</label>
+        <input class="fi" id="pol_carrier" type="text"/>
+      </div>
+      <div>
+        <label class="fi-label">Número da apólice</label>
+        <input class="fi" id="pol_number" type="text"/>
+      </div>
+    </div>
+    <div class="fi-row">
+      <div>
+        <label class="fi-label">Tipo</label>
+        <input class="fi" id="pol_type" type="text" placeholder="Vida, Saúde..."/>
+      </div>
+      <div>
+        <label class="fi-label">Cobertura</label>
+        <input class="fi" id="pol_coverage" type="text" placeholder="$250,000"/>
+      </div>
+    </div>
+    <div class="fi-row">
+      <div>
+        <label class="fi-label">Prêmio mensal</label>
+        <input class="fi" id="pol_premium" type="text" placeholder="$45/mês"/>
+      </div>
+      <div>
+        <label class="fi-label">Data de vigência</label>
+        <input class="fi" id="pol_effective" type="date"/>
+      </div>
+    </div>
+    <label class="fi-label">Status</label>
+    <select class="fi" id="pol_status">
+      <option value="pending">Pendente</option>
+      <option value="issued">Emitida</option>
+      <option value="delivered">Entregue</option>
+    </select>
+    <label class="fi-label mt-8">Observações</label>
+    <textarea class="fi" id="pol_notes" rows="2"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('policyModal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="savePolicy()">Salvar apólice</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/lead.js"></script>
+</body>
+</html>
