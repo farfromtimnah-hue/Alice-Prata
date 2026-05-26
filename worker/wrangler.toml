@@ -1,6 +1,7 @@
 name = "alice-prata-crm-api"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
+preview_urls = false
 
 [[d1_databases]]
 binding = "DB"
