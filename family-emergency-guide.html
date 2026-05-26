@@ -3,7 +3,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="format-detection" content="telephone=no"/>
 <title>Guia de Emergência Familiar — Alice Prata</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +63,26 @@ footer p{color:rgba(250,243,229,0.4);font-size:0.76rem;}
 /* Lang */
 body[data-lang="en"] .pt-content{display:none;}
 body[data-lang="pt"] .en-content{display:none;}
+/* ── iOS / viewport-fit=cover hardening ────────────────────────── */
+/* topbar (sticky top) — grow into notch; honor landscape insets */
+.topbar {
+  padding-top:   max(10px, env(safe-area-inset-top));
+  padding-left:  max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+/* CRITICAL: form inputs at 0.92rem (14.7px) cause iOS auto-zoom on focus.
+   Override to 1rem (16px) — required on all iPhone Safari versions. */
+input.fi, textarea.fi, select.fi { font-size: 1rem; }
+/* Safari native control reset */
+input.fi, textarea.fi, select.fi { -webkit-appearance: none; appearance: none; }
+button { -webkit-appearance: none; appearance: none; }
+* { -webkit-tap-highlight-color: transparent; }
+/* Touch targets — 44 × 44 px minimum */
+.lang-btn   { min-height: 44px; display: inline-flex; align-items: center; }
+.action-btn { min-height: 44px; }
+/* Footer / send-bar safe area */
+footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+.print-cta { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
 </style>
 </head>
 <body data-lang="pt">

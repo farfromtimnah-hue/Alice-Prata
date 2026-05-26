@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="format-detection" content="telephone=no"/>
 <title>Alice Prata — Recursos para Sua Família</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,6 +127,33 @@ footer a:hover{color:var(--sand);}
 .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--white);border-top:1px solid var(--sand);padding:12px 20px;display:none;}
 @media(max-width:768px){.sticky-cta{display:block;}}
 .sticky-cta .btn{width:100%;display:block;text-align:center;}
+</style>
+<style>
+/* ── iOS / viewport-fit=cover hardening ────────────────────────── */
+/* lang-bar (fixed top) — grow into notch; honor landscape insets */
+.lang-bar {
+  padding-top:   max(12px, env(safe-area-inset-top));
+  padding-left:  max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+/* Hero must clear the taller notch-aware lang-bar */
+.hero { padding-top: calc(90px + env(safe-area-inset-top)); }
+/* sticky-cta (fixed bottom, mobile) — clear home indicator */
+.sticky-cta {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  padding-left:   max(20px, env(safe-area-inset-left));
+  padding-right:  max(20px, env(safe-area-inset-right));
+}
+/* Safari native control reset */
+.form-input, .form-select { -webkit-appearance: none; appearance: none; }
+button { -webkit-appearance: none; appearance: none; }
+* { -webkit-tap-highlight-color: transparent; }
+/* Touch targets — 44 × 44 px minimum */
+.lang-btn { min-height: 44px; display: inline-flex; align-items: center; }
+.btn      { min-height: 44px; }
+/* Form inputs: no iOS auto-zoom — font-size already 1rem (16px) ✓ */
+/* Footer safe area */
+footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
 </style>
 </head>
 <body data-lang="pt">
