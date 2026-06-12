@@ -227,17 +227,20 @@ auth.getRedirectResult()
     clearInfo();
     resetGoogleBtn();
     if (err.code === 'auth/unauthorized-domain') {
+      console.error('[login] getRedirectResult error:', err.code, err.message, err);
       showError('domain_error');
     } else if (
       err.code === 'auth/user-cancelled' ||
       err.code === 'auth/popup-closed-by-user'
     ) {
+      console.error('[login] getRedirectResult error:', err.code, err.message, err);
       // User cancelled at Google — no message needed
     } else if (err.code) {
       // Show the code for diagnosability
       const el = document.getElementById('loginError');
       el.dataset.key = '';
-      el.textContent  = t('google_error') + ' [' + err.code + ']';
+      console.error('[login] getRedirectResult error:', err.code, err.message, err);
+      el.textContent  = 'Firebase error: ' + err.code + ' — ' + err.message;
       el.style.display = 'block';
     }
   });
