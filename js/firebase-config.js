@@ -1,6 +1,6 @@
 // Firebase public web config — not secret, safe to ship in client code.
 // See: https://firebase.google.com/docs/web/setup#available-libraries
-const firebaseConfig = {
+window.firebaseConfig = {
   apiKey: "AIzaSyDybZm3RIBLdP7UEvPFVIWLeKPI8AS7Ric",
   authDomain: "alice-prata-crm.firebaseapp.com",
   projectId: "alice-prata-crm",
