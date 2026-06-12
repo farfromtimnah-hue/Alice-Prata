@@ -230,5 +230,6 @@ crm.onAuthReady = function (user) {
   document.querySelectorAll('[data-lang-btn]').forEach(b => {
     b.classList.toggle('active', b.dataset.langBtn === crm.lang);
   });
+  crm.applyI18n();   // translate static nav + toolbar on first load
   loadLeads();
 };

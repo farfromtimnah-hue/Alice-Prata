@@ -83,6 +83,12 @@ window.crm.strings = {
       appointments:      'Reuniões',
       policies:          'Apólices',
       submissions:       'Formulários',
+      profile:           'Perfil',
+      active_nav:        'Ativos',
+      sort_newest:       'Mais recentes',
+      sort_oldest:       'Mais antigos',
+      sort_no_contact:   'Sem contato (primeiro)',
+      all_sources:       'Todas as fontes',
     }
   },
   en: {
@@ -160,6 +166,12 @@ window.crm.strings = {
       appointments:      'Appointments',
       policies:          'Policies',
       submissions:       'Submissions',
+      profile:           'Profile',
+      active_nav:        'Active',
+      sort_newest:       'Newest first',
+      sort_oldest:       'Oldest first',
+      sort_no_contact:   'No contact first',
+      all_sources:       'All sources',
     }
   }
 };
@@ -177,6 +189,20 @@ window.crm.t = function(key) {
   return obj || key;
 };
 
+// Apply data-i18n attributes to static elements (nav, toolbar, options).
+// INPUT/TEXTAREA get their placeholder set; everything else (incl. OPTION) gets textContent.
+window.crm.applyI18n = function applyI18n() {
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    var val = crm.t(key);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+};
+
 window.crm.setLang = function(lang) {
   window.crm.lang = lang;
   localStorage.setItem('crm_lang', lang);
@@ -184,4 +210,5 @@ window.crm.setLang = function(lang) {
     b.classList.toggle('active', b.dataset.langBtn === lang);
   });
   if (typeof window.crm.onLangChange === 'function') window.crm.onLangChange(lang);
+  window.crm.applyI18n();
 };

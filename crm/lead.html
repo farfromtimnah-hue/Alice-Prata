@@ -16,8 +16,8 @@
   <img src="../alice-prata-logo.png" alt="Alice Prata" class="nav-logo"/>
   <span class="nav-title">CRM</span>
   <div class="nav-links">
-    <a href="index.html" class="nav-link" data-i18n="ui.active">Board</a>
-    <a href="profile.html" class="nav-link" data-i18n="ui.profile_title">Perfil</a>
+    <a href="index.html" class="nav-link" data-i18n="ui.active_nav">Ativos</a>
+    <a href="profile.html" class="nav-link" data-i18n="ui.profile">Perfil</a>
   </div>
   <div class="nav-lang">
     <button class="nav-lang-btn active" data-lang-btn="pt" onclick="crm.setLang('pt')">PT</button>
@@ -25,7 +25,7 @@
   </div>
   <div class="nav-user">
     <span id="navUserEmail"></span>
-    <button class="nav-signout" onclick="crm.signOut()">Sair</button>
+    <button class="nav-signout" onclick="crm.signOut()" data-i18n="ui.sign_out">Sair</button>
   </div>
 </nav>
 

@@ -16,8 +16,8 @@
   <img src="../alice-prata-logo.png" alt="Alice Prata" class="nav-logo"/>
   <span class="nav-title">CRM</span>
   <div class="nav-links">
-    <a href="index.html" class="nav-link active" data-i18n="ui.active">Ativos</a>
-    <a href="profile.html" class="nav-link" data-i18n="ui.profile_title">Perfil</a>
+    <a href="index.html" class="nav-link active" data-i18n="ui.active_nav">Ativos</a>
+    <a href="profile.html" class="nav-link" data-i18n="ui.profile">Perfil</a>
   </div>
   <div class="nav-lang">
     <button class="nav-lang-btn active" data-lang-btn="pt" onclick="crm.setLang('pt')">PT</button>
@@ -31,21 +31,21 @@
 
 <div class="page">
   <div class="board-toolbar">
-    <input type="search" class="board-search" id="searchInput" placeholder="Buscar leads..." oninput="onSearch(this.value)"/>
+    <input type="search" class="board-search" id="searchInput" placeholder="" data-i18n="ui.search" oninput="onSearch(this.value)"/>
     <div class="board-filter-wrap">
       <select class="board-filter" id="sortSelect" onchange="onSort(this.value)">
-        <option value="newest">Mais recentes</option>
-        <option value="oldest">Mais antigos</option>
-        <option value="last_contact">Sem contato (primeiro)</option>
+        <option value="newest" data-i18n="ui.sort_newest">Mais recentes</option>
+        <option value="oldest" data-i18n="ui.sort_oldest">Mais antigos</option>
+        <option value="last_contact" data-i18n="ui.sort_no_contact">Sem contato (primeiro)</option>
       </select>
     </div>
     <div class="board-filter-wrap">
       <select class="board-filter" id="sourceFilter" onchange="onSourceFilter(this.value)">
-        <option value="">Todas as fontes</option>
-        <option value="landing-insurance">Seguro</option>
-        <option value="landing-resources">Recursos</option>
-        <option value="emergency-guide">Guia Emergência</option>
-        <option value="referral">Indicação</option>
+        <option value="" data-i18n="ui.all_sources">Todas as fontes</option>
+        <option value="landing-insurance" data-i18n="sources.landing-insurance">Seguro</option>
+        <option value="landing-resources" data-i18n="sources.landing-resources">Recursos</option>
+        <option value="emergency-guide" data-i18n="sources.emergency-guide">Guia Emergência</option>
+        <option value="referral" data-i18n="sources.referral">Indicação</option>
       </select>
     </div>
   </div>
