@@ -256,6 +256,7 @@ auth.onAuthStateChanged(function (user) {
   }
   // Clear any loading state and go to board
   clearInfo();
+  console.log('[login] approved, redirecting to index.html');
   window.location.href = 'index.html';
 });
 
