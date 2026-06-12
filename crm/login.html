@@ -206,46 +206,10 @@ function isApproved(user) {
 firebase.initializeApp(window.firebaseConfig);
 const auth = firebase.auth();
 
-// If we're returning from a Google redirect, show a brief loading state
-// so the user knows something is happening instead of seeing a blank login form.
-if (sessionStorage.getItem('crm_google_pending')) {
-  showInfo('checking');
-}
+// getRedirectResult() block removed — no longer needed with signInWithPopup.
+// (Popup returns its result directly in signInGoogle()'s .then()/.catch().)
 
-// getRedirectResult() must be called on every page load.
-// • Normal load (no pending redirect) → resolves with {user: null} — no-op.
-// • Return from successful Google redirect → user state already in
-//   onAuthStateChanged which redirects to board. We just clear the loader.
-// • Return from failed redirect → rejects with the error — we show the message.
-auth.getRedirectResult()
-  .then(function () {
-    sessionStorage.removeItem('crm_google_pending');
-    clearInfo();
-  })
-  .catch(function (err) {
-    sessionStorage.removeItem('crm_google_pending');
-    clearInfo();
-    resetGoogleBtn();
-    if (err.code === 'auth/unauthorized-domain') {
-      console.error('[login] getRedirectResult error:', err.code, err.message, err);
-      showError('domain_error');
-    } else if (
-      err.code === 'auth/user-cancelled' ||
-      err.code === 'auth/popup-closed-by-user'
-    ) {
-      console.error('[login] getRedirectResult error:', err.code, err.message, err);
-      // User cancelled at Google — no message needed
-    } else if (err.code) {
-      // Show the code for diagnosability
-      const el = document.getElementById('loginError');
-      el.dataset.key = '';
-      console.error('[login] getRedirectResult error:', err.code, err.message, err);
-      el.textContent  = 'Firebase error: ' + err.code + ' — ' + err.message;
-      el.style.display = 'block';
-    }
-  });
-
-// onAuthStateChanged handles both redirect-return and email sign-in.
+// onAuthStateChanged handles both popup sign-in and email sign-in.
 // Fires as soon as Firebase restores auth state from IndexedDB.
 auth.onAuthStateChanged(function (user) {
   if (!user) return;
@@ -280,33 +244,35 @@ async function signInEmail(e) {
   }
 }
 
-// ── Google sign-in — redirect (reliable on GitHub Pages + Safari) ─
-// signInWithPopup fails in these environments because:
-//   1. Safari / ITP blocks cross-origin postMessage from firebaseapp.com
-//   2. iOS standalone PWA mode blocks all popups entirely
-//   3. Some browsers block popups opened from async code paths
-// signInWithRedirect avoids all of this by navigating the tab directly.
+// ── Google sign-in — popup ────────────────────────────────────────
 function signInGoogle() {
   clearError();
-  const btn  = document.getElementById('googleBtn');
-  const span = document.getElementById('googleBtnText');
-  btn.disabled     = true;
+  var btn = document.getElementById('googleBtn');
+  var span = document.getElementById('googleBtnText');
+  btn.disabled = true;
   span.textContent = t('google_loading');
 
-  // Flag so we show the "Checking…" info banner when the page reloads
-  // after the OAuth round-trip. sessionStorage survives the redirect.
-  sessionStorage.setItem('crm_google_pending', '1');
-
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithRedirect(provider).catch(function (err) {
-    // This catch only fires if the redirect itself can't start (very rare —
-    // e.g. the Firebase SDK isn't initialised yet). The normal error path
-    // is handled by getRedirectResult() after the page reloads.
-    sessionStorage.removeItem('crm_google_pending');
-    resetGoogleBtn();
-    showError('google_error');
-    console.error('[login] signInWithRedirect failed to start:', err);
-  });
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(function(result) {
+      // onAuthStateChanged will handle the redirect to index.html
+    })
+    .catch(function(err) {
+      btn.disabled = false;
+      span.textContent = t('google_btn');
+      if (err.code === 'auth/popup-blocked') {
+        showError('popup_blocked');
+      } else if (
+        err.code === 'auth/user-cancelled' ||
+        err.code === 'auth/popup-closed-by-user'
+      ) {
+        // user closed — no message needed
+      } else {
+        var el = document.getElementById('loginError');
+        el.textContent = 'Firebase error: ' + err.code + ' — ' + err.message;
+        el.style.display = 'block';
+      }
+    });
 }
 </script>
 </body>
