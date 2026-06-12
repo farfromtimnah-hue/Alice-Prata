@@ -257,6 +257,27 @@ a { color: var(--accent); text-decoration: none; }
   opacity: 0.55;
 }
 
+/* Board page fills the viewport so the kanban scroll area spans the full
+   height instead of collapsing to a short strip when columns are empty.
+   This also makes the whole board a horizontal-scroll / swipe target on
+   touch devices (previously only a thin strip at the top was scrollable).
+   Scoped to .board-page so the profile / lead pages are unaffected. */
+.board-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+.board-page .board-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+/* .board-scroll is the scroll container now, so sticky column headers
+   pin to its top rather than to the old body-scroll offset. */
+.board-page .col-header {
+  top: 0;
+}
+
 /* ── KANBAN COLUMN ────────────────────────────────────────────────── */
 .board-col {
   width: var(--col-w);
