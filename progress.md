@@ -229,6 +229,25 @@ GET    /api/crm/stages                    list all pipeline stages
 
 ---
 
+## Completed Tasks (continued)
+
+### Session 4 (2026-06-13) — Pending License Workflow + Board Tabs
+- [x] **D1 migration** — added `pending_license_status` (NULL|'applying'|'waiting') and `pending_license_unread` (0/1) columns to `leads`. Applied to live D1 (`migrations/2026-06-13_pending_license.sql`); also reflected in `worker/schema.sql`.
+- [x] **STATE_LICENSING_DATA** constant in `worker/src/index.js` — all 50 states + DC with non-resident fee, special requirements, and NIPR/Sircon routing (sourced from `state-licensing.html`). Special requirements only for CA, GA, NY; NY routes direct to dfs.ny.gov (no NIPR/Sircon).
+- [x] **Worker API**:
+  - `GET /api/crm/state-info/:stateCode` — returns fee/requirements/nipr/sircon/url; 404 if unknown.
+  - `POST /api/crm/leads/:id/license-decision` — sets `pending_license_status`, clears unread, logs `license_decision` activity, returns updated lead.
+  - `licensed-states` POST now auto-promotes any `pending_license` leads whose `licensed_state` matches the newly added state → `new_lead` (clears pending fields, logs activity), and returns `promoted_leads` count.
+  - Deployed (`wrangler deploy`, version `c17aeb01-...`).
+- [x] **Board tab system** (`board.js` + `crm.css`) — Active / Holding / Archive tabs replace the vertical scroll-through sections. Each tab shows a lead-count badge; Holding shows a red "New/Nova" badge when any `pending_license` lead is unread. `clearPendingBadge()` stores `crm_holding_last_viewed` in localStorage on Holding click; badge re-evaluates against DB on each board load.
+- [x] **Pending license decision UI** (`lead.js` + `crm.css`) — for `pending_license` leads, a "License Decision" section under the contact-log buttons: shows "{State} — $fee" + requirements (only if any), two decision buttons (pre-selected from `pending_license_status`). "Applying" reveals an info panel with NIPR/Sircon/state-URL links + requirement reminders; "Waiting" hides it. Both clear the unread flag.
+- [x] **NPN rename** — `NMLS` field relabeled to `NPN (National Producer Number)` in `profile.js` (input id `p_npn`). Value still persists in the existing `nmls` DB column (no column migration scoped).
+- [x] **Auto-promotion feedback** — `addState()` shows a toast "{n} lead(s) moved to active pipeline!" when the API returns `promoted_leads > 0`.
+- [x] **Horizontal scroll** — `.board-scroll` columns container set to `display:flex; flex-direction:row; overflow-x:auto; -webkit-overflow-scrolling:touch`; `.board-col` keeps `flex-shrink:0`. No color/size/padding changes.
+- [x] i18n: added `tab_active`, `tab_holding`, `tab_archive`, `badge_unread` (PT + EN).
+
+---
+
 ## Pending Tasks
 
 ### Deployment
@@ -250,6 +269,13 @@ GET    /api/crm/stages                    list all pipeline stages
 - [ ] End-to-end form submission test (submit landing-insurance form → verify lead appears in CRM board)
 - [ ] Firebase Google Sign-In on GitHub Pages (requires authorized domain step above)
 - [ ] CRM board rendering on mobile
+- [ ] **Authenticated UI test of Session 4 work** — tabs, holding badge, license-decision section, and auto-promotion were not verified in a live logged-in browser (preview is auth-gated). Syntax-checked + endpoints confirmed reachable (401, not 404).
+
+### Known issues / discovered during Session 4
+- **NPN stored in `nmls` column** — the UI now says NPN but the value persists in the legacy `agent_profile.nmls` column and is sent over the wire as `nmls`. A future cleanup could migrate the column + worker whitelist to `npn` for full consistency.
+- **Cross-page holding badge** — the board badge is driven by `pending_license_unread` in the DB (authoritative). `lead.js` writes `crm_holding_last_viewed` to localStorage as a best-effort signal, but the badge truly refreshes only on the next board load (board and lead are separate pages). Acceptable, but not a live push.
+- **Auto-promotion uses `licensed_state`** — auto-promotion matches `leads.licensed_state` (case-insensitive) against the newly added state code. Leads in `pending_license` without a `licensed_state` set will not be auto-promoted. The existing schema gap (no auto-route INTO `pending_license` on submission) is still open (see above).
+- **state-info has no state name** — `GET /api/crm/state-info/:code` returns fee/requirements/routing only; the display name comes from a `STATE_NAMES` map in `lead.js`. Keep the two in sync if states change.
 
 ---
 
@@ -274,4 +300,4 @@ GET    /api/crm/stages                    list all pipeline stages
 
 ## Last Updated
 
-2026-05-26, end of Session 3.
+2026-06-13, end of Session 4 (pending license workflow, board tabs, NPN rename, auto-promotion, horizontal scroll). Worker deployed (version `c17aeb01-...`); D1 migration applied to live DB; all changes committed + pushed to `main`.

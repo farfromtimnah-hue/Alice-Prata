@@ -67,8 +67,8 @@ function renderPage() {
           <input class="fi" id="p_license" value="${esc(p.license_number)}" type="text"/>
         </div>
         <div>
-          <label class="fi-label">NMLS</label>
-          <input class="fi" id="p_nmls" value="${esc(p.nmls)}" type="text"/>
+          <label class="fi-label">${crm.lang==='en'?'NPN (National Producer Number)':'NPN (Número Nacional de Produtor)'}</label>
+          <input class="fi" id="p_npn" value="${esc(p.nmls)}" type="text"/>
         </div>
       </div>
       <div style="margin-top:16px;">
@@ -155,7 +155,8 @@ async function saveProfile() {
     manager_name:  document.getElementById('p_mgr_name').value.trim(),
     manager_phone: document.getElementById('p_mgr_phone').value.trim(),
     license_number:document.getElementById('p_license').value.trim(),
-    nmls:          document.getElementById('p_nmls').value.trim(),
+    // NPN (National Producer Number) — persisted in the legacy `nmls` column.
+    nmls:          document.getElementById('p_npn').value.trim(),
   };
   try {
     await crm.apiFetch('/api/crm/profile', { method: 'PATCH', body: JSON.stringify(body) });
@@ -175,7 +176,7 @@ async function addState() {
     return;
   }
   try {
-    await crm.apiFetch('/api/crm/licensed-states', {
+    const res = await crm.apiFetch('/api/crm/licensed-states', {
       method: 'POST',
       body: JSON.stringify({ state_code: code, state_name: name || code }),
     });
@@ -185,7 +186,16 @@ async function addState() {
       statesData.push({ state_code: code, state_name: name || code });
     }
     document.getElementById('statePills').innerHTML = renderStatePills();
-    showToast(crm.t('ui.saved'));
+
+    const promoted = res && Number(res.promoted_leads) > 0 ? Number(res.promoted_leads) : 0;
+    if (promoted > 0) {
+      const msg = crm.lang === 'en'
+        ? `${promoted} lead(s) moved to active pipeline!`
+        : `${promoted} lead(s) movidos para o pipeline ativo!`;
+      showToast(msg);
+    } else {
+      showToast(crm.t('ui.saved'));
+    }
   } catch {
     showToast(crm.t('ui.error_generic'), false);
   }

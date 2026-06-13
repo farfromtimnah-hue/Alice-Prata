@@ -40,6 +40,8 @@ CREATE TABLE IF NOT EXISTS leads (
   last_contact_method  TEXT CHECK(last_contact_method IN ('texted','emailed','voicemail','no_answer','someone_else') OR last_contact_method IS NULL),
   last_contacted_at    TEXT,                 -- ISO-8601
   is_orphan            INTEGER DEFAULT 0,    -- 1 if missing usable contact info
+  pending_license_status TEXT DEFAULT NULL,  -- NULL (unactioned) | 'applying' | 'waiting'
+  pending_license_unread INTEGER DEFAULT 0,  -- 1 = unread/unactioned, 0 = actioned or not pending_license
   created_at           TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at           TEXT NOT NULL DEFAULT (datetime('now'))
 );

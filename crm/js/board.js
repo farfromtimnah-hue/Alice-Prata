@@ -25,6 +25,37 @@ let searchTerm = '';
 let sortValue  = 'newest';
 let sourceFilter = '';
 
+// ── Tabs ──────────────────────────────────────────────────────────
+// Three tabs replace the old vertical scroll-through section system.
+const TABS = [
+  { key: 'active',  i18n: 'ui.tab_active',  types: ['active']  },
+  { key: 'holding', i18n: 'ui.tab_holding', types: ['holding'] },
+  { key: 'archive', i18n: 'ui.tab_archive', types: ['archive'] },
+];
+let activeTab = 'active';
+// Suppress the holding red badge after the agent has viewed the tab this
+// session. Reset on every fresh data load so it re-evaluates against the DB.
+let holdingBadgeDismissed = false;
+
+// Any pending_license lead still flagged unread/unactioned?
+function boardHasUnread() {
+  return allLeads.some(l => l.stage === 'pending_license' && Number(l.pending_license_unread) === 1);
+}
+
+// Record that the agent has looked at the holding tab.
+function clearPendingBadge() {
+  localStorage.setItem('crm_holding_last_viewed', String(Date.now()));
+}
+
+function selectTab(key) {
+  activeTab = key;
+  if (key === 'holding') {
+    clearPendingBadge();
+    holdingBadgeDismissed = true;
+  }
+  renderBoard();
+}
+
 // ── Toast ─────────────────────────────────────────────────────────
 function showToast(msg, ok) {
   const el = document.getElementById('toast');
@@ -127,63 +158,75 @@ function groupByStage(leads) {
 
 // ── Board renderer ────────────────────────────────────────────────
 function renderBoard() {
-  const root = document.getElementById('boardRoot');
-  const leads = filteredLeads();
-  const byStage = groupByStage(leads);
+  renderTabs();
+  renderColumns();
+}
 
-  // Sections
-  const sections = [
-    { label: crm.t('ui.section_pipeline'), types: ['active'] },
-    { label: crm.t('ui.section_holding'),  types: ['holding'] },
-    { label: crm.t('ui.section_archive'),  types: ['archive'] },
-  ];
+// Tab bar: label + lead-count badge per tab, plus a red unread badge on Holding.
+function renderTabs() {
+  const tabsEl = document.getElementById('boardTabs');
+  if (!tabsEl) return;
+
+  const byStage = groupByStage(filteredLeads());
+  const counts = {};
+  for (const tab of TABS) {
+    counts[tab.key] = STAGE_ORDER
+      .filter(s => tab.types.includes(s.type))
+      .reduce((sum, s) => sum + (byStage[s.code] ? byStage[s.code].length : 0), 0);
+  }
+
+  const showUnread = boardHasUnread() && !holdingBadgeDismissed;
+
+  tabsEl.innerHTML = TABS.map(tab => {
+    const isActive = tab.key === activeTab;
+    const unread = (tab.key === 'holding' && showUnread)
+      ? `<span class="tab-badge" title="${crm.t('ui.badge_unread')}">${crm.t('ui.badge_unread')}</span>`
+      : '';
+    return `<button class="board-tab${isActive ? ' active' : ''}" data-tab="${tab.key}" onclick="selectTab('${tab.key}')">
+        <span class="tab-label">${crm.t(tab.i18n)}</span>
+        <span class="tab-count">${counts[tab.key]}</span>
+        ${unread}
+      </button>`;
+  }).join('');
+}
+
+// Columns for the currently selected tab only.
+function renderColumns() {
+  const root = document.getElementById('boardRoot');
+  const byStage = groupByStage(filteredLeads());
+  const tab = TABS.find(t => t.key === activeTab) || TABS[0];
+  const stages = STAGE_ORDER.filter(s => tab.types.includes(s.type));
 
   root.innerHTML = '';
 
-  for (const section of sections) {
-    const stages = STAGE_ORDER.filter(s => section.types.includes(s.type));
+  for (const { code, type } of stages) {
+    const colLeads = byStage[code] || [];
+    const col = document.createElement('div');
+    col.className = 'board-col';
 
-    // Section label
-    const labelEl = document.createElement('div');
-    labelEl.className = 'board-section-label';
-    labelEl.textContent = section.label;
-    root.appendChild(labelEl);
+    const header = document.createElement('div');
+    header.className = `col-header type-${type}`;
+    header.innerHTML = `
+      <span class="col-title">${crm.t('stages.' + code)}</span>
+      <span class="col-count">${colLeads.length}</span>`;
+    col.appendChild(header);
 
-    // Columns for this section
-    const groupEl = document.createElement('div');
-    groupEl.className = 'board-group';
+    const cards = document.createElement('div');
+    cards.className = 'col-cards';
 
-    for (const { code, type } of stages) {
-      const colLeads = byStage[code] || [];
-      const col = document.createElement('div');
-      col.className = 'board-col';
-
-      const header = document.createElement('div');
-      header.className = `col-header type-${type}`;
-      header.innerHTML = `
-        <span class="col-title">${crm.t('stages.' + code)}</span>
-        <span class="col-count">${colLeads.length}</span>`;
-      col.appendChild(header);
-
-      const cards = document.createElement('div');
-      cards.className = 'col-cards';
-
-      if (colLeads.length === 0) {
-        const empty = document.createElement('div');
-        empty.className = 'col-empty';
-        empty.textContent = crm.t('ui.no_leads');
-        cards.appendChild(empty);
-      } else {
-        for (const lead of colLeads) {
-          cards.appendChild(renderCard(lead));
-        }
+    if (colLeads.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'col-empty';
+      empty.textContent = crm.t('ui.no_leads');
+      cards.appendChild(empty);
+    } else {
+      for (const lead of colLeads) {
+        cards.appendChild(renderCard(lead));
       }
-
-      col.appendChild(cards);
-      groupEl.appendChild(col);
     }
 
-    root.appendChild(groupEl);
+    col.appendChild(cards);
+    root.appendChild(col);
   }
 }
 
@@ -196,6 +239,7 @@ async function loadLeads() {
     const data = await crm.apiFetch(url);
     if (!Array.isArray(data)) throw new Error('Unexpected response');
     allLeads = data;
+    holdingBadgeDismissed = false;   // re-check unread against fresh DB data
     renderBoard();
   } catch (e) {
     root.innerHTML = `<div class="error-state">${crm.t('ui.error_generic')}<br><small>${e.message}</small></div>`;

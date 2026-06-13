@@ -32,6 +32,69 @@
  *   GET  /api/crm/stages
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// STATE LICENSING DATA — non-resident life insurance license fees & routing
+// Source: state-licensing.html (fees current as of 2025).
+//   fee          — non-resident license fee (USD)
+//   requirements — special steps; [] when none
+//   nipr         — true if NIPR handles that state
+//   sircon       — true if Sircon also handles that state
+//   url          — state-specific application URL (only where NIPR/Sircon don't apply)
+// ═══════════════════════════════════════════════════════════════════════════
+const STATE_LICENSING_DATA = {
+  AL: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  AK: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  AZ: { fee: 130, requirements: [], nipr: true, sircon: true },
+  AR: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  CA: { fee: 188, requirements: ['Fingerprinting required', '4-6 weeks processing'], nipr: true, sircon: true },
+  CO: { fee: 71,  requirements: [], nipr: true, sircon: true },
+  CT: { fee: 100, requirements: [], nipr: true, sircon: true },
+  DE: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  FL: { fee: 0,   requirements: [], nipr: true, sircon: true, note: 'Home state — already licensed' },
+  GA: { fee: 65,  requirements: ['Notarized Citizenship Affidavit required'], nipr: true, sircon: true },
+  HI: { fee: 90,  requirements: [], nipr: true, sircon: true },
+  ID: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  IL: { fee: 60,  requirements: [], nipr: true, sircon: true },
+  IN: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  IA: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  KS: { fee: 40,  requirements: [], nipr: true, sircon: true },
+  KY: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  LA: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  ME: { fee: 60,  requirements: [], nipr: true, sircon: true },
+  MD: { fee: 54,  requirements: [], nipr: true, sircon: true },
+  MA: { fee: 150, requirements: [], nipr: true, sircon: true },
+  MI: { fee: 10,  requirements: [], nipr: true, sircon: true },
+  MN: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  MS: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  MO: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  MT: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  NE: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  NV: { fee: 133, requirements: [], nipr: true, sircon: true },
+  NH: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  NJ: { fee: 90,  requirements: [], nipr: true, sircon: true },
+  NM: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  NY: { fee: 0,   requirements: ['Must apply at dfs.ny.gov directly — NOT NIPR'], nipr: false, sircon: false, url: 'https://www.dfs.ny.gov' },
+  NC: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  ND: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  OH: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  OK: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  OR: { fee: 15,  requirements: [], nipr: true, sircon: true },
+  PA: { fee: 55,  requirements: [], nipr: true, sircon: true },
+  RI: { fee: 45,  requirements: [], nipr: true, sircon: true },
+  SC: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  SD: { fee: 20,  requirements: [], nipr: true, sircon: true },
+  TN: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  TX: { fee: 150, requirements: [], nipr: true, sircon: true },
+  UT: { fee: 25,  requirements: [], nipr: true, sircon: true },
+  VT: { fee: 100, requirements: [], nipr: true, sircon: true },
+  VA: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  WA: { fee: 107, requirements: [], nipr: true, sircon: true },
+  DC: { fee: 60,  requirements: [], nipr: true, sircon: true },
+  WV: { fee: 30,  requirements: [], nipr: true, sircon: true },
+  WI: { fee: 50,  requirements: [], nipr: true, sircon: true },
+  WY: { fee: 30,  requirements: [], nipr: true, sircon: true },
+};
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -406,6 +469,22 @@ async function crmRouter(request, env, path, method, json, err, _authPayload) {
   const segments = path.split('/').filter(Boolean); // ['api','crm','leads','123','activity']
   const resource = segments[2]; // 'leads' | 'profile' | 'licensed-states' | 'carriers' | 'stages' | 'referrals'
 
+  // ── STATE INFO (license fee lookup) ───────────────────────────────────────
+  if (resource === 'state-info' && method === 'GET') {
+    const code = (segments[3] || '').toUpperCase();
+    const data = STATE_LICENSING_DATA[code];
+    if (!data) return err('State not found', 404);
+    return json({
+      state_code: code,
+      fee: data.fee,
+      requirements: data.requirements || [],
+      nipr: !!data.nipr,
+      sircon: !!data.sircon,
+      url: data.url || null,
+      note: data.note || null,
+    });
+  }
+
   // ── STAGES ──────────────────────────────────────────────────────────────
   if (resource === 'stages' && method === 'GET') {
     const { results } = await env.DB.prepare(
@@ -432,6 +511,7 @@ async function crmRouter(request, env, path, method, json, err, _authPayload) {
     }
 
     if (sub === 'stage' && method === 'POST') return await moveStage(request, leadId, env, json, err);
+    if (sub === 'license-decision' && method === 'POST') return await licenseDecision(request, leadId, env, json, err);
     if (sub === 'activity' && method === 'POST') return await logActivity(request, leadId, env, json, err);
     if (sub === 'notes' && method === 'GET') return await getNotes(leadId, env, json);
     if (sub === 'note' && method === 'POST') return await addNote(request, leadId, env, json, err);
@@ -488,8 +568,24 @@ async function crmRouter(request, env, path, method, json, err, _authPayload) {
       const code = sanitizeText(body.state_code, 2);
       const name = sanitizeText(body.state_name, 50);
       if (!code) return err('state_code required');
-      await env.DB.prepare('INSERT OR IGNORE INTO licensed_states (state_code, state_name) VALUES (?,?)').bind(code.toUpperCase(), name || code).run();
-      return json({ ok: true });
+      const upperCode = code.toUpperCase();
+      await env.DB.prepare('INSERT OR IGNORE INTO licensed_states (state_code, state_name) VALUES (?,?)').bind(upperCode, name || code).run();
+
+      // Auto-promote any pending_license leads waiting on this newly licensed state.
+      const { results: pending } = await env.DB.prepare(
+        `SELECT id FROM leads WHERE stage='pending_license' AND UPPER(licensed_state)=?`
+      ).bind(upperCode).all();
+
+      for (const row of (pending || [])) {
+        await env.DB.prepare(
+          `UPDATE leads SET stage='new_lead', pending_license_status=NULL, pending_license_unread=0, updated_at=datetime('now') WHERE id=?`
+        ).bind(row.id).run();
+        await env.DB.prepare(
+          `INSERT INTO activity_log (lead_id, action_type, old_stage, new_stage, notes) VALUES (?, 'stage_changed', 'pending_license', 'new_lead', ?)`
+        ).bind(row.id, 'Auto-promoted to New Lead — state license added').run();
+      }
+
+      return json({ ok: true, promoted_leads: (pending || []).length });
     }
     if (method === 'DELETE') {
       const code = segments[3];
@@ -661,6 +757,26 @@ async function moveStage(request, leadId, env, json, err) {
   ).bind(leadId, oldStage, newStage, body.notes || null).run();
 
   return json({ ok: true });
+}
+
+async function licenseDecision(request, leadId, env, json, err) {
+  let body; try { body = await request.json(); } catch { return err('Invalid JSON'); }
+  const status = sanitizeText(body.status);
+  if (status !== 'applying' && status !== 'waiting') return err('Invalid status');
+
+  const lead = await env.DB.prepare('SELECT id FROM leads WHERE id=?').bind(leadId).first();
+  if (!lead) return err('Lead not found', 404);
+
+  await env.DB.prepare(
+    `UPDATE leads SET pending_license_status=?, pending_license_unread=0, updated_at=datetime('now') WHERE id=?`
+  ).bind(status, leadId).run();
+
+  await env.DB.prepare(
+    `INSERT INTO activity_log (lead_id, action_type, notes) VALUES (?, 'license_decision', ?)`
+  ).bind(leadId, status).run();
+
+  const updated = await env.DB.prepare('SELECT * FROM leads WHERE id=?').bind(leadId).first();
+  return json(updated);
 }
 
 async function logActivity(request, leadId, env, json, err) {

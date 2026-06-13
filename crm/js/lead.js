@@ -18,6 +18,22 @@ const STAGE_TYPE = {
 
 let leadData = null;
 let leadId = null;
+let currentStateInfo = null;   // cached /api/crm/state-info response for pending_license leads
+
+// US state code → display name (for the License Decision fee line)
+const STATE_NAMES = {
+  AL:'Alabama', AK:'Alaska', AZ:'Arizona', AR:'Arkansas', CA:'California',
+  CO:'Colorado', CT:'Connecticut', DE:'Delaware', FL:'Florida', GA:'Georgia',
+  HI:'Hawaii', ID:'Idaho', IL:'Illinois', IN:'Indiana', IA:'Iowa', KS:'Kansas',
+  KY:'Kentucky', LA:'Louisiana', ME:'Maine', MD:'Maryland', MA:'Massachusetts',
+  MI:'Michigan', MN:'Minnesota', MS:'Mississippi', MO:'Missouri', MT:'Montana',
+  NE:'Nebraska', NV:'Nevada', NH:'New Hampshire', NJ:'New Jersey', NM:'New Mexico',
+  NY:'New York', NC:'North Carolina', ND:'North Dakota', OH:'Ohio', OK:'Oklahoma',
+  OR:'Oregon', PA:'Pennsylvania', RI:'Rhode Island', SC:'South Carolina',
+  SD:'South Dakota', TN:'Tennessee', TX:'Texas', UT:'Utah', VT:'Vermont',
+  VA:'Virginia', WA:'Washington', DC:'Washington DC', WV:'West Virginia',
+  WI:'Wisconsin', WY:'Wyoming',
+};
 
 // ── Helpers ───────────────────────────────────────────────────────
 function esc(s) {
@@ -114,6 +130,9 @@ function renderLead(data) {
           </div>
         </div>
 
+        <!-- License decision (pending_license stage only) -->
+        ${data.stage === 'pending_license' ? renderLicenseSection(data) : ''}
+
         <!-- Quick actions -->
         <div class="action-group">
           <button class="btn btn-secondary btn-sm" onclick="openApptModal()">📅 ${crm.t('ui.set_appointment')}</button>
@@ -169,6 +188,101 @@ function renderLead(data) {
   `;
 
   document.getElementById('leadPage').innerHTML = html;
+
+  if (data.stage === 'pending_license') loadStateInfo(data);
+}
+
+// ── License decision (pending_license) ─────────────────────────────
+function renderLicenseSection(data) {
+  const title = crm.lang === 'en' ? 'License Decision' : 'Decisão de Licença';
+  const applyingLabel = crm.lang === 'en' ? 'Applying for License' : 'Solicitando Licença';
+  const waitingLabel  = crm.lang === 'en' ? 'Waiting for More Interest' : 'Aguardando Mais Interesse';
+  const status = data.pending_license_status;
+  const loading = crm.lang === 'en' ? 'Loading state info…' : 'Carregando informações do estado…';
+  return `
+    <div class="license-decision" id="licenseDecision">
+      <div class="fi-label">${title}</div>
+      <div class="state-fee-box" id="stateFeeBox">
+        <span class="text-muted" style="font-size:0.82rem;">${loading}</span>
+      </div>
+      <div class="contact-log-row" style="margin-top:8px;">
+        <button class="contact-log-btn license-btn${status==='applying'?' active':''}" data-decision="applying" onclick="setLicenseDecision('applying')">${applyingLabel}</button>
+        <button class="contact-log-btn license-btn${status==='waiting'?' active':''}" data-decision="waiting" onclick="setLicenseDecision('waiting')">${waitingLabel}</button>
+      </div>
+      <div class="license-info-panel${status==='applying'?'':' hidden'}" id="licenseInfoPanel"></div>
+    </div>`;
+}
+
+async function loadStateInfo(data) {
+  const box = document.getElementById('stateFeeBox');
+  const code = (data.licensed_state || '').toUpperCase();
+  currentStateInfo = null;
+  if (!code) {
+    if (box) box.innerHTML = `<span class="text-muted" style="font-size:0.82rem;">${crm.lang==='en'?'No state on file for this lead.':'Nenhum estado registrado para este lead.'}</span>`;
+    return;
+  }
+  try {
+    const info = await crm.apiFetch(`/api/crm/state-info/${code}`);
+    if (!info || info.error) throw new Error('not found');
+    currentStateInfo = info;
+    const stateName = STATE_NAMES[code] || code;
+    let html = `<div class="state-fee-line"><strong>${esc(stateName)}</strong> — $${info.fee}</div>`;
+    if (Array.isArray(info.requirements) && info.requirements.length) {
+      html += `<ul class="state-req-list">${info.requirements.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
+    }
+    if (box) box.innerHTML = html;
+    // If the lead already chose "applying", build the info panel now.
+    if (data.pending_license_status === 'applying') renderLicenseInfoPanel();
+  } catch {
+    if (box) box.innerHTML = `<span class="text-muted" style="font-size:0.82rem;">${esc(code)}${crm.lang==='en'?' — fee info unavailable':' — informação indisponível'}</span>`;
+  }
+}
+
+function renderLicenseInfoPanel() {
+  const panel = document.getElementById('licenseInfoPanel');
+  if (!panel || !currentStateInfo) return;
+  const info = currentStateInfo;
+  const links = [];
+  if (info.nipr)   links.push(`<a href="https://nipr.com" target="_blank" rel="noopener">NIPR ↗</a>`);
+  if (info.sircon) links.push(`<a href="https://www.sircon.com" target="_blank" rel="noopener">Sircon ↗</a>`);
+  if (info.url)    links.push(`<a href="${esc(info.url)}" target="_blank" rel="noopener">${esc(info.url.replace(/^https?:\/\//,''))} ↗</a>`);
+
+  let html = `<div class="license-info-title">${crm.lang==='en'?'Where to apply':'Onde solicitar'}</div>`;
+  if (links.length) html += `<div class="license-links">${links.join('')}</div>`;
+  if (Array.isArray(info.requirements) && info.requirements.length) {
+    html += `<div class="license-info-title" style="margin-top:10px;">${crm.lang==='en'?'Reminders':'Lembretes'}</div>`;
+    html += `<ul class="state-req-list">${info.requirements.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  }
+  panel.innerHTML = html;
+  panel.classList.remove('hidden');
+}
+
+async function setLicenseDecision(status) {
+  try {
+    await crm.apiFetch(`/api/crm/leads/${leadId}/license-decision`, {
+      method: 'POST',
+      body: JSON.stringify({ status }),
+    });
+    if (leadData) {
+      leadData.pending_license_status = status;
+      leadData.pending_license_unread = 0;   // mark read
+    }
+    document.querySelectorAll('.license-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.decision === status));
+
+    const panel = document.getElementById('licenseInfoPanel');
+    if (status === 'applying') {
+      renderLicenseInfoPanel();
+    } else if (panel) {
+      panel.classList.add('hidden');
+      panel.innerHTML = '';
+    }
+    // Best-effort cross-page signal so the board re-checks the holding badge.
+    try { localStorage.setItem('crm_holding_last_viewed', String(Date.now())); } catch (e) {}
+    showToast(crm.t('ui.saved'));
+  } catch {
+    showToast(crm.t('ui.error_generic'), false);
+  }
 }
 
 function renderNotes(notes) {
